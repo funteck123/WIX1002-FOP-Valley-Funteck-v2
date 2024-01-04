@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 //import java.nio.Buffer;
 
@@ -16,16 +17,36 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+    public int hasKey = 0;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth / 2 - gp.tileSize / 2;
+        screenY = gp.screenHeight / 2 - gp.tileSize / 2;
+
+        solidArea = new Rectangle();
+        solidArea.x=11;
+        solidArea.y=18;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        
+        solidArea.width= 26;
+        solidArea.height=26;
+        
+
+
+
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 4;
         direction = "down";
     }
@@ -36,32 +57,54 @@ public class Player extends Entity {
            
             if (keyH.upPressed && keyH.leftPressed) {
                 direction = "left";
-                y -= speed;
-                x -= speed;
+            //    worldY -= speed;
+            //    worldX -= speed;
             } else if (keyH.upPressed && keyH.rightPressed) {
                 direction = "right";
-                y -= speed;
-                x += speed;
+            //    worldY -= speed;
+            //    worldX += speed;
             } else if (keyH.downPressed && keyH.leftPressed) {
                 direction = "left";
-                y += speed;
-                x -= speed;
+            //    worldY += speed;
+            //    worldX -= speed;
             } else if (keyH.downPressed && keyH.rightPressed) {
                 direction = "right";
-                y += speed;
-                x += speed;
+            //    worldY += speed;
+            //    worldX += speed;
             } else if (keyH.upPressed) {
                 direction = "up";
-                y -= speed;
+            //    worldY -= speed;
             } else if (keyH.downPressed) {
                 direction = "down";
-                y += speed;
+            //    worldY += speed;
             } else if (keyH.leftPressed) {
                 direction = "left";
-                x -= speed;
+            //    worldX -= speed;
             } else if (keyH.rightPressed) {
                 direction = "right";
-                x += speed;
+            //    worldX += speed;
+            }
+
+            //Check tile collision
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            // If Tile Collision
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            // Check Object Collision
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
+
+            // If Collision is false, player moves
+            if(collisionOn == false) {
+                switch (direction) {
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break; 
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
+                }
             }
 
             spriteCounter++;
@@ -102,6 +145,47 @@ public class Player extends Entity {
         }
     }
 
+    public void pickUpObject(int i) {
+
+        if(i != 999) {
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                case "Key":
+                    gp.playSE(1);
+                    hasKey++;
+                    gp.obj[i] = null;
+                    gp.ui.showMessage("You got a key!");
+                    //System.out.println("You have " + hasKey + " keys");
+                    break;
+                case "Door":
+                    if(hasKey > 0) {
+                        gp.playSE(3);
+                        gp.obj[i] = null;
+                        hasKey--;
+                        gp.ui.showMessage("You opened a door!");
+                    }
+                    else {
+                        gp.ui.showMessage("You need a key. :(");
+                    }
+                    //System.out.println("You have " + hasKey + " keys");
+                    break;
+                case "Boots":
+                    gp.playSE(2);
+                    speed += 5;
+                    gp.obj[i] = null;
+                    gp.ui.showMessage("Speed up!");
+                    break;
+                case "Chest":
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSE(4);
+                    break;
+            }
+        }
+
+    }
+
     public void draw(Graphics2D g2) {
 //        g2.setColor(Color.white);
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
@@ -138,7 +222,7 @@ public class Player extends Entity {
             }
             break;
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
     }
 

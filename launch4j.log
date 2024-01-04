@@ -1,0 +1,80 @@
+
+
+Version:	3.50
+CmdLine:	E:\GitHub\WIX1002-FOP-Valley-Funteck-v2\WIX1002-FOP-Valley-Funteck-v2.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\GitHub\WIX1002-FOP-Valley-Funteck-v2\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\ffmpeg\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\libnvvp;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\Nsight Compute 2022.1.1\;C:\Users\Funteck\AppData\Local\Microsoft\WindowsApps;C:\Users\Funteck\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\HP\Common\HPDestPlgIn\;C:\Program Files\Git\cmd;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\;;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\ffmpeg\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\libnvvp;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\Nsight Compute 2022.1.1\;C:\Users\Funteck\AppData\Local\Microsoft\WindowsApps;C:\Users\Funteck\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\HP\Common\HPDestPlgIn\;C:\Program Files\Git\cmd;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\;;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\libnvvp\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\dotnet\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\Nsight Compute 2022.1.1\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\HP\Common\HPDestPlgIn\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Programs\Python\Python312\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Programs\Python\Python312\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "E:\GitHub\WIX1002-FOP-Valley-Funteck-v2\WIX1002-FOP-Valley-Funteck-v2.exe"
+Args length:	80/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	E:\GitHub\WIX1002-FOP-Valley-Funteck-v2\WIX1002-FOP-Valley-Funteck-v2.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\GitHub\WIX1002-FOP-Valley-Funteck-v2\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\ffmpeg\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\libnvvp;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\Nsight Compute 2022.1.1\;C:\Users\Funteck\AppData\Local\Microsoft\WindowsApps;C:\Users\Funteck\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\HP\Common\HPDestPlgIn\;C:\Program Files\Git\cmd;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\;;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\ffmpeg\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\libnvvp;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\Nsight Compute 2022.1.1\;C:\Users\Funteck\AppData\Local\Microsoft\WindowsApps;C:\Users\Funteck\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\HP\Common\HPDestPlgIn\;C:\Program Files\Git\cmd;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Funteck\AppData\Local\Programs\Python\Python312\;;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\libnvvp\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\dotnet\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\Nsight Compute 2022.1.1\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\HP\Common\HPDestPlgIn\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Programs\Python\Python312\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Funteck\AppData\Local\Programs\Python\Python312\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "E:\GitHub\WIX1002-FOP-Valley-Funteck-v2\WIX1002-FOP-Valley-Funteck-v2.exe"
+Args length:	80/32768 chars
+Exit code:	0
