@@ -54,12 +54,9 @@ public class TileManager {
 
             while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
                 String line = br.readLine();
-                String[] tokens = line.split(" ");
+                
 
                 }
-            }
-            
-
         } catch (Exception e) {
             e.printStackTrace();
         }
