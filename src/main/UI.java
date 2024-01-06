@@ -9,8 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import entity.Entity;
 import object.OBJ_Heart;
-import object.SuperObject;
+//import object.SuperObject;
 
 public class UI {
 
@@ -33,7 +34,7 @@ public class UI {
         try {
             InputStream is = this.getClass().getResourceAsStream("/res/font/x12y16pxMaruMonica.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
-            is = this.getClass().getResourceAsStream("/res/font/Purisa-BoldOblique.ttf");
+            is = this.getClass().getResourceAsStream("/res/font/Purisa Bold.ttf");
             purisaB = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (FontFormatException e) {
             e.printStackTrace();
@@ -45,7 +46,7 @@ public class UI {
         ariel_80B = new Font("Arial", Font.BOLD, 80);
 
         //CREATE HUD OBJECT
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
@@ -87,12 +88,27 @@ public class UI {
         int y = gp.tileSize/2;
         int i = 0;
 
-        while (i < gp.player.life/2) {
+        //Draw max life
+        while (i < gp.player.maxLife/2) {
             g2.drawImage(heart_blank, x, y, null);
             x += gp.tileSize;
             i++;
         }
 
+        x = gp.tileSize/2;
+        y = gp.tileSize/2;
+        i = 0;
+
+        //Draw max life
+        while (i < gp.player.life) {
+            g2.drawImage(heart_half, x, y, null);
+            i++;
+            if (i < gp.player.life) {
+                g2.drawImage(heart_full, x, y, null);
+            }
+            i++;
+            x += gp.tileSize;
+        }
 
     }
 

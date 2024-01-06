@@ -55,7 +55,7 @@ public class Player extends Entity {
 
         //Player Status
         maxLife = 6;
-        life = maxLife;
+        life = 3;
     }
 
     public void update() {
