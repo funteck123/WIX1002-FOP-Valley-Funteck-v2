@@ -3,10 +3,7 @@ package main;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
-
-import object.OBJ_Key;
 
 public class UI {
 
@@ -29,8 +26,8 @@ public class UI {
         ariel_80B = new Font("Arial", Font.BOLD, 80);
         
 
-        OBJ_Key key = new OBJ_Key(gp);
-       /// keyImage = key.image;
+       //OBJ_Key key = new OBJ_Key(gp);
+       // keyImage = key.image;
     }
 
     public void showMessage(String text) {

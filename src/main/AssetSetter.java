@@ -1,7 +1,6 @@
 package main;
 
 import entity.NPC_warrior;
-import object.*;
 
 public class AssetSetter {
     

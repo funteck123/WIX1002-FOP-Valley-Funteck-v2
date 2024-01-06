@@ -35,7 +35,10 @@ public class Entity {
 
         collisionOn = false;
         gp.cChecker.checkTile(this);
+        gp.cChecker.checkObject(this, false);
+        gp.cChecker.checkPlayer(this);
 
+        //IF NO Collision
         if(collisionOn == false) {
             switch (direction) {
                 case "up": worldY -= speed; break;
