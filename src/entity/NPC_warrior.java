@@ -27,7 +27,7 @@ public class NPC_warrior extends Entity {
 
      public void setDialogue() {
 
-        dialogues[1] = "Sword's name: 'Banterbringer.'\nReady for a demo?";
+        dialogues[1] = "Sword's name: 'DeathBringer.'\nReady for a demo?";
         dialogues[0] = "You have encountered a warrior.\n\n1. Talk\n2. Fight\n3. Run";
         dialogues[2] = "I have neat sword.";
         
