@@ -10,19 +10,22 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 //import java.awt.Color;
+import main.UtilityTool;
 
 
 public class Player extends Entity {
 
-    GamePanel gp;
+
     KeyHandler keyH;
 
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0;
+    int standCounter=0;
+   
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+        super(gp);
+ 
         this.keyH = keyH;
 
         screenX = gp.screenWidth / 2 - gp.tileSize / 2;
@@ -125,64 +128,42 @@ public class Player extends Entity {
 
 
     }
+    public BufferedImage setup(String iamgePath){
+        UtilityTool uTool = new UtilityTool();
+         BufferedImage image = null;
+         try {
+             image = ImageIO.read(getClass().getResourceAsStream( iamgePath + ".png"));
+             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         return  image;}
+         
+        
+
+    
 
     public void getPlayerImage() {
+    
+       up1= setup("/res//player/boy_up_1");
+        up2=setup("/res/player/boy_up_2");
+        down1=setup("/res/player/boy_down_1");
+        down2=setup("/res/player/boy_down_2");
+        left1=setup("/res/player/boy_left_1");
+        left2=setup("/res/player/boy_left_2");
+        right1=setup("/res/player/boy_right_1");
+        right2=setup("/res/player/boy_right_2");
+      
 
-            up1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_right_2.png"));
-
-
-
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+    
 
     public void pickUpObject(int i) {
 
         if(i != 999) {
-            String objectName = gp.obj[i].name;
+           
 
-            switch (objectName) {
-                case "Key":
-                    gp.playSE(1);
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You got a key!");
-                    //System.out.println("You have " + hasKey + " keys");
-                    break;
-                case "Door":
-                    if(hasKey > 0) {
-                        gp.playSE(3);
-                        gp.obj[i] = null;
-                        hasKey--;
-                        gp.ui.showMessage("You opened a door!");
-                    }
-                    else {
-                        gp.ui.showMessage("You need a key. :(");
-                    }
-                    //System.out.println("You have " + hasKey + " keys");
-                    break;
-                case "Boots":
-                    gp.playSE(2);
-                    speed += 5;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Speed up!");
-                    break;
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
-                    break;
-            }
-        }
-
+    }
     }
 
     public void draw(Graphics2D g2) {
@@ -221,7 +202,7 @@ public class Player extends Entity {
             }
             break;
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY,  null);
 
     }
 

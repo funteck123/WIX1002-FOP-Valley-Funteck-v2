@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_warrior;
 import object.*;
 
 public class AssetSetter {
@@ -11,7 +12,16 @@ public class AssetSetter {
     }
 
     public void setObject () {
-    }}
+    }
+public void setNPC() {
+gp.npc[0] = new NPC_warrior(gp, 0, 0);
+gp.npc[0].worldX = gp.tileSize * 23;
+gp.npc[0].worldY = gp.tileSize * 21;
+}
+}
+
+
+
 
 
 
