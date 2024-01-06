@@ -5,15 +5,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+
+import object.OBJ_Heart;
+import object.SuperObject;
 
 public class UI {
 
     GamePanel gp;
     Graphics2D g2 ;
     Font ariel_40, ariel_80B, maruMonica, purisaB;
-   /// BufferedImage keyImage;
+    BufferedImage heart_full, heart_half, heart_blank;
+    // BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -38,6 +43,13 @@ public class UI {
 
         ariel_40 = new Font("Arial", Font.PLAIN, 40);
         ariel_80B = new Font("Arial", Font.BOLD, 80);
+
+        //CREATE HUD OBJECT
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
+
     }
 
     public void showMessage(String text) {
