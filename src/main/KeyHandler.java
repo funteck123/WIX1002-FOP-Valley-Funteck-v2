@@ -4,9 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
-    
+    GamePanel gamePanel;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
 
+    public KeyHandler(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+        
+    }
     @Override
     public void keyTyped(KeyEvent e) {
         throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
@@ -30,6 +34,16 @@ public class KeyHandler implements KeyListener{
             rightPressed = true;
         }
 
+   else if(code == KeyEvent.VK_P) {
+            if (gamePanel.gameState==gamePanel.playState) {
+                gamePanel.gameState = gamePanel.pauseState;
+                
+            }
+            else if (gamePanel.gameState==gamePanel.pauseState) {
+                gamePanel.gameState = gamePanel.playState;
+                
+            }
+        }
 
 
 
