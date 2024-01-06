@@ -19,7 +19,7 @@ public class AssetSetter {
         gp.npc[0].worldY = gp.tileSize * 21;
     
     
-        gp.npc[1] = new Monster_Harpy(gp);
+        gp.npc[1] = new Monster_Witch(gp);
         gp.npc[1].worldX = gp.tileSize * 20;
         gp.npc[1].worldY = gp.tileSize * 20;
     }
