@@ -26,23 +26,23 @@ public class Entity {
 
     public Rectangle solidArea=new Rectangle(0,0,48,48);
     public boolean collisionOn = false;
+    
     public Entity (GamePanel gp){
-        this.gp=gp;
+        this.gp = gp;
     }
 
         
 
     
-public void draw(Graphics2D g) {
+public void draw(Graphics2D g2) {
     BufferedImage image = null;
     int screenX = worldX - gp.player.worldX + gp.player.screenX;
     int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
     if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-        g.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-    }
-    switch (direction) {
+        
+        switch (direction) {
         case "up":
             if (spriteNum == 1) {
                 image = up1;
@@ -71,13 +71,16 @@ public void draw(Graphics2D g) {
                 image = right2;
             }
             break;
+        }
+        
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 }
-       public BufferedImage setup(String iamgePath){
+       public BufferedImage setup(String imagePath){
        UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
         try {
-            image = ImageIO.read(getClass().getResourceAsStream( iamgePath + ".png"));
+            image = ImageIO.read(getClass().getResourceAsStream( imagePath + ".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             e.printStackTrace();
