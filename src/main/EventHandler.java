@@ -2,11 +2,11 @@ package main;
 
 import java.awt.Rectangle;
 
-public class EvenHandler {
+public class EventHandler {
     GamePanel gp;
     Rectangle eventRect;
     int eventRectDefaultX, eventRectDefaultY;
-    public EvenHandler(GamePanel gp) {
+    public EventHandler(GamePanel gp) {
         this.gp = gp;
 
 
@@ -19,7 +19,7 @@ public class EvenHandler {
         eventRectDefaultY=eventRect.y;
 
     }
-    public void chechEvent() {
+    public void checkEvent() {
         if (hit (23,23,"up")) {
             System.out.println("HIT");
         }
