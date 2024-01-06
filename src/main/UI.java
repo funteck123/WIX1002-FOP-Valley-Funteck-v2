@@ -66,20 +66,37 @@ public class UI {
 
         //PLAY
         if (gp.gameState == gp.playState) {
+            drawPlayerLife();
 
         }
         //PAUSE
         if (gp.gameState== gp.pauseState) {
-                drawPauseScreen();
+            drawPlayerLife();
+            drawPauseScreen();
         }
         //DIALOGUE 
         if (gp.gameState == gp.dialogueState) {
+            drawPlayerLife();
             drawDialogueScreen();
         }
 
     }
-    
-    private void drawPauseScreen() {
+
+    public void drawPlayerLife() {
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        int i = 0;
+
+        while (i < gp.player.life/2) {
+            g2.drawImage(heart_blank, x, y, null);
+            x += gp.tileSize;
+            i++;
+        }
+
+
+    }
+
+    public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
         String text = "PAUSED";;
         int x=getXforCenteredText(text);
@@ -87,7 +104,7 @@ public class UI {
         g2.drawString(text, x, y);
     }
 
-    private void drawDialogueScreen() {
+    public void drawDialogueScreen() {
 
         //WINDOW
         int x = gp.tileSize*2;
