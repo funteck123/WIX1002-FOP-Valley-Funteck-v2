@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 //import java.security.Key;
+import java.beans.EventHandler;
 
 import javax.swing.JPanel;
 
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // FPS
     int FPS = 60;
-
+  
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public Thread gameThread;
+    public EvenHandler evenHandler = new EvenHandler(this);
 
     //Entity and object
     public Player player = new Player(this, keyH);
