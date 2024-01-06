@@ -1,6 +1,6 @@
 package main;
 
-import entity.NPC_warrior;
+import entity.*;
 
 public class AssetSetter {
     
@@ -17,6 +17,11 @@ public class AssetSetter {
         gp.npc[0] = new NPC_warrior(gp);
         gp.npc[0].worldX = gp.tileSize * 21;
         gp.npc[0].worldY = gp.tileSize * 21;
+    
+    
+        gp.npc[1] = new Monster_Harpy(gp);
+        gp.npc[1].worldX = gp.tileSize * 20;
+        gp.npc[1].worldY = gp.tileSize * 20;
     }
 
 }
