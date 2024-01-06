@@ -3,13 +3,16 @@ package main;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class UI {
 
     GamePanel gp;
     Graphics2D g2 ;
-    Font ariel_40, ariel_80B;
+    Font ariel_40, ariel_80B, maruMonica, purisaB;
    /// BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
@@ -21,6 +24,17 @@ public class UI {
     
     public UI(GamePanel gp) {
         this.gp = gp;
+
+        try {
+            InputStream is = this.getClass().getResourceAsStream("/res/font/x12y16pxMaruMonica.ttf");
+            maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
+            is = this.getClass().getResourceAsStream("/res/font/Purisa-BoldOblique.ttf");
+            purisaB = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         ariel_40 = new Font("Arial", Font.PLAIN, 40);
         ariel_80B = new Font("Arial", Font.BOLD, 80);
@@ -34,8 +48,8 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
-        this.g2=g2;
-        g2.setFont(ariel_40);
+        this.g2 = g2;
+        g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
         //PLAY
