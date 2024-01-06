@@ -24,6 +24,11 @@ public class Entity {
     public int actionLockCounter = 0;
     String dialogues[] = new String[20];
     int dialogueIndex = 0;
+
+    //Character Status
+    public int maxLife;
+    public int life;
+
     
     public Entity (GamePanel gp){
         this.gp = gp;
@@ -149,8 +154,8 @@ public class Entity {
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         }
     }
-       public BufferedImage setup(String imagePath){
-       UtilityTool uTool = new UtilityTool();
+        public BufferedImage setup(String imagePath){
+        UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
         try {
             image = ImageIO.read(getClass().getResourceAsStream( imagePath + ".png"));

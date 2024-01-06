@@ -22,9 +22,9 @@ public class NPC_paladin extends Entity {
         left2=setup("/res/npc/Warrior_left2");
         right1=setup("/res/npc/Warrior_right1");
         right2=setup("/res/npc/Warrior_right2");
-     }
+    }
     
-     public void setAction() {
+    public void setAction() {
 
         actionLockCounter ++;
 
@@ -47,7 +47,7 @@ public class NPC_paladin extends Entity {
 
         }
         
-     }
+    }
 
 }
 
