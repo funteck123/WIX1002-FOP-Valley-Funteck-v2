@@ -59,7 +59,9 @@ public class NPC_warrior extends Entity {
      }
 
     public void speak() {
-        gp.ui.currentDialogue = dialogues[0];
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex ++;
+
     }
 
 }
