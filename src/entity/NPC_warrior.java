@@ -11,6 +11,7 @@ public class NPC_warrior extends Entity {
         direction = "down";
         speed = 1;
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -22,6 +23,14 @@ public class NPC_warrior extends Entity {
         left2=setup("/res/npc/Warrior_left2");
         right1=setup("/res/npc/Warrior_right1");
         right2=setup("/res/npc/Warrior_right2");
+     }
+
+     public void setDialogue() {
+
+        dialogues[0] = "Hello, I am a warrior.";
+        dialogues[1] = "Run away or die!";
+        dialogues[2] = "I have neat sword.";
+        
      }
     
      public void setAction() {
@@ -48,6 +57,10 @@ public class NPC_warrior extends Entity {
         }
         
      }
+
+    public void speak() {
+        gp.ui.currentDialogue = dialogues[0];
+    }
 
 }
 
