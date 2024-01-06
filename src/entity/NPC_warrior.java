@@ -27,8 +27,8 @@ public class NPC_warrior extends Entity {
 
      public void setDialogue() {
 
-        dialogues[0] = "Hello, I am a warrior.";
-        dialogues[1] = "Run away or die!";
+        dialogues[1] = "Sword's name: 'Banterbringer.'\nReady for a demo?";
+        dialogues[0] = "You have encountered a warrior.\n\n1. Talk\n2. Fight\n3. Run";
         dialogues[2] = "I have neat sword.";
         
      }
@@ -59,9 +59,7 @@ public class NPC_warrior extends Entity {
      }
 
     public void speak() {
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex ++;
-
+        super.speak();
     }
 
 }

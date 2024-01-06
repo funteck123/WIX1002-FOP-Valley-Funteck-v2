@@ -4,13 +4,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
-    GamePanel gamePanel;
+    GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean enterPressed = false;
 
-    public KeyHandler(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-        
+    public KeyHandler(GamePanel gp) {
+        this.gp = gp;
     }
+
     @Override
     public void keyTyped(KeyEvent e) {
         //throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
@@ -21,30 +22,41 @@ public class KeyHandler implements KeyListener{
 
         int code = e.getKeyCode();
 
-        if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
-            upPressed = true;
-        }
-        else if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
-            downPressed = true;
-        }
-        else if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
-            leftPressed = true;
-        }
-        else if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
-            rightPressed = true;
-        }
-
-   else if(code == KeyEvent.VK_P) {
-            if (gamePanel.gameState==gamePanel.playState) {
-                gamePanel.gameState = gamePanel.pauseState;
-                
+        // PLAY STATE
+        if(gp.gameState == gp.playState) {
+            if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
+                upPressed = true;
             }
-            else if (gamePanel.gameState==gamePanel.pauseState) {
-                gamePanel.gameState = gamePanel.playState;
-                
+            if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
+                downPressed = true;
+            }
+            if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
+                leftPressed = true;
+            }
+            if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
+                rightPressed = true;
+            }
+            if(code == KeyEvent.VK_P) {
+                gp.gameState = gp.pauseState;
+            }
+            if(code == KeyEvent.VK_ENTER) {
+                enterPressed = true;
             }
         }
 
+        // PAUSE STATE
+        else if(gp.gameState == gp.pauseState) {
+            if(code == KeyEvent.VK_P) {
+                gp.gameState = gp.playState;
+            }
+        }
+        
+        // DIALOGUE STATE
+        else if (gp.gameState == gp.dialogueState) {
+            if(code == KeyEvent.VK_ENTER) {
+                gp.gameState = gp.playState;
+            }
+        }
     }
 
     @Override
@@ -55,13 +67,13 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
             upPressed = false;
         }
-        else if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
+        if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
             downPressed = false;
         }
-        else if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
+        if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
             leftPressed = false;
         }
-        else if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
+        if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
             rightPressed = false;
         }
     }

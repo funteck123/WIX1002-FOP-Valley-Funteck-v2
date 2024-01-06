@@ -70,10 +70,16 @@ public class UI {
         int height = gp.tileSize*4;
         drawSubWindow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 25));
         x += gp.tileSize;
         y += gp.tileSize;
-        g2.drawString(currentDialogue, x, y);
+
+        for (String line : currentDialogue.split("\n")) {
+            g2.drawString(line, x, y);
+            y += g2.getFontMetrics().getHeight();
+        }
+
+        
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
