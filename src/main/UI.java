@@ -88,10 +88,14 @@ public class UI {
         x += gp.tileSize;
         y += gp.tileSize;
 
-        for (String line : currentDialogue.split("\n")) {
-            g2.drawString(line, x, y);
-            y += g2.getFontMetrics().getHeight();
+        if (currentDialogue != null) {
+            for (String line : currentDialogue.split("\n")) {
+                g2.drawString(line, x, y);
+                y += g2.getFontMetrics().getHeight();
+            }
         }
+
+        
 
         
     }

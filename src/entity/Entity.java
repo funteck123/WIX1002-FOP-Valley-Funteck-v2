@@ -149,8 +149,8 @@ public class Entity {
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         }
     }
-       public BufferedImage setup(String imagePath){
-       UtilityTool uTool = new UtilityTool();
+        public BufferedImage setup(String imagePath){
+        UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
         try {
             image = ImageIO.read(getClass().getResourceAsStream( imagePath + ".png"));

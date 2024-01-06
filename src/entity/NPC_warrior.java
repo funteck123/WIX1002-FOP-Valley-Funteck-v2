@@ -23,17 +23,17 @@ public class NPC_warrior extends Entity {
         left2=setup("/res/npc/Warrior_left2");
         right1=setup("/res/npc/Warrior_right1");
         right2=setup("/res/npc/Warrior_right2");
-     }
+    }
 
-     public void setDialogue() {
+    public void setDialogue() {
 
         dialogues[1] = "Sword's name: 'DeathBringer.'\nReady for a demo?";
         dialogues[0] = "You have encountered a warrior.\n\n1. Talk\n2. Fight\n3. Run";
         dialogues[2] = "I have neat sword.";
         
-     }
+    }
     
-     public void setAction() {
+    public void setAction() {
 
         actionLockCounter ++;
 
@@ -56,7 +56,7 @@ public class NPC_warrior extends Entity {
 
         }
         
-     }
+    }
 
     public void speak() {
         super.speak();
