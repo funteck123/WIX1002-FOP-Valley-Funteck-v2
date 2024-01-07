@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import entity.Entity;
-import object.OBJ_Heart;
+import object.*;
 //import object.SuperObject;
 
 public class UI {
