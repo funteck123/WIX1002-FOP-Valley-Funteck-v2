@@ -63,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     //game state
     public  int gameState = 1;
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -70,8 +71,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
-        playMusic(0);
-        gameState = playState;
+        //playMusic(0);
+        gameState = titleState;
     }
 
     public void startGameThread() {
@@ -179,42 +180,50 @@ public class GamePanel extends JPanel implements Runnable{
 
         //}
         
-        //draw tiles
-        tileM.draw(g2);
-
-        //add entities to the list
-        entityList.add(player);
-        for (int i = 0; i < entityList.size(); i++) {
-            if (npc[i] != null) {
-                entityList.add(npc[i]);
-            }
+        // TITLE SCREEN
+        if(gameState == titleState) {
+            ui.draw(g2);
         }
-        for (int i = 0; i < entityList.size(); i++) {
-            if (obj[i] != null) {
-                entityList.add(obj[i]);
+        else {
+            
+            //draw tiles
+            tileM.draw(g2);
+
+            //add entities to the list
+            entityList.add(player);
+            for (int i = 0; i < entityList.size(); i++) {
+                if (npc[i] != null) {
+                    entityList.add(npc[i]);
+                }
             }
-        }
-
-        //sort
-        Collections.sort(entityList, new Comparator<Entity>() {
-            @Override
-            public int compare(Entity e1, Entity e2) {
-                int result = Integer.compare(e1.worldY, e2.worldY);
-                return result;
+            for (int i = 0; i < entityList.size(); i++) {
+                if (obj[i] != null) {
+                    entityList.add(obj[i]);
+                }
             }
-        });
 
-        //draw entities
-        for (int i = 0; i < entityList.size(); i++) {
-            entityList.get(i).draw(g2);
+            //sort
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    int result = Integer.compare(e1.worldY, e2.worldY);
+                    return result;
+                }
+            });
+
+            //draw entities
+            for (int i = 0; i < entityList.size(); i++) {
+                entityList.get(i).draw(g2);
+            }
+
+            //empty the list
+            entityList.clear();
+            
+            ui.draw(g2);
+            
+            //g2.dispose();
+
         }
-
-        //empty the list
-        entityList.clear();
-        
-        ui.draw(g2);
-        
-        //g2.dispose();
 
     }
 

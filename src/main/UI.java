@@ -65,10 +65,14 @@ public class UI {
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
+        // TITLE 
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+
+        }
         //PLAY
         if (gp.gameState == gp.playState) {
             drawPlayerLife();
-
         }
         //PAUSE
         if (gp.gameState== gp.pauseState) {
@@ -80,6 +84,29 @@ public class UI {
             drawPlayerLife();
             drawDialogueScreen();
         }
+
+    }
+
+    public void drawTitleScreen() {
+        
+        g2.setColor(new Color(0,250,250));
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        // TITLE SCREEN
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+        String text = "FOP Valley Funteck";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize*3;
+
+        // SHADOW
+        g2.setColor(Color.black);
+        g2.drawString(text,x+5,y+5);
+
+
+        // MAIN COLOR
+        g2.setColor(Color.white);
+        g2.drawString(text,x,y);
+
 
     }
 
