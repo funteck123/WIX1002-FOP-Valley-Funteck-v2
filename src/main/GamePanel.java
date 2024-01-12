@@ -43,12 +43,13 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public Thread gameThread;
-    public EventHandler evenHandler = new EventHandler(this);
+    public EventHandler eHandler = new EventHandler(this);
 
     //Entity and object
     public Player player = new Player(this, keyH);
     public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
+    public Entity monster[] = new Entity[20];
     ArrayList <Entity> objList = new ArrayList<>();
     
 
@@ -68,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
+        aSetter.setMonster();
         playMusic(0);
         gameState = playState;
     }
@@ -159,6 +161,13 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             }
         }
+        //monster
+        for(int i = 0 ; i < monster.length; i++) {
+
+            if(monster[i] != null) {
+                monster[i].update();
+            }
+        }
         if (gameState == pauseState) {
             //nothing
         }
@@ -186,9 +195,15 @@ public class GamePanel extends JPanel implements Runnable{
                 npc[i].draw(g2);
             }
         }
+            for (int i = 0; i < monster.length; i++) {
+            if (monster[i] != null) {
+            monster[i].draw(g2);
+            }
+        }
+        
         
         player.draw(g2);
-
+     
         ui.draw(g2);
         
         g2.dispose();

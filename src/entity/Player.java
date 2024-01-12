@@ -107,6 +107,13 @@ public class Player extends Entity {
             // Check NPC Collision
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
+         // check NPC collision
+    int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+     interactNPC(monsterIndex);
+            //check event
+            gp.eHandler.checkEvent();
+            gp.keyH.enterPressed = false;
+
 
             // If Collision is false, player moves
             if(collisionOn == false) {
@@ -184,8 +191,7 @@ public class Player extends Entity {
             }
             
         }
-        gp.keyH.enterPressed = false;
-
+      
     }
 
     public void draw(Graphics2D g2) {
