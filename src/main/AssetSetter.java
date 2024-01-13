@@ -1,8 +1,8 @@
 package main;
 
 import Monster.*;
-import Monster.Monster.Monster_Skeleton;
 import entity.*;
+import object.*;
 
 public class AssetSetter {
 
@@ -13,7 +13,16 @@ public class AssetSetter {
         this.gp = gp;
     }
 
-    public void setObject() {
+    public void setObject () {
+
+        gp.obj[0] = new OBJ_Door(gp);
+        gp.obj[0].worldX = gp.tileSize * 21;
+        gp.obj[0].worldY = gp.tileSize * 22;
+
+        // gp.obj[0] = new OBJ_Chest(gp);
+        // gp.obj[0].worldX = gp.tileSize * 20;
+        // gp.obj[0].worldY = gp.tileSize * 20;
+
     }
 
     public void setNPC() {

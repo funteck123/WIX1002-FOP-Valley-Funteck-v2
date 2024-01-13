@@ -12,6 +12,13 @@ public class NPC_warrior extends Entity {
         speed = 1;
         getImage();
         setDialogue();
+
+        solidArea.x=4;
+        solidArea.y=16;
+        solidArea.width=40;
+        solidArea.height=32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
     }
 
     public void getImage() {

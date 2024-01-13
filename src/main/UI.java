@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import entity.Entity;
-import object.OBJ_Heart;
+import object.*;
 //import object.SuperObject;
 
 public class UI {
@@ -25,6 +25,7 @@ public class UI {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int commandNum = 0;
 
 
     
@@ -65,10 +66,14 @@ public class UI {
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
+        // TITLE 
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+
+        }
         //PLAY
         if (gp.gameState == gp.playState) {
             drawPlayerLife();
-
         }
         //PAUSE
         if (gp.gameState== gp.pauseState) {
@@ -80,6 +85,61 @@ public class UI {
             drawPlayerLife();
             drawDialogueScreen();
         }
+
+    }
+
+    public void drawTitleScreen() {
+        
+        g2.setColor(new Color(0,250,250));
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        // TITLE SCREEN
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+        String text = "FOP Valley Funteck";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize*3;
+
+        // SHADOW
+        g2.setColor(Color.black);
+        g2.drawString(text,x+5,y+5);
+
+
+        // MAIN COLOR
+        g2.setColor(Color.white);
+        g2.drawString(text,x,y);
+
+        // IMAGE
+        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+        y += gp.tileSize*2;
+        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+        // MENU
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
+
+        text = "NEW GAME";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*4;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x-gp.tileSize/2, y);
+        }
+
+        text = "LOAD GAME";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x-gp.tileSize/2, y);
+        }
+
+        text = "QUIT";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 2) {
+            g2.drawString(">", x-gp.tileSize/2, y);
+        }
+
 
     }
 
