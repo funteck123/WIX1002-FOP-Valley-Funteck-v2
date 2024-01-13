@@ -77,6 +77,7 @@ public class TileManager {
             setup(41,"hash_black", true);
             setup(42,"hash_white", true);
 
+            
         }
     public void setup(int index ,String name,boolean collision){
         UtilityTool uTool = new UtilityTool();
