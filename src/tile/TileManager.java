@@ -74,15 +74,16 @@ public class TileManager {
            
             setup(39,"earth", false);
             setup(40,"wall", true);
-            setup(41,"tree", true);
-            
+            setup(41,"hash_black", true);
+            setup(42,"hash_white", true);
+
         }
     public void setup(int index ,String name,boolean collision){
         UtilityTool uTool = new UtilityTool();
-        try {tile [index]=new Tile();
+        try {tile[index]=new Tile();
             tile[index].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/"+name+".png"));
-         tile[index].image=uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
-         tile[index].collision=collision;
+            tile[index].image=uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
+            tile[index].collision=collision;
   
     }
     catch (IOException e){

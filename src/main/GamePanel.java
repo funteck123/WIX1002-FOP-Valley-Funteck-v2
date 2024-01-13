@@ -211,6 +211,19 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             }
 
+
+            for (int i = 0; i < entityList.size(); i++) {
+                if (monster[i] != null) {
+                    entityList.add(monster[i]);
+                }
+            }
+
+
+
+
+
+
+
             //sort
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
