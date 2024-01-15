@@ -17,7 +17,7 @@ import entity.Player;
 //import tile.Tile;
 import tile.TileManager;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
     // SCREEN SETTINGS
     public final int originalTileSize = 16; // 16x16 tile
     public final int scale = 3;
@@ -27,8 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
-
-    //World Settings
+    // World Settings
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     // public final int worldWidth = tileSize * maxWorldCol; // 800 pixels
@@ -36,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // FPS
     int FPS = 60;
-  
+
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
@@ -47,13 +46,12 @@ public class GamePanel extends JPanel implements Runnable{
     public Thread gameThread;
     public EventHandler eHandler = new EventHandler(this);
 
-    //Entity and object
+    // Entity and object
     public Player player = new Player(this, keyH);
     public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
-    ArrayList <Entity> entityList = new ArrayList<>();
-
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -62,8 +60,9 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
-    //game state
-    public  int gameState = 1;
+
+    // game state
+    public int gameState = 1;
     public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
@@ -74,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
-        //playMusic(0);
+        // playMusic(0);
         gameState = titleState;
     }
 
@@ -85,121 +84,119 @@ public class GamePanel extends JPanel implements Runnable{
 
     // @Override
     // public void run() {
-        
-    //     double drawInternal = 1000000000 / FPS;
-    //     double nextDrawTime = System.nanoTime() + drawInternal;
 
-    //     while(gameThread != null) {
-    //     //System.out.println("loop is running");
-        
-    //     // long currentTIme = System.nanoTime();
-    //     //System.out.println(currentTIme);
+    // double drawInternal = 1000000000 / FPS;
+    // double nextDrawTime = System.nanoTime() + drawInternal;
 
-    //     // 1 UPDATE: updat einfo such character position
-    //     update();
+    // while(gameThread != null) {
+    // //System.out.println("loop is running");
 
-    //     // 2 DRAW: draw the screen with the updated info
-    //     repaint();
-    //     try {
-    //         double remainingTime = nextDrawTime - System.nanoTime();
-    //         remainingTime = remainingTime / 1000000;
+    // // long currentTIme = System.nanoTime();
+    // //System.out.println(currentTIme);
 
-    //         if(remainingTime < 0) {
-    //             remainingTime = 0;
-    //         }
+    // // 1 UPDATE: updat einfo such character position
+    // update();
 
-    //         Thread.sleep((long) remainingTime);
+    // // 2 DRAW: draw the screen with the updated info
+    // repaint();
+    // try {
+    // double remainingTime = nextDrawTime - System.nanoTime();
+    // remainingTime = remainingTime / 1000000;
 
-    //         nextDrawTime += drawInternal;
+    // if(remainingTime < 0) {
+    // remainingTime = 0;
+    // }
 
+    // Thread.sleep((long) remainingTime);
 
-    //     } catch (InterruptedException e) {
-    //         e.printStackTrace();
-    //     }
-        
+    // nextDrawTime += drawInternal;
+
+    // } catch (InterruptedException e) {
+    // e.printStackTrace();
+    // }
+
     // }
     // }
 
-     @Override
+    @Override
     public void run() {
 
-        double drawInterval = 1000000000/FPS;
+        double drawInterval = 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTIme;
         long timer = 0;
         int drawCount = 0;
 
-        while(gameThread != null) {
+        while (gameThread != null) {
 
             currentTIme = System.nanoTime();
             delta += (currentTIme - lastTime) / drawInterval;
             timer += (currentTIme - lastTime);
             lastTime = currentTIme;
 
-            if(delta >= 1) {
+            if (delta >= 1) {
                 update();
                 repaint();
                 delta--;
                 drawCount++;
             }
 
-            if(timer >= 1000000000) {
+            if (timer >= 1000000000) {
                 System.out.println("FPS: " + drawCount);
                 drawCount = 0;
                 timer = 0;
             }
 
         }
-        
+
     }
 
     public void update() {
-        if(gameState == playState){
-            //player
+        if (gameState == playState) {
+            // player
             player.update();
-            //npc
+            // npc
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {
                     npc[i].update();
                 }
             }
         }
-        //monster
-        for(int i = 0 ; i < monster.length; i++) {
+        // monster
+        for (int i = 0; i < monster.length; i++) {
 
-            if(monster[i] != null) {
+            if (monster[i] != null) {
                 monster[i].update();
             }
         }
         if (gameState == pauseState) {
-            //nothing
+            // nothing
         }
 
     }
 
     public void paintComponent(Graphics g) {
-        
+
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D)g; //type casting
+        Graphics2D g2 = (Graphics2D) g; // type casting
 
-        //if gameState(gameState== titleScreen) {
+        // if gameState(gameState== titleScreen) {
 
-        //} else {
+        // } else {
 
-        //}
-        
+        // }
+
         // TITLE SCREEN
-        if(gameState == titleState) {
+        if (gameState == titleState) {
             ui.draw(g2);
-        }
-        else {
-            
-            //draw tiles
+        } else {
+
+            // draw tiles
             tileM.draw(g2);
 
-            //add entities to the list
+            // add entities to the list
             entityList.add(player);
             for (int i = 0; i < entityList.size(); i++) {
                 if (npc[i] != null) {
@@ -212,20 +209,18 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             }
 
-
             for (int i = 0; i < entityList.size(); i++) {
                 if (monster[i] != null) {
                     entityList.add(monster[i]);
                 }
             }
 
+            // player
+            if (gameState == playState) {
+                player.draw(g2);
+            }
 
-
-
-
-
-
-            //sort
+            // sort
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
@@ -234,17 +229,17 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             });
 
-            //draw entities
+            // draw entities
             for (int i = 0; i < entityList.size(); i++) {
                 entityList.get(i).draw(g2);
             }
 
-            //empty the list
+            // empty the list
             entityList.clear();
-            
+
             ui.draw(g2);
-            
-            //g2.dispose();
+
+            // g2.dispose();
 
         }
 
@@ -263,6 +258,6 @@ public class GamePanel extends JPanel implements Runnable{
     public void playSE(int i) {
         se.setFile(i);
         se.play();
-    }    
+    }
 
 }

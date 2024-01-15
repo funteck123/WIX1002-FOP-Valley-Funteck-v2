@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 //import java.nio.Buffer;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -19,6 +20,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     int standCounter = 0;
+    public String characterName = "Warrior";
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -37,8 +39,8 @@ public class Player extends Entity {
         solidArea.width = 26;
         solidArea.height = 26;
 
+        loadCharacterImages();
         setDefaultValues();
-        getPlayerImage();
     }
 
     public void setDefaultValues() {
@@ -63,12 +65,12 @@ public class Player extends Entity {
         // shield
     }
 
-   public int getAttack() {
-        return attack=strength;
+    public int getAttack() {
+        return attack = strength;
     }
 
     public int getDefense() {
-        return defense= dexterity;
+        return defense = dexterity;
     }
 
     public void update() {
@@ -173,17 +175,21 @@ public class Player extends Entity {
         return image;
     }
 
-    public void getPlayerImage() {
+    public void loadCharacterImages() {
+        up1 = setup("/res/player/" + characterName + "_up1");
+        up2 = setup("/res/player/" + characterName + "_up2");
+        down1 = setup("/res/player/" + characterName + "_down1");
+        down2 = setup("/res/player/" + characterName + "_down2");
+        left1 = setup("/res/player/" + characterName + "_left1");
+        left2 = setup("/res/player/" + characterName + "_left2");
+        right1 = setup("/res/player/" + characterName + "_right1");
+        right2 = setup("/res/player/" + characterName + "_right2");
+    }
 
-        up1 = setup("/res//player/boy_up_1");
-        up2 = setup("/res/player/boy_up_2");
-        down1 = setup("/res/player/boy_down_1");
-        down2 = setup("/res/player/boy_down_2");
-        left1 = setup("/res/player/boy_left_1");
-        left2 = setup("/res/player/boy_left_2");
-        right1 = setup("/res/player/boy_right_1");
-        right2 = setup("/res/player/boy_right_2");
+    public void changeCharacter() {
 
+        loadCharacterImages();
+        setDefaultValues();
     }
 
     public void pickUpObject(int i) {

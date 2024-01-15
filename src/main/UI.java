@@ -16,7 +16,7 @@ import object.*;
 public class UI {
 
     GamePanel gp;
-    Graphics2D g2 ;
+    Graphics2D g2;
     Font ariel_40, ariel_80B, maruMonica, purisaB;
     BufferedImage heart_full, heart_half, heart_blank;
     // BufferedImage keyImage;
@@ -26,9 +26,9 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commandNum = 0;
+    public int selectScreenState = 0;// 0:first screen,
+    public String selectedCharacter = "";
 
-
-    
     public UI(GamePanel gp) {
         this.gp = gp;
 
@@ -46,7 +46,7 @@ public class UI {
         ariel_40 = new Font("Arial", Font.PLAIN, 40);
         ariel_80B = new Font("Arial", Font.BOLD, 80);
 
-        //CREATE HUD OBJECT
+        // CREATE HUD OBJECT
         Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
@@ -66,21 +66,21 @@ public class UI {
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
-        // TITLE 
+        // TITLE
         if (gp.gameState == gp.titleState) {
             drawTitleScreen();
 
         }
-        //PLAY
+        // PLAY
         if (gp.gameState == gp.playState) {
             drawPlayerLife();
         }
-        //PAUSE
-        if (gp.gameState== gp.pauseState) {
+        // PAUSE
+        if (gp.gameState == gp.pauseState) {
             drawPlayerLife();
             drawPauseScreen();
         }
-        //DIALOGUE 
+        // DIALOGUE
         if (gp.gameState == gp.dialogueState) {
             drawPlayerLife();
             drawDialogueScreen();
@@ -89,77 +89,166 @@ public class UI {
     }
 
     public void drawTitleScreen() {
-        
-        g2.setColor(new Color(0,250,250));
-        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
 
-        // TITLE SCREEN
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
-        String text = "FOP Valley Funteck";
-        int x = getXforCenteredText(text);
-        int y = gp.tileSize*3;
+        if (selectScreenState == 0) {
 
-        // SHADOW
-        g2.setColor(Color.black);
-        g2.drawString(text,x+5,y+5);
+            // title name
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 120F));
+            String text = "Adventure";
+            int x = centerTextX(text);
+            int y = gp.tileSize * 3;
 
+            // shadow
+            g2.setColor(Color.darkGray);
+            g2.drawString(text, x + 5, y + 5);
 
-        // MAIN COLOR
-        g2.setColor(Color.white);
-        g2.drawString(text,x,y);
+            // color
+            g2.setColor(Color.white);
+            g2.drawString(text, x, y);
 
-        // IMAGE
-        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-        y += gp.tileSize*2;
-        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+            // ASCII monster
+            String wolf = """
+                             __
+                            /  \\__
+                           (     @\\___
+                           /                O
+                         /    (_______/
+                       /_____/
+                    """;
 
-        // MENU
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
+            // Split the ASCII art into lines
+            String[] wolfLines = wolf.split("\r\n|\r|\n");
 
-        text = "NEW GAME";
-        x = getXforCenteredText(text);
-        y += gp.tileSize*4;
-        g2.drawString(text, x, y);
-        if (commandNum == 0) {
-            g2.drawString(">", x-gp.tileSize/2, y);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+
+            // Calculate the total height of the ASCII art
+            int totalHeight = wolfLines.length * g2.getFontMetrics().getHeight();
+
+            // Calculate the total width of the ASCII art
+            int totalWidth = 0;
+            for (String line : wolfLines) {
+                int lineWidth = g2.getFontMetrics().stringWidth(line);
+                if (lineWidth > totalWidth) {
+                    totalWidth = lineWidth;
+                }
+            }
+
+            // Adjust x and y positions to center the ASCII art
+            x = (gp.screenWidth - totalWidth) / 2;
+            y = (gp.screenHeight - totalHeight) / 2;
+
+            // Adjust spacing between characters to ensure proper orientation
+            int lineHeight = g2.getFontMetrics().getHeight();
+            for (String line : wolfLines) {
+                g2.drawString(line, x, y);
+                y += lineHeight;
+            }
+
+            // menu
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+            text = "New Game";
+            x = centerTextX(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            text = "Load Game";
+            x = centerTextX(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            text = "Quit";
+            x = centerTextX(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+        } else if (selectScreenState == 1) {
+            g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(40F));
+
+            String[] characterNames = { "Warrior", "Mage", "Rogue", "Paladin", "Archer", "Back" };
+            selectedCharacter = characterNames[commandNum];
+
+            String text = "Select your character";
+            int x = centerTextX(text);
+            int y = gp.tileSize * 3;
+            g2.drawString(text, x, y);
+
+            text = "Warrior";
+            x = centerTextX(text);
+            y += gp.tileSize * 2;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+            text = "Mage";
+            x = centerTextX(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+            text = "Rogue";
+            x = centerTextX(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+            text = "Paladin";
+            x = centerTextX(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 3) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+            text = "Archer";
+            x = centerTextX(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 4) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+            text = "Back";
+            x = centerTextX(text);
+            y += gp.tileSize * 2;
+            g2.drawString(text, x, y);
+            if (commandNum == 5) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
         }
+    }
 
-        text = "LOAD GAME";
-        x = getXforCenteredText(text);
-        y += gp.tileSize;
-        g2.drawString(text, x, y);
-        if (commandNum == 1) {
-            g2.drawString(">", x-gp.tileSize/2, y);
-        }
-
-        text = "QUIT";
-        x = getXforCenteredText(text);
-        y += gp.tileSize;
-        g2.drawString(text, x, y);
-        if (commandNum == 2) {
-            g2.drawString(">", x-gp.tileSize/2, y);
-        }
-
-
+    public int centerTextX(String text) {
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int x = gp.screenWidth / 2 - length / 2;
+        return x;
     }
 
     public void drawPlayerLife() {
-        int x = gp.tileSize/2;
-        int y = gp.tileSize/2;
+        int x = gp.tileSize / 2;
+        int y = gp.tileSize / 2;
         int i = 0;
 
-        //Draw max life
-        while (i < gp.player.maxLife/2) {
+        // Draw max life
+        while (i < gp.player.maxLife / 2) {
             g2.drawImage(heart_blank, x, y, null);
             x += gp.tileSize;
             i++;
         }
 
-        x = gp.tileSize/2;
-        y = gp.tileSize/2;
+        x = gp.tileSize / 2;
+        y = gp.tileSize / 2;
         i = 0;
 
-        //Draw max life
+        // Draw max life
         while (i < gp.player.life) {
             g2.drawImage(heart_half, x, y, null);
             i++;
@@ -174,19 +263,20 @@ public class UI {
 
     public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
-        String text = "PAUSED";;
-        int x=getXforCenteredText(text);
-        int y=gp.screenHeight/2;
+        String text = "PAUSED";
+        ;
+        int x = getXforCenteredText(text);
+        int y = gp.screenHeight / 2;
         g2.drawString(text, x, y);
     }
 
     public void drawDialogueScreen() {
 
-        //WINDOW
-        int x = gp.tileSize*2;
-        int y = gp.tileSize/2;
-        int width = gp.screenWidth - (gp.tileSize*4);
-        int height = gp.tileSize*4;
+        // WINDOW
+        int x = gp.tileSize * 2;
+        int y = gp.tileSize / 2;
+        int width = gp.screenWidth - (gp.tileSize * 4);
+        int height = gp.tileSize * 4;
         drawSubWindow(x, y, width, height);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 25));
@@ -199,14 +289,10 @@ public class UI {
                 y += g2.getFontMetrics().getHeight();
             }
         }
-
-        
-
-        
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
-        
+
         Color c = new Color(0, 0, 0, 200);
         g2.setColor(c);
         g2.fillRoundRect(x, y, width, height, 35, 35);
@@ -218,15 +304,11 @@ public class UI {
 
     }
 
-
     public int getXforCenteredText(String text) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        int x=gp.screenWidth/2-length/2;
-       
+        int x = gp.screenWidth / 2 - length / 2;
+
         return x;
-        
+
     }
 }
-    
-
-
