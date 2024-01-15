@@ -11,6 +11,26 @@ import main.GamePanel;
 import main.UtilityTool;
 
 public class Entity {
+
+    /// badr change 
+
+   
+
+    public String[] nameCharacter = new String[5];
+    public String[] spellName = new String[3];
+    public int[] requirement = new int[3];
+    public int[] cooldown = new int[3];
+    public int[] Mana = new int[3];
+
+
+
+
+
+
+
+
+
+
     GamePanel gp;
     public int worldX, worldY;
     // public int speed;
