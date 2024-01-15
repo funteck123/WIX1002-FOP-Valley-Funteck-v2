@@ -30,8 +30,20 @@ public class Entity {
     public boolean collision = false;
 
     //Character Status
+    public int type;
+    public int speed;
     public int maxLife;
     public int life;
+    public int level;
+    public int strength;
+    public int dexterity;
+    public int attack;
+    public int defense;
+    public int exp;
+    public int nextLevelExp;
+    public int coin;
+    public Entity currentWeapon;
+    public Entity currentShield;
 
     
     public Entity (GamePanel gp){
