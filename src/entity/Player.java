@@ -63,6 +63,14 @@ public class Player extends Entity {
         // shield
     }
 
+   public int getAttack() {
+        return attack=strength;
+    }
+
+    public int getDefense() {
+        return defense= dexterity;
+    }
+
     public void update() {
 
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.enterPressed) {
