@@ -21,6 +21,8 @@ public class Player extends Entity {
     public int npcIndex;
     public int objIndex;
     public int monsterIndex;
+    public String npcAtkDialogue;
+    public String playerAtkDialogue;
 
     int standCounter = 0;
 
@@ -53,8 +55,8 @@ public class Player extends Entity {
 
         // Player Status
         level = 1;
-        maxLife = 6;
-        life = 6;
+        maxLife = 6000;
+        life = maxLife;
         maxAttack = 10;
         maxMana = 1000;
         mana = maxMana;
@@ -255,26 +257,29 @@ public class Player extends Entity {
             int damageDealt = gp.player.attack;
             gp.npc[i].life -= damageDealt;
 
-            gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + "with" + damageDealt + "!";
+            gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + " with " + damageDealt + "!";
 
             damageDealt = 0;
 
             // Check if the monster is defeated
             if (gp.npc[i].life < 0) {
                 // Handle victory, gain experience, etc.
-                gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + "!";
+                gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + " !";
                 playerWin = true;
                 gp.gameState = gp.gameOverState;
             } else {
                 // If not defeated, let the monster attack
                 damageDealt = gp.npc[i].npcAttack(i);
                 gp.player.life -= damageDealt;
-                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with" + damageDealt + "!";
+                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
                 damageDealt = 0;
             }
         } else {
             gp.gameState = gp.gameOverState;
             playerWin = false;
+            gp.ui.monsterAttackDialogue = "";
+            gp.ui.playerAttackDialogue = "";
+
         }
     }
 
@@ -285,7 +290,7 @@ public class Player extends Entity {
             int damageDealt = gp.player.attack;
             //gp.npc[i].life -= damageDealt;
 
-            gp.ui.playerAttackDialogue = "You put " + gp.npc[i].defense + "defense!";
+            gp.ui.playerAttackDialogue = "You put " + gp.npc[i].defense + " defense!";
 
             damageDealt = 0;
 
@@ -299,12 +304,15 @@ public class Player extends Entity {
                 // If not defeated, let the monster attack
                 damageDealt = gp.npc[i].npcAttack(i);
                 gp.player.life -= damageDealt - defense;
-                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with" + damageDealt + "!";
+                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
                 damageDealt = 0;
             }
         }   else {
             gp.gameState = gp.gameOverState;
             playerWin = false;
+            gp.ui.monsterAttackDialogue = "";
+            gp.ui.playerAttackDialogue = "";
+
         }
     }
 
@@ -315,7 +323,9 @@ public class Player extends Entity {
             int damageDealt = gp.player.attack;
             gp.player.life += gp.player.heal;
 
+
             gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "!";
+
 
             damageDealt = 0;
 
@@ -329,12 +339,15 @@ public class Player extends Entity {
                 // If not defeated, let the monster attack
                 damageDealt = gp.npc[i].npcAttack(i);
                 gp.player.life -= damageDealt;
-                gp.ui.monsterAttackDialogue = "The " + gp.monster[i].name + " attacked you with" + damageDealt + "!";
+                gp.ui.monsterAttackDialogue = "The " + gp.monster[i].name + " attacked you with " + damageDealt + "!";
                 damageDealt = 0;
             }
         }   else {
             gp.gameState = gp.gameOverState;
             playerWin = false;
+            gp.ui.monsterAttackDialogue = "";
+            gp.ui.playerAttackDialogue = "";
+
         }
     }
 
@@ -342,6 +355,9 @@ public class Player extends Entity {
     public void playerRun(int i) {
         gp.gameState = gp.gameOverState;
         playerWin = false;
+        gp.ui.monsterAttackDialogue = "";
+        gp.ui.playerAttackDialogue = "";
+
     }
 
 

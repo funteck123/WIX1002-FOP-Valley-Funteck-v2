@@ -33,6 +33,7 @@ public class UI {
     public int npcNo = 0;
 
     public int commandNum = 0;
+    public int commandNumFight = 5;
 
 
     
@@ -99,6 +100,15 @@ public class UI {
             //drawFightScreen();
             //drawDialogueScreen();
         }
+
+        if (gp.gameState == gp.gameOverState) {
+            drawGameOver();
+        }
+
+        if (gp.gameState == gp.fightState) {
+            //drawFightScreen();
+            //drawDialogueScreen();
+        }
         
     }
 
@@ -130,31 +140,39 @@ public class UI {
         // MENU
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
 
+
+        g2.setColor(Color.white);
+
         text = "NEW GAME";
         x = getXforCenteredText(text);
         y += gp.tileSize*4;
         g2.drawString(text, x, y);
         if (commandNum == 0) {
+            g2.setColor(Color.red);
             g2.drawString(">", x-gp.tileSize/2, y);
         }
+
+        g2.setColor(Color.white);
 
         text = "LOAD GAME";
         x = getXforCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);
         if (commandNum == 1) {
+            g2.setColor(Color.green);
             g2.drawString(">", x-gp.tileSize/2, y);
         }
+
+        g2.setColor(Color.white);
 
         text = "QUIT";
         x = getXforCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);
         if (commandNum == 2) {
+            g2.setColor(Color.blue);
             g2.drawString(">", x-gp.tileSize/2, y);
         }
-
-
     }
 
     public void drawPlayerLife() {
@@ -220,6 +238,16 @@ public class UI {
         
     }
 
+    public void drawGameOver() {
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
+        String text = "GAME OVER";;
+        int x=getXforCenteredText(text);
+        int y=gp.screenHeight/2;
+        g2.drawString(text, x, y);
+        
+    }
+
     public void drawFightScreen() {
 
         //WINDOW
@@ -261,23 +289,37 @@ public class UI {
                 "+-------------------------------------------------------------+\r\n" + //
                 "";
 
-                switch (commandNum) {
-                    case 0:
-                        gp.player.playerAttack(npcNo);
-                        break;
-                    case 1:
-                        gp.player.playerDefend(npcNo);
-                        break;
-                    case 2:
-                        gp.player.playerHeal(npcNo);
-                        break;
-                    case 3:
-                        gp.player.playerRun(npcNo);
-                        break;
-                    case 4:
-                        // Handle case 4
-                        break;
-                }
+        if (fightDialogue != null) {
+            for (String line : fightDialogue.split("\n")) {
+                g2.drawString(line, x, y);
+                y += g2.getFontMetrics().getHeight();
+            }
+        }
+        
+       
+
+        switch (commandNum) {
+            case 0:
+                gp.player.playerAttack(npcNo);
+                break;
+            case 1:
+                gp.player.playerDefend(npcNo);
+                break;
+            case 2:
+                gp.player.playerHeal(npcNo);
+                break;
+            case 3:
+                gp.player.playerRun(npcNo);
+                break;
+            case 4:
+                // Handle case 4
+                break;
+        }
+        commandNum = 5;
+        
+
+
+                
         }
 
 

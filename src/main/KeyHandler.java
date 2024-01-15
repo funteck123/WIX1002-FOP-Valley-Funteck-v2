@@ -45,7 +45,7 @@ public class KeyHandler implements KeyListener{
             }
         }
         // PLAY STATE
-        else if(gp.gameState == gp.playState) {
+        if(gp.gameState == gp.playState) {
             if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
                 upPressed = true;
             }
@@ -70,14 +70,14 @@ public class KeyHandler implements KeyListener{
         }
 
         // PAUSE STATE
-        else if(gp.gameState == gp.pauseState) {
+        if(gp.gameState == gp.pauseState) {
             if(code == KeyEvent.VK_P) {
                 gp.gameState = gp.playState;
             }
         }
         
         // DIALOGUE STATE
-        else if (gp.gameState == gp.dialogueState) {
+        if (gp.gameState == gp.dialogueState) {
             if(code == KeyEvent.VK_W) {
                 gp.ui.commandNum = 0;
             }   
@@ -102,16 +102,20 @@ public class KeyHandler implements KeyListener{
             if(code == KeyEvent.VK_4) {
                 gp.ui.commandNum = 7;
             }
+            // if(code == KeyEvent.VK_ENTER) {
+            //     gp.gameState = gp.playState;
+            // }
         }
+        
 
         // CHARACTER STATE
-        else if (gp.gameState == gp.characterState) {
+        if (gp.gameState == gp.characterState) {
             if(code == KeyEvent.VK_C) {
                 gp.gameState = gp.playState;
             }
         } 
 
-        else if (gp.gameState == gp.gameOverState) {
+        if (gp.gameState == gp.gameOverState) {
             if(code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
             }
