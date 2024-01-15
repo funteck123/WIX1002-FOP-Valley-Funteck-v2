@@ -28,6 +28,7 @@ public class UI {
     public String fightDialogue = "";
     public String monsterAttackDialogue = "";
     public String playerAttackDialogue = "";
+    public String npcAscii = "";
     
     public int monsterIndex = 0;
     public int npcNo = 0;
@@ -35,7 +36,7 @@ public class UI {
     public int commandNum = 0;
     public int commandNumFight = 5;
     //public boolean enterPressed = false;
-    public boolean playerTurn = true;
+    public boolean playerTurn = false;
 
 
     
@@ -270,19 +271,20 @@ public class UI {
         //collison
         //npcIndex = gp.cChecker.checkEntity(gp.player, gp.npc);
 
+        g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
         x += gp.tileSize;
         y += gp.tileSize;
 
-        fightDialogue = "> "+ playerAttackDialogue + "\r\n" + //
+        fightDialogue = "> "+ monsterAttackDialogue + "\r\n" + //
                 "\r\n" + //
                 ""+ gp.npc[npcNo].name +"\r\n" + //
                 "--> HP: " + gp.npc[npcNo].life + " / " + gp.npc[npcNo].maxLife + "\r\n" + //
                 "--> MP: " + gp.npc[npcNo].mana + " / " + gp.npc[npcNo].maxMana + "\r\n" +  //
                 "\r\n" + //
-                "> " + monsterAttackDialogue + "\r\n" + //
+                "> " + playerAttackDialogue + "\r\n" + //
                 "\r\n" + //
-                "Warrior\r\n" + //
+                "Player: Warrior\r\n" + //
                 "--> HP: "+ gp.player.life + " / " + gp.player.maxLife + "\r\n" + //
                 "--> MP: "+ gp.player.mana + " / " + gp.player.maxMana + "\r\n" + //
                 "+-------------------------------------------------------------+\r\n" + //
@@ -306,6 +308,28 @@ public class UI {
             }
         }
         
+        g2.setColor(Color.RED);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
+        x = gp.tileSize*1 + gp.tileSize*8;
+        y = gp.tileSize/2 + gp.tileSize;
+
+        npcAscii = "\\****__              ____                                              \r\n" + //
+                "|    *****\\_      --/ *\\-__                                          \r\n" + //
+                "/_          (_    ./ ,/----'                                         \r\n" + //
+                "     \\__         (_./  /                                                \r\n" + //
+                "       \\__           \\___----^__                                       \r\n" + //
+                "          _/   _                  \\                                      \r\n" + //
+                "   |    _/  __/ )\\\"\\ _____         *\\                                    \r\n" + //
+                "   |\\__/   /    ^ ^       \\____      )                                   \r\n" + //
+                "    \\___--\"                    \\_____ \r\n" + //
+                "";
+
+        if (npcAscii != null) {
+            for (String line : npcAscii.split("\n")) {
+                g2.drawString(line, x, y);
+                y += g2.getFontMetrics().getHeight();
+            }
+        }
        
 
         switch (commandNum) {

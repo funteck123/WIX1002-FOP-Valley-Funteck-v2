@@ -339,7 +339,9 @@ public class Player extends Entity {
             gp.gameState = gp.gameOverState;
             gp.ui.monsterAttackDialogue = "";
             gp.ui.playerAttackDialogue = "";
-            gp.npc[i] = null;           
+            gp.npc[i].worldX = -10;
+            gp.npc[i].worldX = -10;           
+
         }
     }
 

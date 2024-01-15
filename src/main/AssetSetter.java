@@ -26,7 +26,8 @@ public class AssetSetter {
     }
 
     public void setNPC() {
-        gp.npc[0] = new NPC_warrior(gp);
+        
+        gp.npc[0] = new Monster_Skeleton(gp);
         gp.npc[0].worldX = gp.tileSize * 21;
         gp.npc[0].worldY = gp.tileSize * 21;
 
@@ -42,7 +43,7 @@ public class AssetSetter {
         gp.npc[3].worldX = gp.tileSize * 23;
         gp.npc[3].worldY = gp.tileSize * 33;
 
-        gp.npc[4] = new Monster_Skeleton(gp);
+        gp.npc[4] = new NPC_warrior(gp);
         gp.npc[4].worldX = gp.tileSize * 23;
         gp.npc[4].worldY = gp.tileSize * 32;
 

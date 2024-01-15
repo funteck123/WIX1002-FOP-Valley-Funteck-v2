@@ -34,6 +34,11 @@ public class Entity {
     public boolean monsterWin = true;
     public boolean playerWin = true;
 
+    
+
+
+
+    
 
     public BufferedImage image, image2, image3;
     public String name = "default";
