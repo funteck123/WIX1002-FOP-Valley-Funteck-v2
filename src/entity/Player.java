@@ -23,6 +23,7 @@ public class Player extends Entity {
     public int monsterIndex;
     public String npcAtkDialogue;
     public String playerAtkDialogue;
+    public boolean playerWin;
 
     int standCounter = 0;
 

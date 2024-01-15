@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-import entity.Entity;
+import entity.*;
 import object.*;
 //import object.SuperObject;
 
@@ -241,10 +241,18 @@ public class UI {
     public void drawGameOver() {
 
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
-        String text = "GAME OVER";;
-        int x=getXforCenteredText(text);
-        int y=gp.screenHeight/2;
-        g2.drawString(text, x, y);
+
+        if (gp.player.playerWin == true) {
+            String text = "YOU WIN";;
+            int x=getXforCenteredText(text);
+            int y=gp.screenHeight/2;
+            g2.drawString(text, x, y);
+        } else {
+            String text = "GAME OVER";;
+            int x=getXforCenteredText(text);
+            int y=gp.screenHeight/2;
+            g2.drawString(text, x, y);
+        }
         
     }
 
