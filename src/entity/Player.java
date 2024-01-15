@@ -52,17 +52,24 @@ public class Player extends Entity {
         // Player Status
         level = 1;
         maxLife = 6;
-        life = 3;
-        strength = 1; // the more strength he has, moredamage he given
-        dexterity = 1; // the more dexterity he has, the less damage he receive
-        exp = 0;
-        nextLevelExp = 5;
-        coin = 0;
+        life = 6;
+        maxAttack = 10;
+        maxMagicalAttack = 2;
+        maxDefense = 5;
+        maxMagicalDefense = 3;
+        attack = maxAttack;
+        magicalAttack = maxMagicalAttack;
+        defense = maxDefense;
+        magicalDefense = maxMagicalDefense;
 
-        // attack=getAttack(); // the total attack value is decided by strength and
-        // weapon
-        // defense=getDefense(); // the total defense value is decided by dexterity and
-        // shield
+        strength=1; // the more strength he has, moredamage he given
+        dexterity=1; // the more dexterity he has, the less damage he receive
+        exp=0;
+        nextLevelExp=5;
+        coin=0;
+        
+        attack=getAttack(); // the total attack value is decided by strength and weapon
+        defense=getDefense(); // the total defense value is decided by dexterity and shield
     }
 
     public int getAttack() {
@@ -165,15 +172,19 @@ public class Player extends Entity {
 
     public BufferedImage setup(String iamgePath) {
         UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream(iamgePath + ".png"));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return image;
+         BufferedImage image = null;
+         try {
+             image = ImageIO.read(getClass().getResourceAsStream( iamgePath + ".png"));
+             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         return  image;
     }
+         
+        
+
+    
 
     public void loadCharacterImages() {
         up1 = setup("/res/player/" + characterName + "_up1");
@@ -215,6 +226,25 @@ public class Player extends Entity {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     public void draw(Graphics2D g2) {
         // g2.setColor(Color.white);
         // g2.fillRect(x, y, gp.tileSize, gp.tileSize);

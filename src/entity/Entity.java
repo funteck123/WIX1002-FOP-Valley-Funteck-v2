@@ -37,13 +37,22 @@ public class Entity {
     public int level;
     public int strength;
     public int dexterity;
-    public int attack;
-    public int defense;
+    //public int attack;
+    //public int defense;
     public int exp;
     public int nextLevelExp;
     public int coin;
     public Entity currentWeapon;
     public Entity currentShield;
+
+    public int maxAttack;
+    public int maxMagicalAttack;
+    public int maxDefense;
+    public int maxMagicalDefense;
+    public int attack;
+    public int magicalAttack;
+    public int defense;
+    public int magicalDefense;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -71,6 +80,9 @@ public class Entity {
             actionLockCounter = 0;
 
         }
+
+    }
+    public void fight() {
 
     }
 
