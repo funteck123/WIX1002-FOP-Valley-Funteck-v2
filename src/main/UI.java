@@ -85,6 +85,10 @@ public class UI {
             drawPlayerLife();
             drawDialogueScreen();
         }
+         //CHARACTER STATE
+        if(gp.gameState == gp.characterState) {
+            drawCharacterScreen();
+        }
 
     }
 
