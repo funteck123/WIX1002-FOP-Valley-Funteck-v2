@@ -102,9 +102,9 @@ public class KeyHandler implements KeyListener{
             if(code == KeyEvent.VK_4) {
                 gp.ui.commandNum = 7;
             }
-            // if(code == KeyEvent.VK_ENTER) {
-            //     gp.gameState = gp.playState;
-            // }
+            if(code == KeyEvent.VK_ENTER) {
+                enterPressed = true;
+            }
         }
         
 
@@ -115,6 +115,7 @@ public class KeyHandler implements KeyListener{
             }
         } 
 
+        // Game Over State
         if (gp.gameState == gp.gameOverState) {
             if(code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;

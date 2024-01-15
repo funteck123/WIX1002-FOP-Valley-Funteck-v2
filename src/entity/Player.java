@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 //import java.nio.Buffer;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -24,6 +25,7 @@ public class Player extends Entity {
     public String npcAtkDialogue;
     public String playerAtkDialogue;
     public boolean playerWin;
+    public int damageDealt;
 
     int standCounter = 0;
 
@@ -56,9 +58,10 @@ public class Player extends Entity {
 
         // Player Status
         level = 1;
-        maxLife = 6000;
+        maxLife = 300;
+        
         life = maxLife;
-        maxAttack = 10;
+        maxAttack = 2;
         maxMana = 1000;
         mana = maxMana;
         maxMagicalAttack = 2;
@@ -254,33 +257,28 @@ public class Player extends Entity {
     public void playerAttack(int i) {
         if (gp.player.life > 0) {
             
+            Random random = new Random();
+            damageDealt = random.nextInt(gp.player.attack) + 1;
             // Player's attack logic
-            int damageDealt = gp.player.attack;
-            gp.npc[i].life -= damageDealt;
+            damageDealt = gp.player.attack;
+            gp.npc[i].life = Math.max(0, gp.npc[i].life - damageDealt);
 
             gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + " with " + damageDealt + "!";
 
             damageDealt = 0;
 
-            // Check if the monster is defeated
-            if (gp.npc[i].life < 0) {
-                // Handle victory, gain experience, etc.
-                gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + " !";
-                playerWin = true;
-                gp.gameState = gp.gameOverState;
-            } else {
+            if (gp.npc[i].life <= 0) {
                 // If not defeated, let the monster attack
-                damageDealt = gp.npc[i].npcAttack(i);
-                gp.player.life -= damageDealt;
-                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
-                damageDealt = 0;
-            }
+                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " has been slain!";
+            } 
+            
         } else {
+
             gp.gameState = gp.gameOverState;
             playerWin = false;
             gp.ui.monsterAttackDialogue = "";
             gp.ui.playerAttackDialogue = "";
-
+        
         }
     }
 
@@ -288,32 +286,15 @@ public class Player extends Entity {
         if (gp.player.life > 0) {
             
             // Player's attack logic
-            int damageDealt = gp.player.attack;
-            //gp.npc[i].life -= damageDealt;
-
             gp.ui.playerAttackDialogue = "You put " + gp.npc[i].defense + " defense!";
 
-            damageDealt = 0;
+            damageDealt = Math.min(0,-gp.npc[i].defense);
 
-            // Check if the monster is defeated
-            if (gp.npc[i].life < 0) {
-                // Handle victory, gain experience, etc.
-                gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + "!";
-                playerWin = true;
-                gp.gameState = gp.gameOverState;
-            } else {
-                // If not defeated, let the monster attack
-                damageDealt = gp.npc[i].npcAttack(i);
-                gp.player.life -= damageDealt - defense;
-                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
-                damageDealt = 0;
-            }
         }   else {
             gp.gameState = gp.gameOverState;
             playerWin = false;
             gp.ui.monsterAttackDialogue = "";
             gp.ui.playerAttackDialogue = "";
-
         }
     }
 
@@ -321,28 +302,10 @@ public class Player extends Entity {
         if (gp.player.life > 0) {
             
             // Player's attack logic
-            int damageDealt = gp.player.attack;
             gp.player.life += gp.player.heal;
 
+            gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "! Refreshing, right?";
 
-            gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "!";
-
-
-            damageDealt = 0;
-
-            // Check if the monster is defeated
-            if (gp.npc[i].life < 0) {
-                // Handle victory, gain experience, etc.
-                gp.ui.playerAttackDialogue = "You defeated the " + gp.monster[i].name + "!";
-                playerWin = true;
-                gp.gameState = gp.gameOverState;
-            } else {
-                // If not defeated, let the monster attack
-                damageDealt = gp.npc[i].npcAttack(i);
-                gp.player.life -= damageDealt;
-                gp.ui.monsterAttackDialogue = "The " + gp.monster[i].name + " attacked you with " + damageDealt + "!";
-                damageDealt = 0;
-            }
         }   else {
             gp.gameState = gp.gameOverState;
             playerWin = false;
@@ -359,6 +322,25 @@ public class Player extends Entity {
         gp.ui.monsterAttackDialogue = "";
         gp.ui.playerAttackDialogue = "";
 
+    }
+
+    public void monsterAttack(int i) {
+        // Check if the monster is defeated
+        if (gp.npc[i].life > 0) {
+            // If not defeated, let the monster attack
+            damageDealt = gp.npc[i].npcAttack(i);
+            gp.player.life -= damageDealt;
+            gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
+            damageDealt = 0;
+        } else {
+            // Handle victory, gain experience, etc.
+            gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + " !";
+            playerWin = true;
+            gp.gameState = gp.gameOverState;
+            gp.ui.monsterAttackDialogue = "";
+            gp.ui.playerAttackDialogue = "";
+            gp.npc[i] = null;           
+        }
     }
 
 

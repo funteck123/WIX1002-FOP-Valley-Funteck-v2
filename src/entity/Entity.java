@@ -3,6 +3,7 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -24,10 +25,15 @@ public class Entity {
     public int actionLockCounter = 0;
     public String dialogues[] = new String[20];
     public int dialogueIndex = 0;
+    public ArrayList<String> spellName = new ArrayList<String>();
+    public ArrayList<String> spellMana = new ArrayList<String>();
+    public ArrayList<String> spellMagicalAtk = new ArrayList<String>();
+    public ArrayList<String> spellMagicalDef = new ArrayList<String>();
+    public ArrayList<String> spellCooldown = new ArrayList<String>();
     // public int monsterIndex = 999;
     public boolean monsterWin = true;
     public boolean playerWin = true;
-    
+
 
     public BufferedImage image, image2, image3;
     public String name = "default";

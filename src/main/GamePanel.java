@@ -218,7 +218,10 @@ public class GamePanel extends JPanel implements Runnable{
             for (int i = 0; i < entityList.size(); i++) {
                 if (npc[i] != null && npc[i].life > 0) {
                     entityList.add(npc[i]);
-                }
+                } 
+                
+              
+
             }
             for (int i = 0; i < entityList.size(); i++) {
                 if (obj[i] != null) {

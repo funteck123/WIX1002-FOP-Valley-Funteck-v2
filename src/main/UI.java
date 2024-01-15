@@ -34,6 +34,8 @@ public class UI {
 
     public int commandNum = 0;
     public int commandNumFight = 5;
+    //public boolean enterPressed = false;
+    public boolean playerTurn = true;
 
 
     
@@ -181,7 +183,7 @@ public class UI {
         int i = 0;
 
         //Draw max life
-        while (i < gp.player.maxLife/2) {
+        while (i < gp.player.maxLife/100) {
             g2.drawImage(heart_blank, x, y, null);
             x += gp.tileSize;
             i++;
@@ -192,10 +194,10 @@ public class UI {
         i = 0;
 
         //Draw max life
-        while (i < gp.player.life) {
+        while (i < gp.player.life/50) {
             g2.drawImage(heart_half, x, y, null);
             i++;
-            if (i < gp.player.life) {
+            if (i < gp.player.life/50) {
                 g2.drawImage(heart_full, x, y, null);
             }
             i++;
@@ -308,22 +310,47 @@ public class UI {
 
         switch (commandNum) {
             case 0:
-                gp.player.playerAttack(npcNo);
+                if (playerTurn) {
+                    gp.player.playerAttack(npcNo);
+                    playerTurn = false;
+                    //gp.keyH.enterPressed = false;
+                } 
                 break;
             case 1:
-                gp.player.playerDefend(npcNo);
+                if (playerTurn) {
+                    gp.player.playerDefend(npcNo);
+                    playerTurn = false;
+                    //gp.keyH.enterPressed = false;
+                } 
                 break;
             case 2:
-                gp.player.playerHeal(npcNo);
+                if (playerTurn) {
+                    gp.player.playerHeal(npcNo);
+                    playerTurn = false;
+                    //gp.keyH.enterPressed = false;
+                } 
                 break;
             case 3:
-                gp.player.playerRun(npcNo);
+                if (playerTurn) {
+                    gp.player.playerRun(npcNo);
+                    playerTurn = false;
+                    //gp.keyH.enterPressed = false;
+                } 
+                
                 break;
             case 4:
                 // Handle case 4
                 break;
-        }
+        } 
+
         commandNum = 5;
+
+        if (gp.keyH.enterPressed && !playerTurn) {
+            gp.player.monsterAttack(npcNo);
+            playerTurn = true;
+            gp.keyH.enterPressed = false;
+        }
+        
         
 
 
