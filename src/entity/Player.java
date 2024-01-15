@@ -26,7 +26,8 @@ public class Player extends Entity {
     public String playerAtkDialogue;
     public boolean playerWin;
     public int damageDealt;
-
+    public int damageDealt1;
+    
     int standCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
@@ -65,7 +66,7 @@ public class Player extends Entity {
         maxMana = 1000;
         mana = maxMana;
         maxMagicalAttack = 2;
-        maxDefense = 5;
+        maxDefense = 2;
         maxMagicalDefense = 3;
         attack = maxAttack;
         magicalAttack = maxMagicalAttack;
@@ -286,9 +287,9 @@ public class Player extends Entity {
         if (gp.player.life > 0) {
             
             // Player's attack logic
-            gp.ui.playerAttackDialogue = "You put " + gp.npc[i].defense + " defense!";
+            gp.ui.playerAttackDialogue = "You put " + gp.player.defense + " defense!";
 
-            damageDealt = Math.min(0,-gp.npc[i].defense);
+            damageDealt1 = gp.player.defense;
 
         }   else {
             gp.gameState = gp.gameOverState;
@@ -303,6 +304,7 @@ public class Player extends Entity {
             
             // Player's attack logic
             gp.player.life += gp.player.heal;
+            gp.player.life = Math.min(gp.player.maxLife, gp.player.life);
 
             gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "! Refreshing, right?";
 
@@ -329,9 +331,10 @@ public class Player extends Entity {
         if (gp.npc[i].life > 0) {
             // If not defeated, let the monster attack
             damageDealt = gp.npc[i].npcAttack(i);
-            gp.player.life -= damageDealt;
+            gp.player.life -= Math.max(0,damageDealt - damageDealt1);
             gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
             damageDealt = 0;
+            damageDealt1 = 0;
         } else {
             // Handle victory, gain experience, etc.
             gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + " !";
