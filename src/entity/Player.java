@@ -68,6 +68,14 @@ public class Player extends Entity {
         defense=getDefense(); // the total defense value is decided by dexterity and shield
     }
 
+   public int getAttack() {
+        return attack=strength;
+    }
+
+    public int getDefense() {
+        return defense= dexterity;
+    }
+
     public void update() {
 
         if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.enterPressed) {
