@@ -18,6 +18,10 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    public int npcIndex;
+    public int objIndex;
+    public int monsterIndex;
+
     int standCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
@@ -52,6 +56,8 @@ public class Player extends Entity {
         maxLife = 6;
         life = 6;
         maxAttack = 10;
+        maxMana = 1000;
+        mana = maxMana;
         maxMagicalAttack = 2;
         maxDefense = 5;
         maxMagicalDefense = 3;
@@ -59,6 +65,7 @@ public class Player extends Entity {
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;
+        heal = 10;
 
         strength=1; // the more strength he has, moredamage he given
         dexterity=1; // the more dexterity he has, the less damage he receive
@@ -66,17 +73,17 @@ public class Player extends Entity {
         nextLevelExp=5;
         coin=0;
         
-        attack=getAttack(); // the total attack value is decided by strength and weapon
-        defense=getDefense(); // the total defense value is decided by dexterity and shield
+        //attack=getAttack(); // the total attack value is decided by strength and weapon
+        //defense=getDefense(); // the total defense value is decided by dexterity and shield
     }
 
-   public int getAttack() {
-        return attack=strength;
-    }
+//    public int getAttack() {
+//         return attack=strength;
+//     }
 
-    public int getDefense() {
-        return defense= dexterity;
-    }
+//     public int getDefense() {
+//         return defense= dexterity;
+//     }
 
     public void update() {
 
@@ -121,15 +128,17 @@ public class Player extends Entity {
             gp.cChecker.checkTile(this);
 
             // Check Object Collision
-            int objIndex = gp.cChecker.checkObject(this, true);
+            objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
             // Check NPC Collision
-            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
+
             // check NPC collision
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            interactNPC(monsterIndex);
+            monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            //interactMonster(monsterIndex);
+
             // check event
             gp.eHandler.checkEvent();
             gp.keyH.enterPressed = false;
@@ -208,10 +217,11 @@ public class Player extends Entity {
 
         if (i != 999) {
 
+            gp.ui.npcNo = i;
+
             // System.out.println("You are hitting an NPC.");
             if (gp.keyH.enterPressed == true) {
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
             }
 
         }
@@ -220,7 +230,124 @@ public class Player extends Entity {
 
     }
 
+    // public void interactMonster(int i) {
 
+    //     if (i != 999) {
+
+
+
+    //         // System.out.println("You are hitting an NPC.");
+    //         if (gp.keyH.enterPressed == true) {
+    //             gp.gameState = gp.dialogueState;
+    //             gp.monster[i].speak();
+    //         }
+
+    //     }
+
+    //     gp.keyH.enterPressed = false;
+
+    // }
+
+    public void playerAttack(int i) {
+        if (gp.player.life > 0) {
+            
+            // Player's attack logic
+            int damageDealt = gp.player.attack;
+            gp.npc[i].life -= damageDealt;
+
+            gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + "with" + damageDealt + "!";
+
+            damageDealt = 0;
+
+            // Check if the monster is defeated
+            if (gp.npc[i].life < 0) {
+                // Handle victory, gain experience, etc.
+                gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + "!";
+                playerWin = true;
+                gp.gameState = gp.gameOverState;
+            } else {
+                // If not defeated, let the monster attack
+                damageDealt = gp.npc[i].npcAttack(i);
+                gp.player.life -= damageDealt;
+                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with" + damageDealt + "!";
+                damageDealt = 0;
+            }
+        } else {
+            gp.gameState = gp.gameOverState;
+            playerWin = false;
+        }
+    }
+
+    public void playerDefend(int i) {
+        if (gp.player.life > 0) {
+            
+            // Player's attack logic
+            int damageDealt = gp.player.attack;
+            //gp.npc[i].life -= damageDealt;
+
+            gp.ui.playerAttackDialogue = "You put " + gp.npc[i].defense + "defense!";
+
+            damageDealt = 0;
+
+            // Check if the monster is defeated
+            if (gp.npc[i].life < 0) {
+                // Handle victory, gain experience, etc.
+                gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + "!";
+                playerWin = true;
+                gp.gameState = gp.gameOverState;
+            } else {
+                // If not defeated, let the monster attack
+                damageDealt = gp.npc[i].npcAttack(i);
+                gp.player.life -= damageDealt - defense;
+                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with" + damageDealt + "!";
+                damageDealt = 0;
+            }
+        }   else {
+            gp.gameState = gp.gameOverState;
+            playerWin = false;
+        }
+    }
+
+    public void playerHeal(int i) {
+        if (gp.player.life > 0) {
+            
+            // Player's attack logic
+            int damageDealt = gp.player.attack;
+            gp.player.life += gp.player.heal;
+
+            gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "!";
+
+            damageDealt = 0;
+
+            // Check if the monster is defeated
+            if (gp.npc[i].life < 0) {
+                // Handle victory, gain experience, etc.
+                gp.ui.playerAttackDialogue = "You defeated the " + gp.monster[i].name + "!";
+                playerWin = true;
+                gp.gameState = gp.gameOverState;
+            } else {
+                // If not defeated, let the monster attack
+                damageDealt = gp.npc[i].npcAttack(i);
+                gp.player.life -= damageDealt;
+                gp.ui.monsterAttackDialogue = "The " + gp.monster[i].name + " attacked you with" + damageDealt + "!";
+                damageDealt = 0;
+            }
+        }   else {
+            gp.gameState = gp.gameOverState;
+            playerWin = false;
+        }
+    }
+
+
+    public void playerRun(int i) {
+        gp.gameState = gp.gameOverState;
+        playerWin = false;
+    }
+
+
+
+
+    
 
 
 

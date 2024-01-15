@@ -19,6 +19,19 @@ public class NPC_warrior extends Entity {
         solidArea.height=32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        maxLife = 10;
+        life = maxLife;
+
+
+        maxAttack = 10;
+        maxMagicalAttack = 2;
+        maxDefense = 5;
+        maxMagicalDefense = 3;
+        attack = maxAttack;
+        magicalAttack = maxMagicalAttack;
+        defense = maxDefense;
+        magicalDefense = maxMagicalDefense;
     }
 
     public void getImage() {

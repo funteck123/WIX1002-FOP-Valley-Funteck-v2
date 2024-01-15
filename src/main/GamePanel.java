@@ -63,12 +63,14 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
     //game state
-    public  int gameState = 1;
+    public int gameState = 0;
     public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
+    public final int fightState = 5;
+    public final int gameOverState = 6;
 
     public void setupGame() {
         aSetter.setObject();
@@ -164,15 +166,28 @@ public class GamePanel extends JPanel implements Runnable{
                     npc[i].update();
                 }
             }
-        }
-        //monster
-        for(int i = 0 ; i < monster.length; i++) {
+        
+            //monster
+            for(int i = 0 ; i < monster.length; i++) {
 
-            if(monster[i] != null) {
-                monster[i].update();
+                if(monster[i] != null) {
+                    monster[i].update();
+                }
             }
         }
-        if (gameState == pauseState) {
+        else if (gameState == pauseState) {
+            //nothing
+        }
+        else if (gameState == dialogueState) {
+            //nothing
+        }
+        else if (gameState == characterState) {
+            //nothing
+        }
+        else if (gameState == fightState) {
+            //nothing
+        }
+        else if (gameState == gameOverState) {
             //nothing
         }
 
@@ -193,8 +208,7 @@ public class GamePanel extends JPanel implements Runnable{
         // TITLE SCREEN
         if(gameState == titleState) {
             ui.draw(g2);
-        }
-        else {
+        } else {
             
             //draw tiles
             tileM.draw(g2);

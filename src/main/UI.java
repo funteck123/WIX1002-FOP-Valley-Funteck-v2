@@ -25,6 +25,13 @@ public class UI {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public String fightDialogue = "";
+    public String monsterAttackDialogue = "";
+    public String playerAttackDialogue = "";
+    
+    public int monsterIndex = 0;
+    public int npcNo = 0;
+
     public int commandNum = 0;
 
 
@@ -82,10 +89,17 @@ public class UI {
         }
         //DIALOGUE 
         if (gp.gameState == gp.dialogueState) {
-            drawPlayerLife();
-            drawDialogueScreen();
+            //drawPlayerLife();
+            //drawDialogueScreen();
+            drawFightScreen();
         }
 
+        //FIGHT
+        if (gp.gameState == gp.fightState) {
+            //drawFightScreen();
+            //drawDialogueScreen();
+        }
+        
     }
 
     public void drawTitleScreen() {
@@ -182,6 +196,7 @@ public class UI {
 
     public void drawDialogueScreen() {
 
+
         //WINDOW
         int x = gp.tileSize*2;
         int y = gp.tileSize/2;
@@ -205,32 +220,66 @@ public class UI {
         
     }
 
-    public void fightScreen() {
+    public void drawFightScreen() {
 
         //WINDOW
-        int x = gp.tileSize*2;
+        int x = gp.tileSize*1;
         int y = gp.tileSize/2;
-        int width = gp.screenWidth - (gp.tileSize*4);
-        int height = gp.tileSize*4;
+        int width = gp.screenWidth - (gp.tileSize*2);
+        int height = gp.tileSize*11;
         drawSubWindow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 25));
+        //collison
+        //npcIndex = gp.cChecker.checkEntity(gp.player, gp.npc);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
         x += gp.tileSize;
         y += gp.tileSize;
 
-        
+        fightDialogue = "> "+ playerAttackDialogue + "\r\n" + //
+                "\r\n" + //
+                ""+ gp.npc[npcNo].name +"\r\n" + //
+                "--> HP: " + gp.npc[npcNo].life + " / " + gp.npc[npcNo].maxLife + "\r\n" + //
+                "--> MP: " + gp.npc[npcNo].mana + " / " + gp.npc[npcNo].maxMana + "\r\n" +  //
+                "\r\n" + //
+                "> " + monsterAttackDialogue + "\r\n" + //
+                "\r\n" + //
+                "Warrior\r\n" + //
+                "--> HP: "+ gp.player.life + " / " + gp.player.maxLife + "\r\n" + //
+                "--> MP: "+ gp.player.mana + " / " + gp.player.maxMana + "\r\n" + //
+                "+-------------------------------------------------------------+\r\n" + //
+                ">> Starter\r\n" + //
+                "[W] Attack\r\n" + //
+                "[A] Defend\r\n" + //
+                "[S] Heal    \n" + //
+                "[D] Escape\r\n" + //
+                "\r\n" + //
+                ">> Spells\r\n" + //
+                "[1] Rabid Lunge  \n" + //
+                "[2] <Locked - 10>\r\n" + //
+                "[3] <Locked - 15>\r\n" + //
+                "+-------------------------------------------------------------+\r\n" + //
+                "";
 
-        if (currentDialogue != null) {
-            for (String line : currentDialogue.split("\n")) {
-                g2.drawString(line, x, y);
-                y += g2.getFontMetrics().getHeight();
-            }
+                switch (commandNum) {
+                    case 0:
+                        gp.player.playerAttack(npcNo);
+                        break;
+                    case 1:
+                        gp.player.playerDefend(npcNo);
+                        break;
+                    case 2:
+                        gp.player.playerHeal(npcNo);
+                        break;
+                    case 3:
+                        gp.player.playerRun(npcNo);
+                        break;
+                    case 4:
+                        // Handle case 4
+                        break;
+                }
         }
 
-        
-
-        
-    }
 
 
     public void drawSubWindow(int x, int y, int width, int height) {
@@ -252,7 +301,6 @@ public class UI {
         int x=gp.screenWidth/2-length/2;
        
         return x;
-        
     }
 }
     

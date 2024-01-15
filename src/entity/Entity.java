@@ -22,11 +22,15 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
-    String dialogues[] = new String[20];
-    int dialogueIndex = 0;
+    public String dialogues[] = new String[20];
+    public int dialogueIndex = 0;
+    // public int monsterIndex = 999;
+    public boolean monsterWin = true;
+    public boolean playerWin = true;
+    
 
     public BufferedImage image, image2, image3;
-    public String name;
+    public String name = "default";
     public boolean collision = false;
 
     // Character Status
@@ -37,6 +41,9 @@ public class Entity {
     public int level;
     public int strength;
     public int dexterity;
+    public int maxMana;
+    public int mana;
+    public int heal;
     //public int attack;
     //public int defense;
     public int exp;
@@ -82,7 +89,17 @@ public class Entity {
         }
 
     }
-    public void fight() {
+    public void fight() {   
+
+        //gp.ui.npcIndex = 2;
+
+    }
+
+    public void playerAttack() {
+
+    }
+
+    public void monsterAttack() {
 
     }
 
@@ -110,6 +127,16 @@ public class Entity {
         }
 
     }
+
+    public int npcAttack(int i) {
+        int damage = 0;
+        Random random = new Random();
+        int j = random.nextInt(gp.npc[i].attack) + 1;
+        damage = j;
+        return damage;
+    }
+
+
 
     public void update() {
 
