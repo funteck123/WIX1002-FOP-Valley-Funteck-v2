@@ -55,7 +55,15 @@ public class Player extends Entity {
 
         //Player Status
         maxLife = 6;
-        life = 3;
+        life = 6;
+        maxAttack = 10;
+        maxMagicalAttack = 2;
+        maxDefense = 5;
+        maxMagicalDefense = 3;
+        attack = maxAttack;
+        magicalAttack = maxMagicalAttack;
+        defense = maxDefense;
+        magicalDefense = maxMagicalDefense;
     }
 
     public void update() {
@@ -107,9 +115,9 @@ public class Player extends Entity {
             // Check NPC Collision
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
-         // check NPC collision
-    int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-     interactNPC(monsterIndex);
+            // check NPC collision
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            interactNPC(monsterIndex);
             //check event
             gp.eHandler.checkEvent();
             gp.keyH.enterPressed = false;
@@ -154,7 +162,8 @@ public class Player extends Entity {
          } catch (Exception e) {
              e.printStackTrace();
          }
-         return  image;}
+         return  image;
+    }
          
         
 
@@ -162,7 +171,7 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
     
-       up1= setup("/res//player/boy_up_1");
+        up1= setup("/res//player/boy_up_1");
         up2=setup("/res/player/boy_up_2");
         down1=setup("/res/player/boy_down_1");
         down2=setup("/res/player/boy_down_2");
@@ -198,6 +207,25 @@ public class Player extends Entity {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     public void draw(Graphics2D g2) {
 //        g2.setColor(Color.white);
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize);

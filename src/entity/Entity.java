@@ -32,6 +32,14 @@ public class Entity {
     //Character Status
     public int maxLife;
     public int life;
+    public int maxAttack;
+    public int maxMagicalAttack;
+    public int maxDefense;
+    public int maxMagicalDefense;
+    public int attack;
+    public int magicalAttack;
+    public int defense;
+    public int magicalDefense;
 
     
     public Entity (GamePanel gp){
@@ -65,6 +73,9 @@ public class Entity {
     
     }
 
+    public void fight() {
+
+    }
 
     public void speak() {
 
