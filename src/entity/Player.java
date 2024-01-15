@@ -53,9 +53,19 @@ public class Player extends Entity {
         speed = 4;
         direction = "down";
 
+        
         //Player Status
+        level=1;
         maxLife = 6;
         life = 3;
+        strength=1; // the more strength he has, moredamage he given
+        dexterity=1; // the more dexterity he has, the less damage he receive
+        exp=0;
+        nextLevelExp=5;
+        coin=0;
+        
+        attack=getAttack(); // the total attack value is decided by strength and weapon
+        defense=getDefense(); // the total defense value is decided by dexterity and shield
     }
 
     public void update() {
