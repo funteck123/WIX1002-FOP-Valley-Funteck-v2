@@ -129,7 +129,7 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
             String text = "FOP Valley Funteck";
             int x = getXforCenteredText(text);
-            int y = gp.tileSize*3;
+            int y = gp.tileSize*2;
 
             // SHADOW
             g2.setColor(Color.red);
@@ -138,7 +138,8 @@ public class UI {
 
 
             // MAIN COLOR
-            g2.setColor(Color.white);
+            //g2.setColor(Color.red);
+            g2.setColor(new Color(0,250,250));
             g2.drawString(text,x,y);
 
             // IMAGE
@@ -148,11 +149,26 @@ public class UI {
             BufferedImage down1;
             try {
                 down1 = ImageIO.read(getClass().getResourceAsStream("/res/player/intro_slime.png"));
-                g2.drawImage(down1, x, y, gp.tileSize*10, gp.tileSize*4, null);
+                g2.drawImage(down1, x, y, gp.tileSize*10, gp.tileSize*5, null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
+
+            x = gp.screenWidth/2 - (gp.tileSize*15)/2;
+            y = gp.tileSize*11;
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,25f));
+            g2.setColor(Color.white);
+            text = "(Controls: WASD to \nmove, ENTER to interact.)";
+            if (text != null) {
+                for (String line : text.split("\n")) {
+                    g2.drawString(line, x, y);
+                    y += g2.getFontMetrics().getHeight();
+                }
+            }
+
+            //reset
+            x = gp.screenWidth/2 - (gp.tileSize*10)/2;
+            y = gp.tileSize*4;
 
             // //ASCII
             // g2.setColor(Color.white);
@@ -180,13 +196,11 @@ public class UI {
 
             // MENU
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
-
-
             g2.setColor(Color.white);
 
             text = "NEW GAME";
             x = getXforCenteredText(text);
-            y += gp.tileSize*5;
+            y += gp.tileSize*5.25;
             g2.drawString(text, x, y);
             if (commandNum == 0) {
                 g2.setColor(Color.red);
