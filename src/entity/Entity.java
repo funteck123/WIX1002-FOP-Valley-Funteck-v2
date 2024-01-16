@@ -3,7 +3,6 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -19,10 +18,11 @@ public class Entity {
 
     public String[] nameCharacter = new String[5];
     public String[] spellName = new String[3];
-    public int[] requirement = new int[3];
-    public int[] cooldown = new int[3];
-    public int[] Mana = new int[3];
-
+    public int[] spellRequirement = new int[3];
+    public int[] spellCooldown = new int[3];
+    public int[] spellMana = new int[3];
+    int[] spellMagicalAttack = new int[3];
+    int[] spellMagicalDef = new int[3];  
 
 
 
@@ -45,11 +45,11 @@ public class Entity {
     public int actionLockCounter = 0;
     public String dialogues[] = new String[20];
     public int dialogueIndex = 0;
-    public ArrayList<String> spellName = new ArrayList<String>();
-    public ArrayList<String> spellMana = new ArrayList<String>();
-    public ArrayList<String> spellMagicalAtk = new ArrayList<String>();
-    public ArrayList<String> spellMagicalDef = new ArrayList<String>();
-    public ArrayList<String> spellCooldown = new ArrayList<String>();
+    // public ArrayList<String> spellName = new ArrayList<String>();
+    // public ArrayList<String> spellMana = new ArrayList<String>();
+    // public ArrayList<String> spellMagicalAtk = new ArrayList<String>();
+    // public ArrayList<String> spellMagicalDef = new ArrayList<String>();
+    // public ArrayList<String> spellCooldown = new ArrayList<String>();
     // public int monsterIndex = 999;
     public boolean monsterWin = true;
     public boolean playerWin = true;
@@ -94,6 +94,13 @@ public class Entity {
 
     public Entity(GamePanel gp) {
         this.gp = gp;
+
+        this.spellName = new String[]{"Fireball", "Iceball", "Lightning"};
+        this.spellRequirement = new int[]{1, 5, 10};
+        this.spellCooldown = new int[]{3, 5, 7};
+        this.spellMana = new int[]{100, 500, 1000};
+        this.spellMagicalAttack = new int[]{5, 10, 25};
+        this.spellMagicalDef = new int[]{5, 10, 25};  
     }
 
     public void setAction() {

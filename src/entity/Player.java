@@ -1,5 +1,6 @@
 package entity;
 
+
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -27,6 +28,7 @@ public class Player extends Entity {
     public boolean playerWin;
     public int damageDealt;
     public int damageDealt1;
+    public String characterName;
     
     int standCounter = 0;
 
@@ -48,8 +50,11 @@ public class Player extends Entity {
         solidArea.height = 26;
 
         setDefaultValues();
-        getPlayerImage();
+
+        //getPlayerImage();
+
     }
+
 
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
@@ -170,6 +175,8 @@ public class Player extends Entity {
 
             gp.keyH.enterPressed = false;
 
+            
+
             spriteCounter++;
             if (spriteCounter > 10) {
                 if (spriteNum == 1) {
@@ -202,14 +209,17 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
 
-        up1 = setup("/res//player/boy_up_1");
-        up2 = setup("/res/player/boy_up_2");
-        down1 = setup("/res/player/boy_down_1");
-        down2 = setup("/res/player/boy_down_2");
-        left1 = setup("/res/player/boy_left_1");
-        left2 = setup("/res/player/boy_left_2");
-        right1 = setup("/res/player/boy_right_1");
-        right2 = setup("/res/player/boy_right_2");
+        //System.out.println(gp.keyH.characterName);
+        //gp.keyH.characterName;
+
+        up1 = setup("/res//player/" + gp.keyH.characterName + "_up1");
+        up2 = setup("/res/player/" + gp.keyH.characterName + "_up2");
+        down1 = setup("/res/player/" + gp.keyH.characterName + "_down1");
+        down2 = setup("/res/player/" + gp.keyH.characterName + "_down2");
+        left1 = setup("/res/player/" + gp.keyH.characterName + "_left1");
+        left2 = setup("/res/player/" + gp.keyH.characterName + "_left2");
+        right1 = setup("/res/player/" + gp.keyH.characterName + "_right1");
+        right2 = setup("/res/player/" + gp.keyH.characterName + "_right2");
 
     }
 

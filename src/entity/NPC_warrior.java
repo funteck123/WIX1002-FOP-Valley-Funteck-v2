@@ -32,6 +32,8 @@ public class NPC_warrior extends Entity {
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;
+
+        
     }
 
     public void getImage() {

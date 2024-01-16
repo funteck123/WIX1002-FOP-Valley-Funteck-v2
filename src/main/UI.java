@@ -25,6 +25,8 @@ public class UI {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int  titleScreenState = 0;
+
     public String fightDialogue = "";
     public String monsterAttackDialogue = "";
     public String playerAttackDialogue = "";
@@ -116,67 +118,117 @@ public class UI {
     }
 
     public void drawTitleScreen() {
-        
-        g2.setColor(new Color(0,250,250));
-        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+        if (titleScreenState == 0) {
+            // BACKGROUND
+            g2.setColor(new Color(0,250,250));
+            g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
 
-        // TITLE SCREEN
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
-        String text = "FOP Valley Funteck";
-        int x = getXforCenteredText(text);
-        int y = gp.tileSize*3;
+            // TITLE SCREEN
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+            String text = "FOP Valley Funteck";
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize*3;
 
-        // SHADOW
-        g2.setColor(Color.black);
-        g2.drawString(text,x+5,y+5);
-
-
-        // MAIN COLOR
-        g2.setColor(Color.white);
-        g2.drawString(text,x,y);
-
-        // IMAGE
-        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-        y += gp.tileSize*2;
-        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
-
-        // MENU
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
+            // SHADOW
+            g2.setColor(Color.black);
+            g2.drawString(text,x+5,y+5);
 
 
-        g2.setColor(Color.white);
+            // MAIN COLOR
+            g2.setColor(Color.white);
+            g2.drawString(text,x,y);
 
-        text = "NEW GAME";
-        x = getXforCenteredText(text);
-        y += gp.tileSize*4;
-        g2.drawString(text, x, y);
-        if (commandNum == 0) {
-            g2.setColor(Color.red);
-            g2.drawString(">", x-gp.tileSize/2, y);
-        }
+            // IMAGE
+            x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+            y += gp.tileSize*2;
+            BufferedImage down1 = gp.player.setup("/res/player/" + "Paladin" + "_down1");
+            g2.drawImage(down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
 
-        g2.setColor(Color.white);
+            //ASCII
+            g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+            int x1 = gp.tileSize*1 + gp.tileSize*8;
+            int y1 = gp.tileSize/2 + gp.tileSize;
 
-        text = "LOAD GAME";
-        x = getXforCenteredText(text);
-        y += gp.tileSize;
-        g2.drawString(text, x, y);
-        if (commandNum == 1) {
-            g2.setColor(Color.green);
-            g2.drawString(">", x-gp.tileSize/2, y);
-        }
+            npcAscii = "\\****__              ____                                              \r\n" + //
+                    "|    *****\\_      --/ *\\-__                                          \r\n" + //
+                    "/_          (_    ./ ,/----'                                         \r\n" + //
+                    "     \\__         (_./  /                                                \r\n" + //
+                    "       \\__           \\___----^__                                       \r\n" + //
+                    "          _/   _                  \\                                      \r\n" + //
+                    "   |    _/  __/ )\\\"\\ _____         *\\                                    \r\n" + //
+                    "   |\\__/   /    ^ ^       \\____      )                                   \r\n" + //
+                    "    \\___--\"                    \\_____ \r\n" + //
+                    "";
 
-        g2.setColor(Color.white);
+            if (npcAscii != null) {
+                for (String line : npcAscii.split("\n")) {
+                    g2.drawString(line, x1, y1);
+                    y1 += g2.getFontMetrics().getHeight();
+                }
+            }
 
-        text = "QUIT";
-        x = getXforCenteredText(text);
-        y += gp.tileSize;
-        g2.drawString(text, x, y);
-        if (commandNum == 2) {
-            g2.setColor(Color.blue);
-            g2.drawString(">", x-gp.tileSize/2, y);
-        }
+            // MENU
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
+
+
+            g2.setColor(Color.white);
+
+            text = "NEW GAME";
+            x = getXforCenteredText(text);
+            y += gp.tileSize*4;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.setColor(Color.red);
+                g2.drawString(">", x-gp.tileSize/2, y);
+            }
+
+            g2.setColor(Color.white);
+
+            text = "LOAD GAME";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.setColor(Color.green);
+                g2.drawString(">", x-gp.tileSize/2, y);
+            }
+
+            g2.setColor(Color.white);
+
+            text = "QUIT";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.setColor(Color.blue);
+                g2.drawString(">", x-gp.tileSize/2, y);
+            }                                                                          
+    
+        } else if (titleScreenState == 1) {
+            g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(42F));
+
+            String text = "What kind of hero are you?";
+            int x = getXforCenteredText(text);
+            int y = gp.screenHeight / 4 - gp.tileSize;
+            g2.drawString(text, x, y);
+
+            String[] classes = {"Archer", "Mage", "Paladin", "Rogue", "Warrior"};
+            for (int i = 0; i < classes.length; i++) {
+                x = getXforCenteredText(classes[i]);
+                y = gp.screenHeight / 3 + (gp.tileSize * (i+1));
+                g2.drawString(classes[i], x, y);
+
+                if (commandNum == i) {
+                    g2.setColor(Color.red);
+                    g2.drawString(">", x - gp.tileSize / 2, y);
+                    g2.setColor(Color.white);
+                }
+            }
+        }        
     }
+
 
     public void drawPlayerLife() {
         int x = gp.tileSize/2;
@@ -337,28 +389,28 @@ public class UI {
                 if (playerTurn) {
                     gp.player.playerAttack(npcNo);
                     playerTurn = false;
-                    //gp.keyH.enterPressed = false;
+                    gp.keyH.enterPressed = false;
                 } 
                 break;
             case 1:
                 if (playerTurn) {
                     gp.player.playerDefend(npcNo);
                     playerTurn = false;
-                    //gp.keyH.enterPressed = false;
+                    gp.keyH.enterPressed = false;
                 } 
                 break;
             case 2:
                 if (playerTurn) {
                     gp.player.playerHeal(npcNo);
                     playerTurn = false;
-                    //gp.keyH.enterPressed = false;
+                    gp.keyH.enterPressed = false;
                 } 
                 break;
             case 3:
                 if (playerTurn) {
                     gp.player.playerRun(npcNo);
                     playerTurn = false;
-                    //gp.keyH.enterPressed = false;
+                    gp.keyH.enterPressed = false;
                 } 
                 
                 break;
@@ -366,7 +418,7 @@ public class UI {
                 // Handle case 4
                 break;
         } 
-
+        
         commandNum = 5;
 
         if (gp.keyH.enterPressed && !playerTurn) {
