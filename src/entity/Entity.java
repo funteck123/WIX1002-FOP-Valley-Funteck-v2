@@ -18,11 +18,13 @@ public class Entity {
 
     public String[] nameCharacter = new String[5];
     public String[] spellName = new String[3];
+    public String[] spellDescription = new String[3];
     public int[] spellRequirement = new int[3];
     public int[] spellCooldown = new int[3];
     public int[] spellMana = new int[3];
     int[] spellMagicalAttack = new int[3];
     int[] spellMagicalDef = new int[3];  
+
 
 
 
@@ -69,7 +71,7 @@ public class Entity {
     public int speed;
     public int maxLife;
     public int life;
-    public int level;
+    //public int level;
     public int strength;
     public int dexterity;
     public int maxMana;
@@ -77,8 +79,7 @@ public class Entity {
     public int heal;
     //public int attack;
     //public int defense;
-    public int exp;
-    public int nextLevelExp;
+    
     public int coin;
     public Entity currentWeapon;
     public Entity currentShield;
@@ -91,16 +92,76 @@ public class Entity {
     public int magicalAttack;
     public int defense;
     public int magicalDefense;
+    public int expReward;
+    public String description;
+    public String asciiArt;
+
+    public int level;
+    public int exp;
+    public int[] nextLevelExp = new int[100]; 
 
     public Entity(GamePanel gp) {
         this.gp = gp;
 
         this.spellName = new String[]{"Fireball", "Iceball", "Lightning"};
+        this.spellDescription = new String[]{"Spell 1","Spell 2","Spell 3"};
         this.spellRequirement = new int[]{1, 5, 10};
         this.spellCooldown = new int[]{3, 5, 7};
         this.spellMana = new int[]{100, 500, 1000};
         this.spellMagicalAttack = new int[]{5, 10, 25};
         this.spellMagicalDef = new int[]{5, 10, 25};  
+
+        this.maxLife = 300;
+        this.maxMana = 50;
+        this.maxDefense = 80;
+        this.maxMagicalDefense = 20;
+        this.maxAttack = 70;
+        this.maxMagicalAttack = 50;
+        this.heal = 2;
+
+        
+        this.life = maxLife;
+        this.attack = maxAttack;
+        this.mana = maxMana;
+        this.magicalAttack = maxMagicalAttack;
+        this.defense = maxDefense;
+        this.magicalDefense = maxMagicalDefense;
+        this.expReward = 150;
+
+        this.description = "entity description";
+        this.asciiArt = "\"\\\\****__              ____                                              \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"|    *****\\\\_      --/ *\\\\-__                                          \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"/_          (_    ./ ,/----'                                         \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"     \\\\__         (_./  /                                                \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"       \\\\__           \\\\___----^__                                       \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"          _/   _                  \\\\                                      \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"   |    _/  __/ )\\\\\\\"\\\\ _____         *\\\\                                    \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"   |\\\\__/   /    ^ ^       \\\\____      )                                   \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"    \\\\___--\\\"                    \\\\_____ \\r\\n" + //
+                "\" + //\r\n" + //
+                "                \"\"";
+
+
+        this.exp = 0;
+        
+        for (int i = 0; i < nextLevelExp.length; i++) {
+            if (i < 10) {
+                this.nextLevelExp[i] = 25;
+            } else {
+                this.nextLevelExp[i] = 50;
+            }
+        }
+        
+
+
     }
 
     public void setAction() {
@@ -127,6 +188,17 @@ public class Entity {
         }
 
     }
+
+    public void setSpells() {
+        spellName = new String[]{"Rapid Shot", "Trick Shot", "Smoke Bomb"};
+        spellRequirement = new int[]{10, 15, 22};
+        spellCooldown = new int[]{2, 6, 5};
+        spellMana = new int[]{8, 17, 20};
+        spellMagicalAttack = new int[]{0, 0, 0}; // Fill with random values
+        spellMagicalDef = new int[]{0, 0, 0}; // Fill with random values
+    }
+
+
     public void fight() {   
 
         //gp.ui.npcIndex = 2;
@@ -214,6 +286,7 @@ public class Entity {
             }
             spriteCounter = 0;
         }
+
 
     }
 

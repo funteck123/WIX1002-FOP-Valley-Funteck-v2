@@ -20,21 +20,38 @@ public class Monster_Skeleton extends Entity {
         getImage();
         setDialogue();
 
-        maxLife = 14;
+        maxLife = 300;
+        maxMana = 50;
+        maxDefense = 80;
+        maxMagicalDefense = 20;
+        maxAttack = 70;
+        maxMagicalAttack = 50;
+        heal = 2;
+        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
+        asciiArt =  "        .-.  \r\n" + //
+                    "       (o.o) \r\n" + //
+                    "        |=|  \r\n" + //
+                    "       __|__ \r\n" + //
+                    "     //.=|=.\\\\\r\n" + //
+                    "    // .=|=. \\\\\r\n" + //
+                    "  \\\\ .=|=. //\r\n" + //
+                    "   \\\\(_=_)//\r\n" + //
+                    "      (:| |:)\r\n" + //
+                    "       || ||\r\n" + //
+                    "       () ()\r\n" + //
+                    "       || ||\r\n" + //
+                    "       || ||\r\n" + //
+                    "      ==' '==\r\n" + //
+                    "";
+        
         life = maxLife;
-
-
-        maxAttack = 10;
-        maxMagicalAttack = 2;
-        maxDefense = 5;
-        maxMagicalDefense = 3;
         attack = maxAttack;
+        mana = maxMana;
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;
 
-        maxMana = 1000;
-        mana = maxMana;
+        
     }
 
     public void getImage() {

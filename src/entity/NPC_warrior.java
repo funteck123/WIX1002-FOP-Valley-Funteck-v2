@@ -20,15 +20,31 @@ public class NPC_warrior extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        maxLife = 10;
+        spellName = new String[]{"Divine Wrath", "Furious Strike", "Shield Wall"};
+        spellRequirement = new int[]{8, 10, 25};
+        spellCooldown = new int[]{4, 4, 6};
+        spellMana = new int[]{13, 15, 20};
+        spellMagicalAttack = new int[]{10, 15, 25};
+        spellMagicalDef = new int[]{10, 25, 25};
+        spellDescription = new String[]{
+            "Calls upon divine wrath to smite the target, dealing damage and dispelling buffs.",
+            "Unleashes a powerful attack, dealing heavy damage to the target.",
+            "The Warrior creates an impenetrable barrier with their shield, reducing incoming damage for 3 rounds."
+        };
+        
+        maxLife = 300;
+        maxMana = 50;
+        maxDefense = 80;
+        maxMagicalDefense = 20;
+        maxAttack = 70;
+        maxMagicalAttack = 50;
+        heal = 2;
+        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
+
+        
         life = maxLife;
-
-
-        maxAttack = 10;
-        maxMagicalAttack = 2;
-        maxDefense = 5;
-        maxMagicalDefense = 3;
         attack = maxAttack;
+        mana = maxMana;
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;

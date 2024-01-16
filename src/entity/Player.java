@@ -66,63 +66,143 @@ public class Player extends Entity {
 
         level = 1;
         
+        //spells.readSpellFile("spells.txt");
 
         switch (gp.keyH.characterSelection) {
             case 0:
                 gp.keyH.characterName = "Archer";
+
+                spellName = new String[]{"Rapid Shot", "Trick Shot", "Smoke Bomb"};
+                spellRequirement = new int[]{10, 15, 22};
+                spellCooldown = new int[]{2, 6, 5};
+                spellMana = new int[]{8, 17, 20};
+                spellMagicalAttack = new int[]{0, 0, 0}; // Fill with random values
+                spellMagicalDef = new int[]{0, 0, 0}; // Fill with random values
+                spellDescription = new String[]{
+                    "Hurls a fiery projectile at the target, \ndealing moderate fire damage.",
+                    "Engulfs the target in a raging inferno, \ndealing continuous fire damage for 3 rounds.",
+                    "The Mage releases a burst of frost, \nfreezing nearby enemies in place for 2 rounds."
+                };
+
                 maxLife = 240;
                 maxMana = 60;
                 maxDefense = 65;
                 maxMagicalDefense = 50;
                 maxAttack = 45;
                 maxMagicalAttack = 30;
-                heal = 10;
+                heal = 3;
                 break;
         
             case 1:
                 gp.keyH.characterName = "Mage";
+
+                spellName = new String[]{"Fireball", "Raging Inferno", "Frost Nova"};
+                spellRequirement = new int[]{10, 13, 18};
+                spellCooldown = new int[]{2, 5, 6};
+                spellMana = new int[]{10, 18, 20};
+                spellMagicalAttack = new int[]{15, 20, 0}; // Fill with random values
+                spellMagicalDef = new int[]{5, 0, 15}; // Fill with random values
+                spellDescription = new String[]{
+                    "Hurls a fiery projectile at the target, \n" + //
+                            "dealing moderate fire damage.",
+                    "Engulfs the target in a raging inferno, \n" + //
+                            "dealing continuous fire damage for 3 rounds.",
+                    "The Mage releases a burst of frost, \n" + //
+                            "freezing nearby enemies in place for 2 rounds."
+                };
+
                 maxLife = 200;
                 maxMana = 150;
                 maxDefense = 30;
                 maxMagicalDefense = 100;
                 maxAttack = 20;
                 maxMagicalAttack = 30;
-                heal = 10;
+                heal = 5;
                 break;
         
             case 2:
                 gp.keyH.characterName = "Paladin";
+
+                spellName = new String[]{"Holy Smite", "Divine Shield", "Ice Barrier"};
+                spellRequirement = new int[]{7, 15, 21};
+                spellCooldown = new int[]{3, 6, 6};
+                spellMana = new int[]{10, 18, 15};
+                spellMagicalAttack = new int[]{20, 0, 0}; // Fill with random values
+                spellMagicalDef = new int[]{10, 0, 25}; // Fill with random values
+                spellDescription = new String[]{
+                    "Smashes the target with divine light, dealing damage and healing \n" + //
+                            "the Paladin for a portion of the damage dealt.",
+                    "Creates a protective barrier around the Paladin, \n" + //
+                            "rendering them immune to damage for 2 rounds.",
+                    "Conjures a protective ice barrier, reducing incoming \n" + //
+                            "damage and freezing attackers for 2 rounds."
+                };
+
                 maxLife = 350;
                 maxMana = 100;
                 maxDefense = 70;
                 maxMagicalDefense = 60;
                 maxAttack = 80;
                 maxMagicalAttack = 60;
-                heal = 10;
+                heal = 3;
                 break;
         
             case 3:
                 gp.keyH.characterName = "Rogue";
+
+                spellName = new String[]{"Backstab", "Poisonous Strike", "Shadowstep"};
+                spellRequirement = new int[]{5, 14, 25};
+                spellCooldown = new int[]{3, 4, 6};
+                spellMana = new int[]{12, 15, 15};
+                spellMagicalAttack = new int[]{0, 0, 0}; // Fill with random values
+                spellMagicalDef = new int[]{0, 0, 0}; // Fill with random values
+                spellDescription = new String[]{
+                    "The Rogue sneaks behind the target, delivering a devastating backstab, \n" + //
+                            "causing extra damage and stunning the enemy for 1 round.",
+                    "Coats the weapon with a deadly poison, dealing damage over time and \n" + //
+                            "reducing the target's defenses for 3 rounds.",
+                    "The Rogue can evade the next spell or attack from the enemies."
+                };
+
                 maxLife = 250;
                 maxMana = 75;
                 maxDefense = 60;
                 maxMagicalDefense = 40;
                 maxAttack = 50;
                 maxMagicalAttack = 40;
-                heal = 10;
+                heal = 4;
                 break;
         
             case 4:
                 gp.keyH.characterName = "Warrior";
+
+                spellName = new String[]{"Divine Wrath", "Furious Strike", "Shield Wall"};
+                spellRequirement = new int[]{8, 10, 25};
+                spellCooldown = new int[]{4, 4, 6};
+                spellMana = new int[]{13, 15, 20};
+                spellMagicalAttack = new int[]{10, 15, 25};
+                spellMagicalDef = new int[]{10, 25, 25};
+                spellDescription = new String[]{
+                    "Calls upon divine wrath to smite the target, \n" + //
+                            "dealing damage and dispelling buffs.",
+                    "Unleashes a powerful attack, dealing heavy \n" + //
+                            "damage to the target.",
+                    "The Warrior creates an impenetrable barrier with their \n" + //
+                            "shield, reducing incoming damage for 3 rounds."
+                };
+                
                 maxLife = 300;
                 maxMana = 50;
                 maxDefense = 80;
                 maxMagicalDefense = 20;
                 maxAttack = 70;
                 maxMagicalAttack = 50;
-                heal = 10;
+                heal = 2;
                 break;
-        }
+            }
+
+        
+        
         
         // maxLife = 300;
         // maxAttack = 2;
@@ -141,7 +221,7 @@ public class Player extends Entity {
         magicalDefense = maxMagicalDefense;
 
 
-        nextLevelExp=5;
+        exp=1;
 
         
         //attack=getAttack(); // the total attack value is decided by strength and weapon
@@ -352,6 +432,44 @@ public class Player extends Entity {
         }
     }
 
+    public void playerSpellAttack(int i, int spellNo) {
+        if (gp.player.life > 0) {
+            
+            Random random = new Random();
+            // damageDealt = random.nextInt(gp.player.attack) + 1;
+
+            damageDealt = gp.player.spellMagicalAttack[spellNo];
+            // Player's attack logic
+            damageDealt = gp.player.attack;
+            gp.npc[i].life = Math.max(0, gp.npc[i].life - damageDealt);
+
+            //gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + " with " + damageDealt + "!";
+
+            gp.ui.playerAttackDialogue = gp.player.spellDescription[spellNo] + "Damage: " + damageDealt;
+
+            damageDealt = gp.player.spellMagicalDef[spellNo];
+
+            if(spellNo == 1 && gp.keyH.characterName == "Paladin") {
+                gp.player.life += gp.player.spellMagicalAttack[spellNo]/random.nextDouble(1);
+                gp.player.life = Math.min(gp.player.maxLife, gp.player.life);
+            }
+
+
+            if (gp.npc[i].life <= 0) {
+                // If not defeated, let the monster attack
+                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " has been slain!";
+            } 
+            
+        } else {
+
+            gp.gameState = gp.gameOverState;
+            playerWin = false;
+            gp.ui.monsterAttackDialogue = "";
+            gp.ui.playerAttackDialogue = "";
+        
+        }
+    }
+
     public void playerDefend(int i) {
         if (gp.player.life > 0) {
             
@@ -388,7 +506,7 @@ public class Player extends Entity {
 
 
     public void playerRun(int i) {
-        gp.gameState = gp.gameOverState;
+        gp.gameState = gp.playState;
         playerWin = false;
         gp.ui.monsterAttackDialogue = "";
         gp.ui.playerAttackDialogue = "";
@@ -401,6 +519,7 @@ public class Player extends Entity {
             // If not defeated, let the monster attack
             damageDealt = gp.npc[i].npcAttack(i);
             gp.player.life -= Math.max(0,damageDealt - damageDealt1);
+            gp.player.life = Math.max(0,gp.player.life);
             gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
             damageDealt = 0;
             damageDealt1 = 0;
@@ -408,6 +527,7 @@ public class Player extends Entity {
             // Handle victory, gain experience, etc.
             gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + " !";
             playerWin = true;
+            gp.ui.rewarded = false;
             gp.gameState = gp.gameOverState;
             gp.ui.monsterAttackDialogue = "";
             gp.ui.playerAttackDialogue = "";

@@ -18,9 +18,36 @@ public class NPC_rogue extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        maxLife = 8;
-        life = maxLife;
+        spellName = new String[]{"Backstab", "Poisonous Strike", "Shadowstep"};
+        spellRequirement = new int[]{5, 14, 25};
+        spellCooldown = new int[]{3, 4, 6};
+        spellMana = new int[]{12, 15, 15};
+        spellMagicalAttack = new int[]{0, 0, 0}; // Fill with random values
+        spellMagicalDef = new int[]{0, 0, 0}; // Fill with random values
+        spellDescription = new String[]{
+            "The Rogue sneaks behind the target, delivering a devastating backstab, causing extra damage and stunning the enemy for 1 round.",
+            "Coats the weapon with a deadly poison, dealing damage over time and reducing the target's defenses for 3 rounds.",
+            "The Rogue can evade the next spell or attack from the enemies."
+        };
+        
+        maxLife = 300;
+        maxMana = 50;
+        maxDefense = 80;
+        maxMagicalDefense = 20;
+        maxAttack = 70;
+        maxMagicalAttack = 50;
+        heal = 2;
+        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
 
+        
+        life = maxLife;
+        attack = maxAttack;
+        mana = maxMana;
+        magicalAttack = maxMagicalAttack;
+        defense = maxDefense;
+        magicalDefense = maxMagicalDefense;
+
+        
         // Set other properties specific to the rogue
     }
 

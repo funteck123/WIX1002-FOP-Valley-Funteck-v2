@@ -25,6 +25,10 @@ public class KeyHandler implements KeyListener{
 
         int code = e.getKeyCode();
 
+        if (code == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        }
+
         // TITLE STATE
         if (gp.gameState == gp.titleState) {
             //gp.player.getPlayerImage();
@@ -147,28 +151,25 @@ public class KeyHandler implements KeyListener{
         // DIALOGUE STATE
         if (gp.gameState == gp.dialogueState) {
             if(code == KeyEvent.VK_W) {
-                gp.ui.commandNum = 0;
+                gp.ui.commandNumFight = 0;
             }   
             if(code == KeyEvent.VK_A) {
-                gp.ui.commandNum = 1;
+                gp.ui.commandNumFight = 1;
             }
             if(code == KeyEvent.VK_S) {
-                gp.ui.commandNum = 2;
+                gp.ui.commandNumFight = 2;
             }
             if(code == KeyEvent.VK_D) {
-                gp.ui.commandNum = 3;
+                gp.ui.commandNumFight = 3;
             }
             if(code == KeyEvent.VK_1) {
-                gp.ui.commandNum = 4;
+                gp.ui.commandNumFight = 4;
             }   
             if(code == KeyEvent.VK_2) {
-                gp.ui.commandNum = 5;
+                gp.ui.commandNumFight = 5;
             }
             if(code == KeyEvent.VK_3) {
-                gp.ui.commandNum = 6;
-            }
-            if(code == KeyEvent.VK_4) {
-                gp.ui.commandNum = 7;
+                gp.ui.commandNumFight = 6;
             }
             if(code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
@@ -186,7 +187,12 @@ public class KeyHandler implements KeyListener{
         // Game Over State
         if (gp.gameState == gp.gameOverState) {
             if(code == KeyEvent.VK_ENTER) {
-                gp.gameState = gp.playState;
+                if (gp.player.playerWin == true) {
+                    gp.gameState = gp.playState;
+                } else {
+                    gp.gameState = gp.titleState;
+                    gp.ui.titleScreenState = 0;
+                }
             }
         } 
 

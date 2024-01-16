@@ -20,18 +20,34 @@ public class Monster_Goblin extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        maxLife = 11;
-        life = maxLife;
-
-
-        maxAttack = 10;
-        maxMagicalAttack = 2;
+        maxLife = 40;
+        maxMana = 0;
         maxDefense = 5;
-        maxMagicalDefense = 3;
+        maxMagicalDefense = 2;
+        maxAttack = 10;
+        maxMagicalAttack = 0;
+        heal = 2;
+        asciiArt ="             ,\r\n" + //
+                "             /(.-\"\"-.)\\\r\n" + //
+                "        |\\  \\/      \\/  /|\r\n" + //
+                "        | \\ / =.  .=  \\ / |\r\n" + //
+                "        \\( \\   o\\/o   / )/\r\n" + //
+                "         \\_,  '-/  \\-' ,_/\r\n" + //
+                "           /    \\__/   \\\r\n" + //
+                "           \\ \\__/\\__/ /\r\n" + //
+                "      _ __\\ \\|--|/ /___\r\n" + //
+                "        /`    \\      /    `\\\r\n" + //
+                "       /       '----'       \\\r\n" + //
+                "";
+
+        
+        life = maxLife;
         attack = maxAttack;
+        mana = maxMana;
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;
+
     }
     
     public void getImage() {

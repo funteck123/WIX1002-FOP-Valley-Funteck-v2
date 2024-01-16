@@ -14,14 +14,14 @@ public class spells {
     private NPC_warrior warrior = new NPC_warrior(gp);
     private NPC_paladin paladin = new NPC_paladin(gp);
 
-    public class TextFileReader {
-        public String[] name = new String[5];
-        public String[] spellName = new String[15];
-        public int[] spellRequirement = new int[15];
-        public int[] spellCooldown = new int[15];
-        public int[] spellMana = new int[15];
+    //public class TextFileReader {
+    public String[] name = new String[5];
+    // public String[] spellName = new String[15];
+    // public int[] spellRequirement = new int[15];
+    // public int[] spellCooldown = new int[15];
+    // public int[] spellMana = new int[15];
 
-        public void readTextFile(String filePath) {
+        public void readSpellFile(String filePath) {
             try {
                 File file = new File(filePath);
                 Scanner scanner = new Scanner(file);
@@ -33,7 +33,7 @@ public class spells {
                     if (line.startsWith("**")) {
                         name[index] = line.substring(3, line.length() - 2); // Extract name from line
                     } else if (line.startsWith(" \"")) {
-                        spellName[index] = line.substring(3, line.length() - 1); // Extract name from line
+                        //warrior.spellName[index] = line.substring(3, line.length() - 1); // Extract name from line
                     } else if (line.contains(":")) {
                         String[] parts = line.split(":");
                         String key = parts[0].trim();
@@ -114,7 +114,7 @@ public class spells {
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }
+            }   
         }
-    }
+    //}
 }

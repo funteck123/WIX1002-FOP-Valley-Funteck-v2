@@ -18,18 +18,36 @@ public class NPC_paladin extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        maxLife = 10;
+        spellName = new String[]{"Holy Smite", "Divine Shield", "Ice Barrier"};
+        spellRequirement = new int[]{7, 15, 21};
+        spellCooldown = new int[]{3, 6, 6};
+        spellMana = new int[]{10, 18, 15};
+        spellMagicalAttack = new int[]{20, 0, 0}; // Fill with random values
+        spellMagicalDef = new int[]{10, 0, 25}; // Fill with random values
+        spellDescription = new String[]{
+            "Smashes the target with divine light, dealing damage and healing the Paladin for a portion of the damage dealt.",
+            "Creates a protective barrier around the Paladin, rendering them immune to damage for 2 rounds.",
+            "Conjures a protective ice barrier, reducing incoming damage and freezing attackers for 2 rounds."
+        };
+        
+        maxLife = 300;
+        maxMana = 50;
+        maxDefense = 80;
+        maxMagicalDefense = 20;
+        maxAttack = 70;
+        maxMagicalAttack = 50;
+        heal = 2;
+        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
+
+        
         life = maxLife;
-
-
-        maxAttack = 10;
-        maxMagicalAttack = 2;
-        maxDefense = 5;
-        maxMagicalDefense = 3;
         attack = maxAttack;
+        mana = maxMana;
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;
+
+        
     }
 
     public void getImage() {

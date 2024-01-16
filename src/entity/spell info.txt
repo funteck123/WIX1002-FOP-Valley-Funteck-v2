@@ -1,0 +1,97 @@
+// Warrior
+            "Furious Strike" +
+                    "- Level Requirement: 10" +
+                    "- Description: Unleashes a powerful attack, dealing heavy damage to the target." +
+                    "- Cool Down: 4 rounds"+
+ 		    "- Mana: 15"
+
+            "Shield Wall" +
+                    "- Level Requirement: 25" +
+                    "- Description: The Warrior creates an impenetrable barrier with their shield, reducing incoming damage for 3 rounds." +
+                    "- Cool Down: 6 rounds",
+		    "- Mana: 20"
+
+            "Divine Wrath" +
+                    "- Level Requirement: 8" +
+                    "- Description: Calls upon divine wrath to smite the target, dealing damage and dispelling buffs." +
+                    "- Cool Down: 4 rounds",
+		    "- Mana: 13"
+
+            // Mage
+            "Raging Inferno" +
+                    "- Level Requirement: 13" +
+                    "- Description: Engulfs the target in a raging inferno, dealing continuous fire damage for 3 rounds." +
+                    "- Cool Down: 5 rounds"+
+		    "- Mana: 18"
+
+            "Fireball" +
+                    "- Level Requirement: 10" +
+                    "- Description: Hurls a fiery projectile at the target, dealing moderate fire damage." +
+                    "- Cool Down: 2 rounds",
+		    "- Mana: 10"
+
+            "Frost Nova" +
+                    "- Level Requirement: 18" +
+                    "- Description: The Mage releases a burst of frost, freezing nearby enemies in place for 2 rounds." +
+                    "- Cool Down: 6 rounds",
+		    "- Mana: 20"
+
+            // Rogue
+            "Poisonous Strike" +
+                    "- Level Requirement: 14" +
+                    "- Description: Coats the weapon with a deadly poison, dealing damage over time and reducing the target's defenses for 3 rounds." +
+                    "- Cool Down: 4 rounds"
+		    "- Mana: 15"
+
+
+            "Backstab" +
+                    "- Level Requirement: 5" +
+                    "- Description: The Rogue sneaks behind the target, delivering a devastating backstab, causing extra damage and stunning the enemy for 1 round." +
+                    "- Cool Down: 3 rounds",
+		    "- Mana: 12"
+
+            "Shadowstep" +
+                    "- Level Requirement: 25" +
+                    "- Description: The Rogue can evade the next spell or attack from the enemies." +
+                    "- Cool Down: 6 rounds",
+		    "- Mana: 15"
+
+
+            // Paladin
+            "Ice Barrier" +
+                    "- Level Requirement: 21" +
+                    "- Description: Conjures a protective ice barrier, reducing incoming damage and freezing attackers for 2 rounds." +
+                    "- Cool Down: 6 rounds",
+		    "- Mana: 15"
+
+            "Holy Smite" +
+                    "- Level Requirement: 7" +
+                    "- Description: Smashes the target with divine light, dealing damage and healing the Paladin for a portion of the damage dealt." +
+                    "- Cool Down: 3 rounds",
+		    "- Mana: 10"
+
+            "Divine Shield" +
+                    "- Level Requirement: 15" +
+                    "- Description: Creates a protective barrier around the Paladin, rendering them immune to damage for 2 rounds." +
+                    "- Cool Down: 6 rounds",
+		    "- Mana: 18"
+
+            // Archer
+            "Smoke Bomb" +
+                    "- Level Requirement: 22" +
+                    "- Description: Throws a smoke bomb, creating a cloud of smoke to blind enemies and increase evasion for 2 rounds." +
+                    "- Cool Down: 5 rounds",
+		    "- Mana: 20"
+
+            "Rapid Shot" +
+                    "- Level Requirement: 10" +
+                    "- Description: Fires a flurry of arrows at the target, dealing moderate damage." +
+                    "- Cool Down: 2 rounds",
+ 		    "- Mana: 8"
+
+            "Trick Shot" +
+                    "- Level Requirement: 15 +
+                    "- Description: Executes a precise shot that can pierce the enemies, causing heavy damage to the enemy." +
+                    "- Cool Down: 6 rounds"
+		    "- Mana: 17"
+    };

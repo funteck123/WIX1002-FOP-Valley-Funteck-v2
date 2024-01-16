@@ -19,18 +19,24 @@ public class Monster_Harpy extends Entity {
         getImage();
         setDialogue();
 
-        maxLife = 12;
+        maxLife = 300;
+        maxMana = 50;
+        maxDefense = 80;
+        maxMagicalDefense = 20;
+        maxAttack = 70;
+        maxMagicalAttack = 50;
+        heal = 2;
+        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
+        asciiArt = "";
+        
         life = maxLife;
-
-
-        maxAttack = 10;
-        maxMagicalAttack = 2;
-        maxDefense = 5;
-        maxMagicalDefense = 3;
         attack = maxAttack;
+        mana = maxMana;
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;
+
+        
     }
     
     public void getImage() {
