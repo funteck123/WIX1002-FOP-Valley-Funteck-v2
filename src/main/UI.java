@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+
 import entity.*;
 import object.*;
 //import object.SuperObject;
@@ -139,34 +141,41 @@ public class UI {
             g2.drawString(text,x,y);
 
             // IMAGE
-            x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-            y += gp.tileSize*2;
-            BufferedImage down1 = gp.player.setup("/res/player/" + "Paladin" + "_down1");
-            g2.drawImage(down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
-
-            //ASCII
-            g2.setColor(Color.white);
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
-            int x1 = gp.tileSize*1 + gp.tileSize*8;
-            int y1 = gp.tileSize/2 + gp.tileSize;
-
-            npcAscii = "\\****__              ____                                              \r\n" + //
-                    "|    *****\\_      --/ *\\-__                                          \r\n" + //
-                    "/_          (_    ./ ,/----'                                         \r\n" + //
-                    "     \\__         (_./  /                                                \r\n" + //
-                    "       \\__           \\___----^__                                       \r\n" + //
-                    "          _/   _                  \\                                      \r\n" + //
-                    "   |    _/  __/ )\\\"\\ _____         *\\                                    \r\n" + //
-                    "   |\\__/   /    ^ ^       \\____      )                                   \r\n" + //
-                    "    \\___--\"                    \\_____ \r\n" + //
-                    "";
-
-            if (npcAscii != null) {
-                for (String line : npcAscii.split("\n")) {
-                    g2.drawString(line, x1, y1);
-                    y1 += g2.getFontMetrics().getHeight();
-                }
+            x = gp.screenWidth/2 - (gp.tileSize*10)/2;
+            y += gp.tileSize;
+            //BufferedImage down1 = gp.player.setup("/res/player/" + "intro_slime");
+            BufferedImage down1;
+            try {
+                down1 = ImageIO.read(getClass().getResourceAsStream("/res/player/intro_slime.png"));
+                g2.drawImage(down1, x, y, gp.tileSize*10, gp.tileSize*4, null);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            
+
+            // //ASCII
+            // g2.setColor(Color.white);
+            // g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+            // int x1 = gp.tileSize*1 + gp.tileSize*8;
+            // int y1 = gp.tileSize/2 + gp.tileSize;
+
+            // npcAscii = "\\****__              ____                                              \r\n" + //
+            //         "|    *****\\_      --/ *\\-__                                          \r\n" + //
+            //         "/_          (_    ./ ,/----'                                         \r\n" + //
+            //         "     \\__         (_./  /                                                \r\n" + //
+            //         "       \\__           \\___----^__                                       \r\n" + //
+            //         "          _/   _                  \\                                      \r\n" + //
+            //         "   |    _/  __/ )\\\"\\ _____         *\\                                    \r\n" + //
+            //         "   |\\__/   /    ^ ^       \\____      )                                   \r\n" + //
+            //         "    \\___--\"                    \\_____ \r\n" + //
+            //         "";
+
+            // if (npcAscii != null) {
+            //     for (String line : npcAscii.split("\n")) {
+            //         g2.drawString(line, x1, y1);
+            //         y1 += g2.getFontMetrics().getHeight();
+            //     }
+            // }
 
             // MENU
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
@@ -176,7 +185,7 @@ public class UI {
 
             text = "NEW GAME";
             x = getXforCenteredText(text);
-            y += gp.tileSize*4;
+            y += gp.tileSize*5;
             g2.drawString(text, x, y);
             if (commandNum == 0) {
                 g2.setColor(Color.red);
