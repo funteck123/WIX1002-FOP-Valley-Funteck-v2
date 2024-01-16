@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener{
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     public boolean enterPressed = false;
-    public int characterSelection = 3;
+    public int characterSelection;
     public String characterName;
 
     public KeyHandler(GamePanel gp) {
@@ -72,6 +72,7 @@ public class KeyHandler implements KeyListener{
                         characterName = "Archer";
                         //System.out.println("Do some Archer specific stuff");
                         gp.player.getPlayerImage();
+                        gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
                         break;
                     case 1:
@@ -79,6 +80,7 @@ public class KeyHandler implements KeyListener{
                         characterName = "Mage";
                         //System.out.println("Do some Rogue specific stuff");
                         gp.player.getPlayerImage();
+                        gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
                         break;
                     case 2:
@@ -86,6 +88,7 @@ public class KeyHandler implements KeyListener{
                         characterName = "Paladin";
                         //System.out.println("Do some Archer specific stuff");
                         gp.player.getPlayerImage();
+                        gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
                         break;
                     case 3:
@@ -93,6 +96,7 @@ public class KeyHandler implements KeyListener{
                         characterName = "Rogue";
                         //System.out.println("Do some Mage specific stuff");
                         gp.player.getPlayerImage();
+                        gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
                         break;
                     case 4:
@@ -100,6 +104,7 @@ public class KeyHandler implements KeyListener{
                         characterName = "Warrior";
                         //System.out.println(characterName);
                         gp.player.getPlayerImage();
+                        gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
                         break;
                     }

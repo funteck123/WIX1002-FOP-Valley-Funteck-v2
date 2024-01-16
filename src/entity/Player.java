@@ -28,7 +28,7 @@ public class Player extends Entity {
     public boolean playerWin;
     public int damageDealt;
     public int damageDealt1;
-    public String characterName;
+    //public String characterName;
     
     int standCounter = 0;
 
@@ -63,27 +63,86 @@ public class Player extends Entity {
         direction = "down";
 
         // Player Status
+
         level = 1;
-        maxLife = 300;
+        
+
+        switch (gp.keyH.characterSelection) {
+            case 0:
+                gp.keyH.characterName = "Archer";
+                maxLife = 240;
+                maxMana = 60;
+                maxDefense = 65;
+                maxMagicalDefense = 50;
+                maxAttack = 45;
+                maxMagicalAttack = 30;
+                heal = 10;
+                break;
+        
+            case 1:
+                gp.keyH.characterName = "Mage";
+                maxLife = 200;
+                maxMana = 150;
+                maxDefense = 30;
+                maxMagicalDefense = 100;
+                maxAttack = 20;
+                maxMagicalAttack = 30;
+                heal = 10;
+                break;
+        
+            case 2:
+                gp.keyH.characterName = "Paladin";
+                maxLife = 350;
+                maxMana = 100;
+                maxDefense = 70;
+                maxMagicalDefense = 60;
+                maxAttack = 80;
+                maxMagicalAttack = 60;
+                heal = 10;
+                break;
+        
+            case 3:
+                gp.keyH.characterName = "Rogue";
+                maxLife = 250;
+                maxMana = 75;
+                maxDefense = 60;
+                maxMagicalDefense = 40;
+                maxAttack = 50;
+                maxMagicalAttack = 40;
+                heal = 10;
+                break;
+        
+            case 4:
+                gp.keyH.characterName = "Warrior";
+                maxLife = 300;
+                maxMana = 50;
+                maxDefense = 80;
+                maxMagicalDefense = 20;
+                maxAttack = 70;
+                maxMagicalAttack = 50;
+                heal = 10;
+                break;
+        }
+        
+        // maxLife = 300;
+        // maxAttack = 2;
+        // maxMana = 1000;
+        // maxMagicalAttack = 2;
+        // maxDefense = 2;
+        // maxMagicalDefense = 3;
+        // heal = 10;
+
         
         life = maxLife;
-        maxAttack = 2;
-        maxMana = 1000;
-        mana = maxMana;
-        maxMagicalAttack = 2;
-        maxDefense = 2;
-        maxMagicalDefense = 3;
         attack = maxAttack;
+        mana = maxMana;
         magicalAttack = maxMagicalAttack;
         defense = maxDefense;
         magicalDefense = maxMagicalDefense;
-        heal = 10;
 
-        strength=1; // the more strength he has, moredamage he given
-        dexterity=1; // the more dexterity he has, the less damage he receive
-        exp=0;
+
         nextLevelExp=5;
-        coin=0;
+
         
         //attack=getAttack(); // the total attack value is decided by strength and weapon
         //defense=getDefense(); // the total defense value is decided by dexterity and shield

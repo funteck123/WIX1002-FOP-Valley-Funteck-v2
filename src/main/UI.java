@@ -260,7 +260,7 @@ public class UI {
         int i = 0;
 
         //Draw max life
-        while (i < gp.player.maxLife/100) {
+        while (i < gp.player.maxLife/50) {
             g2.drawImage(heart_blank, x, y, null);
             x += gp.tileSize;
             i++;
@@ -271,10 +271,10 @@ public class UI {
         i = 0;
 
         //Draw max life
-        while (i < gp.player.life/50) {
+        while (i < gp.player.life/25) {
             g2.drawImage(heart_half, x, y, null);
             i++;
-            if (i < gp.player.life/50) {
+            if (i < gp.player.life/25) {
                 g2.drawImage(heart_full, x, y, null);
             }
             i++;
