@@ -122,7 +122,7 @@ public class UI {
     public void drawTitleScreen() {
         if (titleScreenState == 0) {
             // BACKGROUND
-            g2.setColor(new Color(0,250,250));
+            g2.setColor(new Color(0,0,0));
             g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
 
             // TITLE SCREEN
@@ -132,7 +132,8 @@ public class UI {
             int y = gp.tileSize*3;
 
             // SHADOW
-            g2.setColor(Color.black);
+            g2.setColor(Color.red);
+            //g2.setColor(new Color(0,250,250));
             g2.drawString(text,x+5,y+5);
 
 
