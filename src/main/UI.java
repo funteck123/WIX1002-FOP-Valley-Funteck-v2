@@ -86,11 +86,14 @@ public class UI {
         // TITLE 
         if (gp.gameState == gp.titleState) {
             drawTitleScreen();
+            // gp.music.setFile(0);
+            //gp.playMusic(0);
 
         }
         //PLAY
         if (gp.gameState == gp.playState) {
             drawPlayerLife();
+            
         }
         //PAUSE
         if (gp.gameState== gp.pauseState) {
@@ -115,8 +118,9 @@ public class UI {
             drawGameOver();
         }
 
-        if (gp.gameState == gp.fightState) {
-            //drawFightScreen();
+        if (gp.gameState == gp.saveState) {
+            drawSaveScreen();
+            drawPlayerLife();
             //drawDialogueScreen();
         }
         
@@ -308,8 +312,26 @@ public class UI {
         g2.drawString(text, x, y);
 
         //Draw help commands
-        helpText("P to pause, \nS to save game,  \nC to character menu, \nEnter to interact. \nEsc to exit game.");
+        helpText("P to pause, \nL to save game,  \nC to character menu, \nEnter to interact. \nEsc to exit game.");
 
+        for (int j = 0; i<3; j++) {
+            if (gp.player.level >= gp.player.spellRequirement[i]) {
+                gp.player.spellUnlocked[j] = "Unlocked";
+            } else {
+                gp.player.spellUnlocked[j] = "Locked";
+            }
+        }
+    }
+
+    public void drawSaveScreen() {
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
+        g2.setColor(Color.orange);
+        String text = "Game SAVED!";;
+        int x=getXforCenteredText(text);
+        int y=gp.screenHeight/2;
+        g2.drawString(text, x, y);
+        
+        //helpText("Press Enter.");
     }
 
     public void drawPauseScreen() {
@@ -549,8 +571,12 @@ public class UI {
         
         g2.setColor(Color.RED);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 17));
-        x = gp.tileSize*1 + gp.tileSize*11;
+        x = gp.tileSize*1 + gp.tileSize*10;
         y = gp.tileSize/2 + gp.tileSize;
+        if (gp.npc[npcNo].name == "Skeleton") {
+            x = gp.tileSize*1 + gp.tileSize*5;
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
+        }
 
         npcAscii = "\\****__              ____                                              \r\n" + //
                 "|    *****\\_      --/ *\\-__                                          \r\n" + //
@@ -707,6 +733,16 @@ public class UI {
     }
 
     public void drawCharacterState() {
+
+        //update
+        for (int i = 0; i<3; i++) {
+            if (gp.player.level >= gp.player.spellRequirement[i]) {
+                gp.player.spellUnlocked[i] = "Unlocked";
+            } else {
+                gp.player.spellUnlocked[i] = "Locked";
+            }
+        }
+
         //WINDOW
         int x = gp.tileSize*1;
         int y = gp.tileSize/2;
@@ -722,6 +758,7 @@ public class UI {
         x += gp.tileSize;
         y += gp.tileSize*0.75;
 
+        
         String characterStatsMenu  = 
         "+-------------------------------------------------------------+\r\n" +
         "> " + "Character Stats" + "\r\n" +
@@ -734,8 +771,6 @@ public class UI {
         "--> Defense: " + gp.player.defense + "\r\n" +
         "--> Magical Defense: " + gp.player.magicalDefense + "\r\n\n" +
         "--> Level: " + gp.player.level + "\r\n" +
-        "--> Exp Earned: " + gp.npc[npcNo].expReward + "\r\n" +
-        "--> Next Level Exp: " + gp.player.nextLevelExp[gp.player.level] + "\r\n" +
         "+-------------------------------------------------------------+\r\n" +
         ">> Spells\r\n" +
         "[1] " + gp.player.spellName[0] + " <" + gp.player.spellUnlocked[0] + " - Level: " + gp.player.spellRequirement[0] + " +>\r\n" +

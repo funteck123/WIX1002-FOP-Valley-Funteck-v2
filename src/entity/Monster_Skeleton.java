@@ -42,6 +42,8 @@ public class Monster_Skeleton extends Entity {
         "                || ||\n" + //
         "                || ||\n" + //
         "              ==' '==\n";
+
+
         
         life = maxLife;
         attack = maxAttack;

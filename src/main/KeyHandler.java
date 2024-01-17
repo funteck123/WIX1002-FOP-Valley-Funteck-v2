@@ -13,10 +13,14 @@ public class KeyHandler implements KeyListener{
     public String characterName;
     public boolean characterSelected = false;
     public boolean paused = false;
+    public boolean saved = false;
     public boolean characterStats = false;
 
     public long lastPauseToggleTime = 0;
     public long pauseToggleCooldown = 100; // Cooldown in milliseconds
+
+    public long lastSaveToggleTime = 0;
+    public long saveToggleCooldown = 100; // Cooldown in milliseconds
 
     public long lastCharacterToggleTime = 0;
     public long characterToggleCooldown = 100; // Cooldown in milliseconds
@@ -169,15 +173,24 @@ public class KeyHandler implements KeyListener{
                 rightPressed = true;
             }   
 
-            if (code == KeyEvent.VK_L) {
+            // if (code == KeyEvent.VK_L) {
+            //     gp.saveLoad.save();
+            //     gp.gameState = gp.saveState;
+            //     System.out.println("Player saved.");
+            // }
+            if (code == KeyEvent.VK_L && System.currentTimeMillis() - lastSaveToggleTime > saveToggleCooldown) {
+                gp.gameState = (saved) ? gp.playState : gp.saveState;
+                saved = !saved;
                 gp.saveLoad.save();
                 System.out.println("Player saved.");
+                lastSaveToggleTime = System.currentTimeMillis();
             }
             if (code == KeyEvent.VK_P && System.currentTimeMillis() - lastPauseToggleTime > pauseToggleCooldown) {
                 gp.gameState = (paused) ? gp.playState : gp.pauseState;
                 paused = !paused;
                 lastPauseToggleTime = System.currentTimeMillis();
-            } else if (code == KeyEvent.VK_C && System.currentTimeMillis() - lastCharacterToggleTime > characterToggleCooldown) {
+            } 
+            if (code == KeyEvent.VK_C && System.currentTimeMillis() - lastCharacterToggleTime > characterToggleCooldown) {
                 gp.gameState = (characterStats) ? gp.playState : gp.characterState;
                 characterStats = !characterStats;
                 lastCharacterToggleTime = System.currentTimeMillis();
@@ -190,7 +203,7 @@ public class KeyHandler implements KeyListener{
             } else {
                 String keyText = KeyEvent.getKeyText(code);
                 System.out.println("Key Pressed: " + keyText + "\"P to pause, \\n" + //
-                        "S to save game,  \\n" + //
+                        "L to save game,  \\n" + //
                         "C to character menu, \\n" + //
                         "Enter to interact. \\n" + //
                         "Esc to exit game.\"");
@@ -204,6 +217,15 @@ public class KeyHandler implements KeyListener{
             if (code == KeyEvent.VK_P && System.currentTimeMillis() - lastPauseToggleTime > pauseToggleCooldown) {
                 gp.gameState = gp.playState;
                 paused = false;
+                lastPauseToggleTime = System.currentTimeMillis();
+            }
+        }
+
+        // SAVE STATE
+        if (gp.gameState == gp.saveState) {
+            if (code == KeyEvent.VK_L && System.currentTimeMillis() - lastSaveToggleTime > saveToggleCooldown) {
+                gp.gameState = gp.playState;
+                saved = false;
                 lastPauseToggleTime = System.currentTimeMillis();
             }
         }

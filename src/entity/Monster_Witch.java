@@ -27,7 +27,15 @@ public class Monster_Witch extends Entity {
         maxAttack = 70;
         maxMagicalAttack = 50;
         description = "Witches possess magical abilities, including the power to cast spells. \nTheir main ability is to cast \"Fireball,\" a potent fire-based magical attack.";
-        asciiArt = "";
+        asciiArt = " -o..    , ' .  .\n" +
+        "    ~    `\n" +
+        "           _.     zz\n" +
+        "      .__/|_. z z          z\n" +
+        "        -\")\\                      z\n" +
+        "    __ //  )\n" +
+        "      ~~/  \\-=,,._\n" +
+        "        ~;;~   `'~`    -.__        \n" +
+        "                            ~ ~ ~  __";
         
         life = maxLife;
         attack = maxAttack;
