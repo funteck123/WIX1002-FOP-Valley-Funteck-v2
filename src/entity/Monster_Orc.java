@@ -27,7 +27,38 @@ public class Monster_Orc extends Entity {
       maxMagicalAttack = 50;
       heal = 2;
       description = "Orcs are hulking, brutish creatures \nknown for their raw strength. They have no unique abilities.";
-      asciiArt = "";
+      asciiArt = 
+      
+      "             _.-;-._\n" +
+      "            ;_.JL___;\n" +
+      "            F\"-/\\_-7L\n" +
+      "            | a/ e | \\\n" +
+      "           ,L,c;,.='/;, \n" +
+      "        _,-;;S:;:S;;:' '--._\n" +
+      "       ;. \\;;s:::s;;: .'   /\\\n" +
+      "      /  \\  ;::::;;  /    /  \\\n" +
+      "     / ,  k ;S';;'S.'    j __,l\n" +
+      "  ,---/| /  /S   /S '.   |'   ;\n" +
+      " ,Ljjj |/|.' s .' s   \\  L    |\n" +
+      " LL,_ ]( \\    /    '.  '.||   ;\n" +
+      " ||\\ > /  ;-.'_.-.___\\.-'(|===\"\n" +
+      " JJ,\" /   |_  [   ]     _]|   /\n" +
+      "  LL\\/   ,' '--'-'-----'  \\  (\n" +
+      "  ||     ;      |          |  >\n" +
+      "  JJ     |      |\\         |,/\n" +
+      "   LL    |      ||       ' |\n" +
+      "   ||    |      ||       . |\n" +
+      "   JJ    /_     ||       ;_|\n" +
+      "    LL   L \"==='|i======='_|\n" +
+      "    ||    i----' '-------';\n" +
+      "    JJ    ';-----.------,-'\n" +
+      "     LL     L_.__J,'---;'\n" +
+      "     ||      |   ,|    (\n" +
+      "     JJ     .'=  (|  ,_|\n" +
+      "      LL   /    .'L_    \\\n" +
+      "        ||   '---'    '___>\n";
+
+      
       
       life = maxLife;
       attack = maxAttack;

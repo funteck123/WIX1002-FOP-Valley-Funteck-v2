@@ -28,21 +28,20 @@ public class Monster_Skeleton extends Entity {
         maxMagicalAttack = 50;
         heal = 2;
         description = "Skeletons are reanimated undead, driven by \nmalevolent intent. They have no unique abilities.";
-        asciiArt =  "                                  .-.  \r\n" + //
-                    "                                (o.o) \r\n" + //
-                    "                                  |=|  \r\n" + //
-                    "                                __|__ \r\n" + //
-                    "                              //.=|=.\\\\\r\n" + //
-                    "                             // .=|=. \\\\\r\n" + //
-                    "                             \\\\ .=|=. //\r\n" + //
-                    "                            \\\\(_=_)//\r\n" + //
-                    "                                 (:| |:)\r\n" + //
-                    "                                   || ||\r\n" + //
-                    "                                  () ()\r\n" + //
-                    "                                   || ||\r\n" + //
-                    "                                   || ||\r\n" + //
-                    "                                 ==' '==\r\n" + //
-                    "";
+        asciiArt =  "               .-.  \n" + //
+                    "             (o.o) \n" + //
+         "               |=|  \n" + //
+        "             __|__ \n" + //
+        "           //.=|=.\\\\\n" + //
+        "          // .=|=. \\\\\n" + //
+        "          \\\\ .=|=. //\n" + //
+        "         \\\\(_=_)//\n" + //
+        "              (:| |:)\n" + //
+        "                || ||\n" + //
+        "               () ()\n" + //
+        "                || ||\n" + //
+        "                || ||\n" + //
+        "              ==' '==\n";
         
         life = maxLife;
         attack = maxAttack;

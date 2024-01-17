@@ -28,7 +28,7 @@ public class Monster_Goblin extends Entity {
         maxMagicalAttack = 0;
         heal = 2;
         description = "Goblins are small, pesky creatures that rely on sheer numbers to \noverpower their foes. They have no special abilities.";
-        asciiArt ="             ,\r\n" + //
+        asciiArt = "             ,\r\n" + //
                 "             /(.-\"\"-.)\\\r\n" + //
                 "        |\\  \\/      \\/  /|\r\n" + //
                 "        | \\ / =.  .=  \\ / |\r\n" + //
@@ -42,6 +42,7 @@ public class Monster_Goblin extends Entity {
                 "";
 
         
+                
         life = maxLife;
         attack = maxAttack;
         mana = maxMana;

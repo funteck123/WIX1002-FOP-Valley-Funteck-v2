@@ -548,8 +548,8 @@ public class UI {
         }
         
         g2.setColor(Color.RED);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
-        x = gp.tileSize*1 + gp.tileSize*8;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 17));
+        x = gp.tileSize*1 + gp.tileSize*11;
         y = gp.tileSize/2 + gp.tileSize;
 
         npcAscii = "\\****__              ____                                              \r\n" + //
