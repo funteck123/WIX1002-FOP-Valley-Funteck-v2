@@ -75,13 +75,15 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
             }
+
+        }
             // CHARACTER STATE
             else if (gp.gameState == gp.characterState) {
                 if (code == KeyEvent.VK_C) {
                     gp.gameState = gp.playState;
                 }
             }
-        }
+        
     }
 
     public void titleKey(int code) {
