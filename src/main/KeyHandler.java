@@ -3,7 +3,7 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import entity.Player;
+//import entity.*;
 
 public class KeyHandler implements KeyListener{
     GamePanel gp;
@@ -64,13 +64,11 @@ public class KeyHandler implements KeyListener{
                             gp.ui.titleScreenState = 1;
                             break;
                         case 1: 
-                            Player loadedPlayer = SaveLoadGame.loadPlayer(PLAYER_FILE);
-                            if (loadedPlayer != null) {
-                                gp.player = loadedPlayer;
-                                System.out.println("Player loaded.");
-                            } else {
-                                System.out.println("Failed to load player.");
-                            }
+                            gp.saveLoad.load();
+                            gp.player.getPlayerImage();
+                            gp.gameState = gp.playState;
+                            gp.aSetter.setNPC();
+                            break;
                         case 2:
                             System.exit(0);
                             break;
@@ -172,7 +170,7 @@ public class KeyHandler implements KeyListener{
             }   
 
             if (code == KeyEvent.VK_L) {
-                SaveLoadGame.savePlayer(PLAYER_FILE, gp.player);
+                gp.saveLoad.save();
                 System.out.println("Player saved.");
             }
             if (code == KeyEvent.VK_P && System.currentTimeMillis() - lastPauseToggleTime > pauseToggleCooldown) {

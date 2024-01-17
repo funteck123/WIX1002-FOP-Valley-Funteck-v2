@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 import javax.swing.JPanel;
 
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 //import object.SuperObject;
@@ -46,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
     public UI ui = new UI(this);
     public Thread gameThread;
     public EventHandler eHandler = new EventHandler(this);
+    public SaveLoad saveLoad = new SaveLoad(this);
 
     //Entity and object
     public Player player = new Player(this, keyH);
