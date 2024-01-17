@@ -39,7 +39,7 @@ public class Main {
         while (test) {
             choice = 2;
             while (choice !=0 && choice !=1) {
-            System.out.println("\n0: Login\n1: Sign up");
+            System.out.println("\n0: Login\n1: Sign up [user:funteck:pass:fsktm]");
             choice = scanner.nextInt();
             scanner.nextLine();  // Consume the newline character
             }
