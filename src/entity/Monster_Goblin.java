@@ -27,6 +27,7 @@ public class Monster_Goblin extends Entity {
         maxAttack = 10;
         maxMagicalAttack = 0;
         heal = 2;
+        description = "Goblins are small, pesky creatures that rely on sheer numbers to \noverpower their foes. They have no special abilities.";
         asciiArt ="             ,\r\n" + //
                 "             /(.-\"\"-.)\\\r\n" + //
                 "        |\\  \\/      \\/  /|\r\n" + //

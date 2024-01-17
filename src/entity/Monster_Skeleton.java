@@ -27,21 +27,21 @@ public class Monster_Skeleton extends Entity {
         maxAttack = 70;
         maxMagicalAttack = 50;
         heal = 2;
-        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
-        asciiArt =  "        .-.  \r\n" + //
-                    "       (o.o) \r\n" + //
-                    "        |=|  \r\n" + //
-                    "       __|__ \r\n" + //
-                    "     //.=|=.\\\\\r\n" + //
-                    "    // .=|=. \\\\\r\n" + //
-                    "  \\\\ .=|=. //\r\n" + //
-                    "   \\\\(_=_)//\r\n" + //
-                    "      (:| |:)\r\n" + //
-                    "       || ||\r\n" + //
-                    "       () ()\r\n" + //
-                    "       || ||\r\n" + //
-                    "       || ||\r\n" + //
-                    "      ==' '==\r\n" + //
+        description = "Skeletons are reanimated undead, driven by \nmalevolent intent. They have no unique abilities.";
+        asciiArt =  "                                  .-.  \r\n" + //
+                    "                                (o.o) \r\n" + //
+                    "                                  |=|  \r\n" + //
+                    "                                __|__ \r\n" + //
+                    "                              //.=|=.\\\\\r\n" + //
+                    "                             // .=|=. \\\\\r\n" + //
+                    "                             \\\\ .=|=. //\r\n" + //
+                    "                            \\\\(_=_)//\r\n" + //
+                    "                                 (:| |:)\r\n" + //
+                    "                                   || ||\r\n" + //
+                    "                                  () ()\r\n" + //
+                    "                                   || ||\r\n" + //
+                    "                                   || ||\r\n" + //
+                    "                                 ==' '==\r\n" + //
                     "";
         
         life = maxLife;

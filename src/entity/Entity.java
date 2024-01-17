@@ -22,8 +22,10 @@ public class Entity {
     public int[] spellRequirement = new int[3];
     public int[] spellCooldown = new int[3];
     public int[] spellMana = new int[3];
-    int[] spellMagicalAttack = new int[3];
-    int[] spellMagicalDef = new int[3];  
+    public int[] spellMagicalAttack = new int[3];
+    public int[] spellMagicalDef = new int[3];  
+    public String[] spellUnlocked = new String[3];  
+    public int[] spellCooldownOn = new int[3];  
 
 
 
@@ -69,14 +71,12 @@ public class Entity {
     // Character Status
     public int type;
     public int speed;
-    public int maxLife;
-    public int life;
+    public int heal;
+
+
     //public int level;
     public int strength;
     public int dexterity;
-    public int maxMana;
-    public int mana;
-    public int heal;
     //public int attack;
     //public int defense;
     
@@ -84,10 +84,15 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
 
+    public int maxMana;
+    public int maxLife;
     public int maxAttack;
     public int maxMagicalAttack;
     public int maxDefense;
     public int maxMagicalDefense;
+
+    public int life;
+    public int mana;
     public int attack;
     public int magicalAttack;
     public int defense;
@@ -95,6 +100,13 @@ public class Entity {
     public int expReward;
     public String description;
     public String asciiArt;
+
+    public int maxManaFactor;
+    public int maxLifeFactor;
+    public int maxAttackFactor;
+    public int maxMagicalAttackFactor;
+    public int maxDefenseFactor;
+    public int maxMagicalDefenseFactor;
 
     public int level;
     public int exp;
@@ -109,7 +121,9 @@ public class Entity {
         this.spellCooldown = new int[]{3, 5, 7};
         this.spellMana = new int[]{100, 500, 1000};
         this.spellMagicalAttack = new int[]{5, 10, 25};
-        this.spellMagicalDef = new int[]{5, 10, 25};  
+        this.spellMagicalDef = new int[]{5, 10, 25};
+        this.spellUnlocked = new String[]{"Locked", "Locked", "Locked"}; 
+        this.spellCooldownOn = new int[]{0, 0, 0};   
 
         this.maxLife = 300;
         this.maxMana = 50;
@@ -128,30 +142,28 @@ public class Entity {
         this.magicalDefense = maxMagicalDefense;
         this.expReward = 150;
 
+        this.maxManaFactor = 1;
+        this.maxLifeFactor = 1;
+        this.maxAttackFactor = 1;
+        this. maxMagicalAttackFactor = 1;
+        this.maxDefenseFactor = 1;
+        this.maxMagicalDefenseFactor = 1;
+
         this.description = "entity description";
-        this.asciiArt = "\"\\\\****__              ____                                              \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"|    *****\\\\_      --/ *\\\\-__                                          \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"/_          (_    ./ ,/----'                                         \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"     \\\\__         (_./  /                                                \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"       \\\\__           \\\\___----^__                                       \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"          _/   _                  \\\\                                      \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"   |    _/  __/ )\\\\\\\"\\\\ _____         *\\\\                                    \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"   |\\\\__/   /    ^ ^       \\\\____      )                                   \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"    \\\\___--\\\"                    \\\\_____ \\r\\n" + //
-                "\" + //\r\n" + //
-                "                \"\"";
+        this.asciiArt = "\\****__              ____                       \r\n" + //
+                        "|    *****\\_      --/ *\\-__                    \r\n" + //
+                        "/_          (_    ./ ,/----'                     \r\n" + //
+                        "     \\__         (_./  /                        \r\n" + //
+                        "       \\__           \\___----^__               \r\n" + //
+                        "          _/   _                  \\             \r\n" + //
+                        "   |    _/  __/ )\\\"\\ _____         *\\        \r\n" + //
+                        "   |\\__/   /    ^ ^       \\____      )         \r\n" + //
+                        "    \\___--\"                    \\_____ \r\n" + //
+                        "";
 
 
         this.exp = 0;
-        
+        this.level = 0;
         for (int i = 0; i < nextLevelExp.length; i++) {
             if (i < 10) {
                 this.nextLevelExp[i] = 25;

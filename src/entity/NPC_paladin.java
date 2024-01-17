@@ -29,6 +29,13 @@ public class NPC_paladin extends Entity {
             "Creates a protective barrier around the Paladin, rendering them immune to damage for 2 rounds.",
             "Conjures a protective ice barrier, reducing incoming damage and freezing attackers for 2 rounds."
         };
+
+        maxManaFactor = 1;
+        maxLifeFactor = 1;
+        maxAttackFactor = 1;
+         maxMagicalAttackFactor = 1;
+        maxDefenseFactor = 1;
+        maxMagicalDefenseFactor = 1;
         
         maxLife = 300;
         maxMana = 50;

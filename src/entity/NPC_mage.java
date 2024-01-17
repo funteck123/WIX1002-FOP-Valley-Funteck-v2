@@ -30,6 +30,13 @@ public class NPC_mage extends Entity {
             "The Mage releases a burst of frost, freezing nearby enemies in place for 2 rounds."
         };
 
+        maxManaFactor = 1;
+        maxLifeFactor = 1;
+        maxAttackFactor = 1;
+         maxMagicalAttackFactor = 1;
+        maxDefenseFactor = 1;
+        maxMagicalDefenseFactor = 1;
+
         maxLife = 300;
         maxMana = 50;
         maxDefense = 80;

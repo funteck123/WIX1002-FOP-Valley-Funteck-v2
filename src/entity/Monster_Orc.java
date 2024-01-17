@@ -26,7 +26,7 @@ public class Monster_Orc extends Entity {
       maxAttack = 70;
       maxMagicalAttack = 50;
       heal = 2;
-      description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
+      description = "Orcs are hulking, brutish creatures \nknown for their raw strength. They have no unique abilities.";
       asciiArt = "";
       
       life = maxLife;

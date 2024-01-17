@@ -26,7 +26,7 @@ public class Monster_Witch extends Entity {
         maxMagicalDefense = 20;
         maxAttack = 70;
         maxMagicalAttack = 50;
-        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
+        description = "Witches possess magical abilities, including the power to cast spells. \nTheir main ability is to cast \"Fireball,\" a potent fire-based magical attack.";
         asciiArt = "";
         
         life = maxLife;

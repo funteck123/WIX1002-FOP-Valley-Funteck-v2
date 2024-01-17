@@ -26,8 +26,38 @@ public class Monster_Harpy extends Entity {
         maxAttack = 70;
         maxMagicalAttack = 50;
         heal = 2;
-        description = "Goblins are small, pesky creatures that rely on sheer numbers to overpower their foes. They have no special abilities.";
-        asciiArt = "";
+        description = "Harpies are agile and cunning. They possess two abilities: \"Talon Strike,\" a \nphysical attack, and \"Wind Gust,\" a magical attack that can disrupt opponents.";
+        asciiArt = 
+        "   ,                                      ,\n" +
+        "        |\\                                      /|\n" +
+        "     ,   \\'._ ,                           ,  _.'/   ,\n" +
+        "     |\\  {'. '-`\\,      ,-._**_.-,      ,/`-' .'}  /|\n" +
+        "      \\`'-'-.  '.`\\      \\*____*/      /`.'  .-'-'`/\n" +
+        "    ,'-'-._  '.  ) )     /`    `\\     ( (  .'  _.-'-',\n" +
+        "    |\\'- _ '.   , /     /  /\"\"\\  \\     \\ ,  .'  _ -'/|\n" +
+        "     \\'-.   .  ; (      \\_|^  ^|_/      ) ;   .  .-'/\n" +
+        "      `'--, . ;  {`-.       \\__/      .-'}  ; . ,--'`\n" +
+        "      '--`_. ;  { ^  \\    _|  |_    /  ^ }  ; ._`--'\n" +
+        "      `,_.--  ;  { ^  `-'`      `'-`  ^ }  ;  --._,`\n" +
+        "        ,_.-    ; {^                ^} ;    -._,\n" +
+        "         ,_.-`), /\\{^,/\\         //\\,^}/\\ ,(`-._,\n" +
+        "           _.'.-` /.'   \\        /   `.\\ `-.'_.\n" +
+        "          `  _.' `       \\      /       ` '._   `\n" +
+        "                        .-'.  .'-.\n" +
+        "                      .'    `` ^  '.\n" +
+        "                     /  ^ ^   ^  ^  \\\n" +
+        "                     | ^    ^   ^   |\n" +
+        "                    /^   ^/    \\  ^  \\\n" +
+        "                    \\,_^_/    ^ \\_,^./\n" +
+        "                     /=/  \\^   /  \\=\\\n" +
+        "                 __ /=/_   | ^|   _\\=\\ __\n" +
+        "               <(=,'=(==,) |  | (,==)=',=)>\n" +
+        "                 /_/|_\\    /  \\    /_|_\\ \\\n" +
+        "                 `V (=|  .'    '.  |=) V`\n" +
+        "                     V  / _/  \\_ \\  V\n" +
+        "                       `\"` \\  / `\"`\n" +
+        "                            \\(\n";
+
         
         life = maxLife;
         attack = maxAttack;

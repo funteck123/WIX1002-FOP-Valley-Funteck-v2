@@ -4,6 +4,7 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 //import java.nio.Buffer;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ import main.KeyHandler;
 //import java.awt.Color;
 import main.UtilityTool;
 
-public class Player extends Entity {
+public class Player extends Entity implements Serializable {
 
     KeyHandler keyH;
 
@@ -84,6 +85,13 @@ public class Player extends Entity {
                     "The Mage releases a burst of frost, \nfreezing nearby enemies in place for 2 rounds."
                 };
 
+                maxManaFactor = 1;
+                maxLifeFactor = 1;
+                maxAttackFactor = 1;
+                maxMagicalAttackFactor = 1;
+                maxDefenseFactor = 1;
+                maxMagicalDefenseFactor = 1;
+
                 maxLife = 240;
                 maxMana = 60;
                 maxDefense = 65;
@@ -110,6 +118,13 @@ public class Player extends Entity {
                     "The Mage releases a burst of frost, \n" + //
                             "freezing nearby enemies in place for 2 rounds."
                 };
+
+                maxManaFactor = 1;
+                maxLifeFactor = 1;
+                maxAttackFactor = 3;
+                maxMagicalAttackFactor = 1;
+                maxDefenseFactor = 1;
+                maxMagicalDefenseFactor = 1;
 
                 maxLife = 200;
                 maxMana = 150;
@@ -138,6 +153,13 @@ public class Player extends Entity {
                             "damage and freezing attackers for 2 rounds."
                 };
 
+                maxManaFactor = 1;
+                maxLifeFactor = 1;
+                maxAttackFactor = 2;
+                maxMagicalAttackFactor = 2;
+                maxDefenseFactor = 1;
+                maxMagicalDefenseFactor = 1;
+
                 maxLife = 350;
                 maxMana = 100;
                 maxDefense = 70;
@@ -163,6 +185,13 @@ public class Player extends Entity {
                             "reducing the target's defenses for 3 rounds.",
                     "The Rogue can evade the next spell or attack from the enemies."
                 };
+
+                maxManaFactor = 1;
+                maxLifeFactor = 1;
+                maxAttackFactor = 2;
+                maxMagicalAttackFactor = 1;
+                maxDefenseFactor = 2;
+                maxMagicalDefenseFactor = 1;
 
                 maxLife = 250;
                 maxMana = 75;
@@ -190,6 +219,13 @@ public class Player extends Entity {
                     "The Warrior creates an impenetrable barrier with their \n" + //
                             "shield, reducing incoming damage for 3 rounds."
                 };
+
+                maxManaFactor = 1;
+                maxLifeFactor = 2;
+                maxAttackFactor = 1;
+                maxMagicalAttackFactor = 1;
+                maxDefenseFactor = 2;
+                maxMagicalDefenseFactor = 2;
                 
                 maxLife = 300;
                 maxMana = 50;
@@ -408,9 +444,9 @@ public class Player extends Entity {
         if (gp.player.life > 0) {
             
             Random random = new Random();
-            damageDealt = random.nextInt(gp.player.attack) + 1;
             // Player's attack logic
-            damageDealt = gp.player.attack;
+            damageDealt = random.nextInt(gp.player.attack) + 1;
+            //damageDealt = gp.player.attack;
             gp.npc[i].life = Math.max(0, gp.npc[i].life - damageDealt);
 
             gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + " with " + damageDealt + "!";
@@ -423,11 +459,10 @@ public class Player extends Entity {
             } 
             
         } else {
-
+            gp.ui.gameOverStateNum = 1;
             gp.gameState = gp.gameOverState;
-            playerWin = false;
-            gp.ui.monsterAttackDialogue = "";
-            gp.ui.playerAttackDialogue = "";
+
+            //playerWin = false;
         
         }
     }
@@ -454,6 +489,7 @@ public class Player extends Entity {
                 gp.player.life = Math.min(gp.player.maxLife, gp.player.life);
             }
 
+            gp.player.spellCooldownOn[spellNo] = gp.player.spellCooldown[spellNo];
 
             if (gp.npc[i].life <= 0) {
                 // If not defeated, let the monster attack
@@ -461,12 +497,11 @@ public class Player extends Entity {
             } 
             
         } else {
-
+            gp.ui.gameOverStateNum = 1;
             gp.gameState = gp.gameOverState;
-            playerWin = false;
-            gp.ui.monsterAttackDialogue = "";
-            gp.ui.playerAttackDialogue = "";
-        
+
+            //playerWin = false;
+
         }
     }
 
@@ -479,10 +514,11 @@ public class Player extends Entity {
             damageDealt1 = gp.player.defense;
 
         }   else {
+            gp.ui.gameOverStateNum = 1;
             gp.gameState = gp.gameOverState;
-            playerWin = false;
-            gp.ui.monsterAttackDialogue = "";
-            gp.ui.playerAttackDialogue = "";
+
+            //playerWin = false;
+
         }
     }
 
@@ -496,21 +532,21 @@ public class Player extends Entity {
             gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "! Refreshing, right?";
 
         }   else {
+            gp.ui.gameOverStateNum = 1;
             gp.gameState = gp.gameOverState;
-            playerWin = false;
-            gp.ui.monsterAttackDialogue = "";
-            gp.ui.playerAttackDialogue = "";
+
+            //playerWin = false;
 
         }
     }
 
 
     public void playerRun(int i) {
-        gp.gameState = gp.playState;
-        playerWin = false;
-        gp.ui.monsterAttackDialogue = "";
-        gp.ui.playerAttackDialogue = "";
+        gp.ui.gameOverStateNum = 2;
+        gp.gameState = gp.gameOverState;
 
+        //playerWin = true;
+        
     }
 
     public void monsterAttack(int i) {
@@ -523,14 +559,16 @@ public class Player extends Entity {
             gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
             damageDealt = 0;
             damageDealt1 = 0;
+
         } else {
             // Handle victory, gain experience, etc.
             gp.ui.playerAttackDialogue = "You defeated the " + gp.npc[i].name + " !";
-            playerWin = true;
-            gp.ui.rewarded = false;
+            gp.ui.gameOverStateNum = 0;
             gp.gameState = gp.gameOverState;
-            gp.ui.monsterAttackDialogue = "";
-            gp.ui.playerAttackDialogue = "";
+
+            gp.ui.rewarded = false;
+
+            //remove monster
             gp.npc[i].worldX = -10;
             gp.npc[i].worldX = -10;           
 

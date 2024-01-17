@@ -3,12 +3,25 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import entity.Player;
+
 public class KeyHandler implements KeyListener{
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     public boolean enterPressed = false;
     public int characterSelection;
     public String characterName;
+    public boolean characterSelected = false;
+    public boolean paused = false;
+    public boolean characterStats = false;
+
+    public long lastPauseToggleTime = 0;
+    public long pauseToggleCooldown = 100; // Cooldown in milliseconds
+
+    public long lastCharacterToggleTime = 0;
+    public long characterToggleCooldown = 100; // Cooldown in milliseconds
+
+    public final String PLAYER_FILE = "player.dat";
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -50,7 +63,14 @@ public class KeyHandler implements KeyListener{
                         case 0:
                             gp.ui.titleScreenState = 1;
                             break;
-                        // case 1: gp.gameState = gp.helpState; break;
+                        case 1: 
+                            Player loadedPlayer = SaveLoadGame.loadPlayer(PLAYER_FILE);
+                            if (loadedPlayer != null) {
+                                gp.player = loadedPlayer;
+                                System.out.println("Player loaded.");
+                            } else {
+                                System.out.println("Failed to load player.");
+                            }
                         case 2:
                             System.exit(0);
                             break;
@@ -73,43 +93,63 @@ public class KeyHandler implements KeyListener{
                 switch (gp.ui.commandNum) {
                     case 0:
                         characterSelection = 0;
-                        characterName = "Archer";
+                        if (characterSelected == false) {
+                            characterName = "Archer";
+                            characterSelected = true;
+                        }
                         //System.out.println("Do some Archer specific stuff");
                         gp.player.getPlayerImage();
                         gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
+                        gp.aSetter.setNPC();
                         break;
                     case 1:
                         characterSelection = 1;
-                        characterName = "Mage";
+                        if (characterSelected == false) {
+                            characterName = "Mage";
+                            characterSelected = true;
+                        }
                         //System.out.println("Do some Rogue specific stuff");
                         gp.player.getPlayerImage();
                         gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
+                        gp.aSetter.setNPC();
                         break;
                     case 2:
                         characterSelection = 2;
-                        characterName = "Paladin";
+                        if (characterSelected == false) {
+                            characterName = "Paladin";
+                            characterSelected = true;
+                        }
                         //System.out.println("Do some Archer specific stuff");
                         gp.player.getPlayerImage();
                         gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
+                        gp.aSetter.setNPC();
                         break;
                     case 3:
                         characterSelection = 3;
-                        characterName = "Rogue";
+                        if (characterSelected == false) {
+                            characterName = "Rogue";
+                            characterSelected = true;
+                        }
                         //System.out.println("Do some Mage specific stuff");
                         gp.player.getPlayerImage();
                         gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
+                        gp.aSetter.setNPC();
                         break;
                     case 4:
                         characterSelection = 4;
-                        characterName = "Warrior";
+                        if (characterSelected == false) {
+                            characterName = "Warrior";
+                            characterSelected = true;
+                        }
                         //System.out.println(characterName);
                         gp.player.getPlayerImage();
                         gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
+                        gp.aSetter.setNPC();
                         break;
                     }
                 }
@@ -117,34 +157,65 @@ public class KeyHandler implements KeyListener{
         }
         
         // PLAY STATE
-        if(gp.gameState == gp.playState) {
-            if(code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
+        if (gp.gameState == gp.playState) {
+            if (code == KeyEvent.VK_UP || code == KeyEvent.VK_W) {
                 upPressed = true;
             }
-            if(code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
+            if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
                 downPressed = true;
             }
-            if(code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
+            if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_A) {
                 leftPressed = true;
             }
-            if(code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
+            if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
                 rightPressed = true;
+            }   
+
+            if (code == KeyEvent.VK_L) {
+                SaveLoadGame.savePlayer(PLAYER_FILE, gp.player);
+                System.out.println("Player saved.");
             }
-            if(code == KeyEvent.VK_P) {
-                gp.gameState = gp.pauseState;
+            if (code == KeyEvent.VK_P && System.currentTimeMillis() - lastPauseToggleTime > pauseToggleCooldown) {
+                gp.gameState = (paused) ? gp.playState : gp.pauseState;
+                paused = !paused;
+                lastPauseToggleTime = System.currentTimeMillis();
+            } else if (code == KeyEvent.VK_C && System.currentTimeMillis() - lastCharacterToggleTime > characterToggleCooldown) {
+                gp.gameState = (characterStats) ? gp.playState : gp.characterState;
+                characterStats = !characterStats;
+                lastCharacterToggleTime = System.currentTimeMillis();
             }
-            if(code == KeyEvent.VK_C) {
-                gp.gameState = gp.characterState;
-            }
-            if(code == KeyEvent.VK_ENTER) {
+            if (code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
+            } 
+            
+            if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_LEFT || code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_W || code == KeyEvent.VK_A || code == KeyEvent.VK_S || code == KeyEvent.VK_D || code == KeyEvent.VK_P || code == KeyEvent.VK_C|| code == KeyEvent.VK_L || code == KeyEvent.VK_ENTER) {
+            } else {
+                String keyText = KeyEvent.getKeyText(code);
+                System.out.println("Key Pressed: " + keyText + "\"P to pause, \\n" + //
+                        "S to save game,  \\n" + //
+                        "C to character menu, \\n" + //
+                        "Enter to interact. \\n" + //
+                        "Esc to exit game.\"");
             }
+
+
         }
 
         // PAUSE STATE
-        if(gp.gameState == gp.pauseState) {
-            if(code == KeyEvent.VK_P) {
+        if (gp.gameState == gp.pauseState) {
+            if (code == KeyEvent.VK_P && System.currentTimeMillis() - lastPauseToggleTime > pauseToggleCooldown) {
                 gp.gameState = gp.playState;
+                paused = false;
+                lastPauseToggleTime = System.currentTimeMillis();
+            }
+        }
+
+        // CHARACTER STATE
+        if (gp.gameState == gp.characterState) {
+            if (code == KeyEvent.VK_C && System.currentTimeMillis() - lastCharacterToggleTime > characterToggleCooldown) {
+                gp.gameState = gp.playState;
+                characterStats = false;
+                lastCharacterToggleTime = System.currentTimeMillis();
             }
         }
         
@@ -163,13 +234,25 @@ public class KeyHandler implements KeyListener{
                 gp.ui.commandNumFight = 3;
             }
             if(code == KeyEvent.VK_1) {
-                gp.ui.commandNumFight = 4;
+
+                if(gp.player.spellCooldownOn[0] == 0 && gp.player.spellUnlocked[0] == "Unlocked") {
+                    gp.ui.commandNumFight = 4;
+                }
+
             }   
             if(code == KeyEvent.VK_2) {
-                gp.ui.commandNumFight = 5;
+
+                if(gp.player.spellCooldownOn[1] == 0 && gp.player.spellUnlocked[1] == "Unlocked") {
+                    gp.ui.commandNumFight = 5;
+                }
+
             }
             if(code == KeyEvent.VK_3) {
-                gp.ui.commandNumFight = 6;
+
+                if(gp.player.spellCooldownOn[2] == 0 && gp.player.spellUnlocked[2] == "Unlocked") {
+                    gp.ui.commandNumFight = 6;
+                }
+
             }
             if(code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
@@ -177,21 +260,18 @@ public class KeyHandler implements KeyListener{
         }
         
 
-        // CHARACTER STATE
-        if (gp.gameState == gp.characterState) {
-            if(code == KeyEvent.VK_C) {
-                gp.gameState = gp.playState;
-            }
-        } 
 
         // Game Over State
         if (gp.gameState == gp.gameOverState) {
             if(code == KeyEvent.VK_ENTER) {
-                if (gp.player.playerWin == true) {
+                if (gp.ui.gameOverStateNum == 0) {
                     gp.gameState = gp.playState;
-                } else {
+                } else if (gp.ui.gameOverStateNum == 1) {
                     gp.gameState = gp.titleState;
                     gp.ui.titleScreenState = 0;
+                    characterSelected = false;
+                } else if (gp.ui.gameOverStateNum == 2) {
+                    gp.gameState = gp.playState;
                 }
             }
         } 

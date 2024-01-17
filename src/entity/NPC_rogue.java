@@ -29,6 +29,13 @@ public class NPC_rogue extends Entity {
             "Coats the weapon with a deadly poison, dealing damage over time and reducing the target's defenses for 3 rounds.",
             "The Rogue can evade the next spell or attack from the enemies."
         };
+
+        maxManaFactor = 1;
+        maxLifeFactor = 1;
+        maxAttackFactor = 1;
+         maxMagicalAttackFactor = 1;
+        maxDefenseFactor = 1;
+        maxMagicalDefenseFactor = 1;
         
         maxLife = 300;
         maxMana = 50;

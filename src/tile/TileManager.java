@@ -42,39 +42,39 @@ public class TileManager {
             setup(8,"grass00", false);
             setup(9,"grass00", false);
 
-            setup(10,"grass00" , false);
-            setup(11,"grass01", false); 
+            setup(10,"subtraction_blue" , false);
+            setup(11,"plus_white", false); 
             setup(12,"water00", true);
             setup(13,"water01", true);
-            setup(14,"water02", true);
-            setup(15,"water03", true);
-            setup(16,"water04", true);
-            setup(17,"water05", true);
-            setup(18,"water06", true);
-            setup(19,"water07", true);
-            setup(20,"water08", true);
-            setup(21,"water09", true);
-            setup(22,"water10", true);
-            setup(23,"water11", true);
-            setup(24,"water12", true);
-            setup(25,"water13", true);
-            setup(26,"road00", false);
-            setup(27,"road01", false);
-            setup(28,"road02", false);
-            setup(29,"road03", false);
-            setup(30,"road04", false);
-            setup(31,"road05", false);
-            setup(32,"road06", false);
-            setup(33,"road07", false);
-            setup(34,"road08", false);
-            setup(35,"road09", false);
-            setup(36,"road10", false);
-            setup(37,"road11", false);
-            setup(38,"road12", false);
+            setup(14,"power_white", true);
+            setup(15,"power_white", true);
+            setup(16,"power_white", true);
+            setup(17,"power_white", true);
+            setup(18,"power_white", true);
+            setup(19,"power_white", true);
+            setup(20,"power_white", true);
+            setup(21,"power_white", true);
+            setup(22,"power_white", true);
+            setup(23,"power_white", true);
+            setup(24,"power_white", true);
+            setup(25,"power_white", true);
+            setup(26,"subtraction_blue", false);
+            setup(27,"subtraction_blue", false);
+            setup(28,"subtraction_blue", false);
+            setup(29,"plus_white", false);
+            setup(30,"plus_white", false);
+            setup(31,"plus_white", false);
+            setup(32,"plus_white", false);
+            setup(33,"subtraction_blue", false);
+            setup(34,"subtraction_blue", false);
+            setup(35,"subtraction_blue", false);
+            setup(36,"subtraction_blue", false);
+            setup(37,"subtraction_blue", false);
+            setup(38,"subtraction_blue", false);
            
-            setup(39,"earth", false);
-            setup(40,"wall", true);
-            setup(41,"hash_black", true);
+            setup(39,"subtraction_red", false);
+            setup(40,"exclamationMark", true);
+            setup(41,"hash _white", true);
             setup(42,"hash_white", true);
 
             
@@ -154,7 +154,6 @@ public class TileManager {
 
 
     }
-
 
 
 }

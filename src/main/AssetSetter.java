@@ -4,7 +4,7 @@ import java.util.Random;
 
 //import Monster.*;
 import entity.*;
-import object.*;
+//import object.*;
 
 public class AssetSetter {
 

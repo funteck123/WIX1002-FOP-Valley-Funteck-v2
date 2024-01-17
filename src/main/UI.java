@@ -28,6 +28,7 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int  titleScreenState = 0;
+    public int gameOverStateNum;
 
     public String fightDialogue = "";
     public String monsterAttackDialogue = "";
@@ -40,8 +41,9 @@ public class UI {
     public int commandNum = 0;
     public int commandNumFight = 999;
     //public boolean enterPressed = false;
-    public boolean playerTurn = false;
+    public boolean playerTurn = true;
     public boolean rewarded = false;
+    public boolean initFight = true;
 
     
     public UI(GamePanel gp) {
@@ -103,9 +105,10 @@ public class UI {
         }
 
         //FIGHT
-        if (gp.gameState == gp.fightState) {
+        if (gp.gameState == gp.characterState) {
             //drawFightScreen();
             //drawDialogueScreen();
+            drawCharacterState();
         }
 
         if (gp.gameState == gp.gameOverState) {
@@ -156,9 +159,9 @@ public class UI {
 
             x = gp.screenWidth/2 - (gp.tileSize*15)/2;
             y = gp.tileSize*11;
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD,25f));
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,23f));
             g2.setColor(Color.white);
-            text = "(Controls: WASD to \nmove, ENTER to interact.)";
+            text = "(Controls: WASD to move, \nENTER to interact, Esc to Exit.)";
             if (text != null) {
                 for (String line : text.split("\n")) {
                     g2.drawString(line, x, y);
@@ -255,31 +258,57 @@ public class UI {
 
 
     public void drawPlayerLife() {
-        int x = gp.tileSize/2;
+        // int x = gp.tileSize/2;
+        // int y = gp.tileSize/2;
         int y = gp.tileSize/2;
+        int x = gp.tileSize*3 + 10;
         int i = 0;
 
         //Draw max life
-        while (i < gp.player.maxLife/50) {
+        while (i < gp.player.life/100) {
             g2.drawImage(heart_blank, x, y, null);
             x += gp.tileSize;
             i++;
         }
 
-        x = gp.tileSize/2;
+        // x = gp.tileSize/2;
         y = gp.tileSize/2;
+        x = gp.tileSize*3 + 10;
+        // y = gp.tileSize+15;
         i = 0;
 
         //Draw max life
-        while (i < gp.player.life/25) {
+        while (i < gp.player.life/50) {
             g2.drawImage(heart_half, x, y, null);
             i++;
-            if (i < gp.player.life/25) {
+            if (i < gp.player.life/50) {
                 g2.drawImage(heart_full, x, y, null);
             }
             i++;
             x += gp.tileSize;
         }
+
+        String text ="";
+        // //Draw player Life
+        // g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50));
+        // g2.setColor(Color.white);
+        // x = gp.screenWidth/2 - (gp.tileSize*14)/2;
+        // y = gp.tileSize*2;
+        // text = "HP: " + gp.player.life;
+        // g2.drawString(text, x, y);
+
+        //Draw player level
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40));
+        g2.setColor(Color.yellow);
+        // x = gp.tileSize*6;
+        y = gp.tileSize+15;
+        x = gp.tileSize/2;
+        // y = gp.tileSize/2;
+        text = "Level: " + gp.player.level;
+        g2.drawString(text, x, y);
+
+        //Draw help commands
+        helpText("P to pause, \nS to save game,  \nC to character menu, \nEnter to interact. \nEsc to exit game.");
 
     }
 
@@ -289,6 +318,8 @@ public class UI {
         int x=getXforCenteredText(text);
         int y=gp.screenHeight/2;
         g2.drawString(text, x, y);
+        
+        //helpText("Press Enter.");
     }
 
     public void drawDialogueScreen() {
@@ -329,39 +360,95 @@ public class UI {
         //npcIndex = gp.cChecker.checkEntity(gp.player, gp.npc);
 
         g2.setColor(Color.white);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 35f));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
         x += gp.tileSize;
         y += gp.tileSize*0.75;
 
-        if (gp.player.playerWin == true) { 
+        if (gameOverStateNum == 0) { 
             if (rewarded != true) {
+
+                int oldLevel = gp.player.level;
+
                 gp.player.exp += gp.npc[npcNo].expReward;
+
+                if (gp.player.exp > 250) {
+                    gp.player.level = 10 + (gp.player.exp-250) / 50;
+                } else {
+                    gp.player.level = gp.player.exp / 25;
+                }
+
+
+                for (int i = 0; i<3; i++) {
+                    if (gp.player.level >= gp.player.spellRequirement[i]) {
+                        gp.player.spellUnlocked[i] = "Unlocked";
+                    } else {
+                        gp.player.spellUnlocked[i] = "Locked";
+                    }
+                }
+
+
+                int newLevel = gp.player.level;
+                int levelDifference = newLevel - oldLevel;
+
+                gp.player.maxLife += gp.player.maxLife * levelDifference * (gp.player.maxLifeFactor)/20;
+                gp.player.maxMana += gp.player.maxMana * levelDifference * (gp.player.maxManaFactor)/20;
+                gp.player.maxDefense += gp.player.maxDefense * levelDifference * (gp.player.maxDefenseFactor)/20;
+                gp.player.maxMagicalDefense += gp.player.maxMagicalDefense * levelDifference * (gp.player.maxMagicalDefenseFactor)/20;
+                gp.player.maxAttack += gp.player.maxAttack * levelDifference * (gp.player.maxAttackFactor)/20; 
+                gp.player.maxMagicalAttack +=  gp.player.maxMagicalAttack * levelDifference * (gp.player.maxMagicalAttackFactor)/20;
+                gp.player.heal += gp.player.heal/20;
+
+                gp.player.life = gp.player.maxLife;
+                gp.player.attack = gp.player.maxAttack;
+                gp.player.mana = gp.player.maxMana;
+                gp.player.magicalAttack = gp.player.maxMagicalAttack;
+                gp.player.defense = gp.player.maxDefense;
+                gp.player.magicalDefense = gp.player.maxMagicalDefense;
+
             }
+
             rewarded = true;
-            if (gp.player.exp > 250) {
-                gp.player.level = 10 + (gp.player.exp-250) / 50;
-            } else {
-                gp.player.level = gp.player.exp / 25;
-            }
-            String text = "You killed the monster!\n\n\nExp earned:" + gp.npc[npcNo].expReward + "\nCurrent level:" + gp.player.level + "\nNext level exp: " + gp.player.nextLevelExp[gp.player.level];;
+
+            String characterStatsMenu  = 
+            "+-------------------------------------------------------------+\r\n" +
+            "> " + "Character Stats" + "\r\n" +
+            "\r\n" +
+            "Player: " + gp.keyH.characterName + "\r\n" +
+            "--> HP: " + gp.player.life + " / " + gp.player.maxLife + "\r\n" +
+            "--> MP: " + gp.player.mana + " / " + gp.player.maxMana + "\r\n" +
+            "--> Attack: " + gp.player.attack + "\r\n" +
+            "--> Magical Attack: " + gp.player.magicalAttack + "\r\n" +
+            "--> Defense: " + gp.player.defense + "\r\n" +
+            "--> Magical Defense: " + gp.player.magicalDefense + "\r\n\n" +
+            "--> Level: " + gp.player.level + "\r\n" +
+            "+-------------------------------------------------------------+\r\n\n" +
+            ">> Spells\r\n" +
+            "[1] " + gp.player.spellName[0] + " <" + gp.player.spellUnlocked[0] + " - Level: " + gp.player.spellRequirement[0] + " +>\r\n" +
+            "[2] " + gp.player.spellName[1] + " <" + gp.player.spellUnlocked[1] + " - Level: " + gp.player.spellRequirement[1] + " +>\r\n" +
+            "[3] " + gp.player.spellName[2] + " <" + gp.player.spellUnlocked[2] + "- Level: " + gp.player.spellRequirement[2] + " +>\r\n" +
+            "+-------------------------------------------------------------+\r\n" +
+            "";
+
+
+
             g2.setColor(Color.green);
-            x = getXforCenteredText(text) + gp.tileSize*3;
-            y += gp.tileSize;
+            // x = gp.screenWidth/2 - gp.tileSize*6;
+            // y += gp.tileSize;
 
-            if (text != null) {
-                for (String line : text.split("\n")) {
+            if (characterStatsMenu != null) {
+                for (String line : characterStatsMenu .split("\n")) {
                     g2.drawString(line, x, y);
                     y += g2.getFontMetrics().getHeight();
                 }
             }
 
-            helpText("Press enter.");
+            helpText("Press Enter.");
             
-        } else {
+        } else if (gameOverStateNum == 1) {
             gp.player.exp = 1;
-            String text = "You died in shame! \n\n\nReturn to title screen to \nrestart or load a save game.";
+            String text = "You died. Game over! \n\n\nReturn to the title screen to \nrestart or load a save game.";
             g2.setColor(Color.red);
-            x = getXforCenteredText(text) + gp.tileSize*3;
+            x = gp.screenWidth/2 - gp.tileSize*6;
             y += gp.tileSize;
 
             if (text != null) {
@@ -371,10 +458,29 @@ public class UI {
                 }
             }
 
-            helpText("Press enter.");
+            helpText("Press Enter.");
+
+        } else if (gameOverStateNum == 2) {
+
+            String text = "You have barely escaped. \n\n\n\"I learned that courage was not \nthe absence of fear, \nbut the triumph over it.\" ";
+            g2.setColor(Color.yellow);
+            x = gp.screenWidth/2 - gp.tileSize*6;
+            y += gp.tileSize;
+
+            if (text != null) {
+                for (String line : text.split("\n")) {
+                    g2.drawString(line, x, y);
+                    y += g2.getFontMetrics().getHeight();
+                }
+            }
+
+            helpText("Press Enter.");
         }
 
-        playerTurn = false;
+        playerTurn = true;
+        initFight = true;
+        gp.ui.monsterAttackDialogue = "";
+        gp.ui.playerAttackDialogue = "";
         
     }
 
@@ -395,35 +501,49 @@ public class UI {
         x += gp.tileSize;
         y += gp.tileSize*0.75;
 
-        fightDialogue = "> "+ monsterAttackDialogue + "\r\n" + //
+        if (initFight) {
+            monsterAttackDialogue = gp.npc[npcNo].description;
+            playerAttackDialogue = "You have encountered a/an " + gp.npc[npcNo].name + ". What do you do?";
+            initFight = false;
+        }
+
+        fightDialogue = "> " + monsterAttackDialogue + "\r\n" + //
                 "\r\n" + //
-                ""+ gp.npc[npcNo].name +"\r\n" + //
+                "Monster:"+ gp.npc[npcNo].name +"\r\n" + //
                 "--> HP: " + gp.npc[npcNo].life + " / " + gp.npc[npcNo].maxLife + "\r\n" + //
                 "--> MP: " + gp.npc[npcNo].mana + " / " + gp.npc[npcNo].maxMana + "\r\n" +  //
                 "\r\n" + //
                 "> " + playerAttackDialogue + "\r\n" + //
                 "\r\n" + //
-                "Player: Warrior\r\n" + //
+                "Player: " + gp.keyH.characterName + "\r\n" + //
                 "--> HP: "+ gp.player.life + " / " + gp.player.maxLife + "\r\n" + //
                 "--> MP: "+ gp.player.mana + " / " + gp.player.maxMana + "\r\n" + //
                 "+-------------------------------------------------------------+\r\n" + //
-                ">> Starter. Player Turn: " + playerTurn + ". Press Enter or choose option.\r\n" + //
+                ">> Starter\r\n" + //
                 "[W] Attack\r\n" + //
                 "[A] Defend\r\n" + //
                 "[S] Heal    \n" + //
                 "[D] Escape\r\n" + //
-                "\r\n" + //
+                "\r" + //
                 ">> Spells\r\n" + //
-                "[1] Spell 1: " + gp.player.spellName[0] + " <Unlocked - Level: " + gp.player.spellRequirement[0] + " +>\r\n" + //
-                "[2] Spell 2: "+ gp.player.spellName[1] + " <Locked - Level: " + gp.player.spellRequirement[1] + " +>\r\n" + //
-                "[3] Spell 3: "+ gp.player.spellName[2] + " <Locked - Level: " + gp.player.spellRequirement[2] + " +>\r\n" + //
+                "[1] " + gp.player.spellName[0] + " <" + gp.player.spellUnlocked[0] + " - Level: " + gp.player.spellRequirement[0] + " - Cooldown: " + gp.player.spellCooldownOn[0] + " turns>\r\n" +
+                "[2] " + gp.player.spellName[1] + " <" + gp.player.spellUnlocked[1] + " - Level: " + gp.player.spellRequirement[1] + " - Cooldown: " + gp.player.spellCooldownOn[1] + " turns>\r\n" +
+                "[3] " + gp.player.spellName[2] + " <" + gp.player.spellUnlocked[2] + "- Level: " + gp.player.spellRequirement[2] + " - Cooldown: " + gp.player.spellCooldownOn[2] + " turns>\r\n" +
                 "+-------------------------------------------------------------+\r\n" + //
                 "";
 
+
+        int j = 0;
         if (fightDialogue != null) {
             for (String line : fightDialogue.split("\n")) {
+                if (j<=5) {
+                    g2.setColor(Color.red);
+                } else {
+                    g2.setColor(Color.white);
+                }
                 g2.drawString(line, x, y);
                 y += g2.getFontMetrics().getHeight();
+                j++;
             }
         }
         
@@ -457,7 +577,11 @@ public class UI {
                     gp.player.playerAttack(npcNo);
                     playerTurn = false;
                     gp.keyH.enterPressed = false;
-                    //helpText("Press enter.");
+                    //helpText("Press Enter.");
+
+                    for (int i = 0; i<3; i++) {
+                        gp.player.spellCooldownOn[i] = Math.max(0,gp.player.spellCooldownOn[i]-1);
+                    }
                 } 
                 break;
             case 1:
@@ -465,7 +589,10 @@ public class UI {
                     gp.player.playerDefend(npcNo);
                     playerTurn = false;
                     gp.keyH.enterPressed = false;
-                    //helpText("Press enter.");
+                    //helpText("Press Enter.");
+                    for (int i = 0; i<3; i++) {
+                        gp.player.spellCooldownOn[i] = Math.max(0,gp.player.spellCooldownOn[i]-1);
+                    }
                 } 
                 break;
             case 2:
@@ -473,7 +600,10 @@ public class UI {
                     gp.player.playerHeal(npcNo);
                     playerTurn = false;
                     gp.keyH.enterPressed = false;
-                    //helpText("Press enter.");
+                    //helpText("Press Enter.");
+                    for (int i = 0; i<3; i++) {
+                        gp.player.spellCooldownOn[i] = Math.max(0,gp.player.spellCooldownOn[i]-1);
+                    }                
                 } 
                 break;
             case 3:
@@ -481,21 +611,34 @@ public class UI {
                     gp.player.playerRun(npcNo);
                     playerTurn = false;
                     gp.keyH.enterPressed = false;
-                    //helpText("Press enter.");
+                    //helpText("Press Enter.");
+                    for (int i = 0; i<3; i++) {
+                        gp.player.spellCooldownOn[i] = Math.max(0,gp.player.spellCooldownOn[i]-1);
+                    }                
                 } 
             case 4:
                 if (playerTurn) {
                     gp.player.playerSpellAttack(npcNo, commandNumFight-4);
                     playerTurn = false;
                     gp.keyH.enterPressed = false;
-                    //helpText("Press enter.");
+                    //helpText("Press Enter.");
+                    for (int i = 0; i<3; i++) {
+                        if (i != commandNumFight-4) {
+                            gp.player.spellCooldownOn[i] = Math.max(0,gp.player.spellCooldownOn[i]-1);
+                        }
+                    }  
                 } 
             case 5:
                 if (playerTurn) {
                     gp.player.playerSpellAttack(npcNo, commandNumFight-4);
                     playerTurn = false;
                     gp.keyH.enterPressed = false;
-                    //helpText("Press enter.");
+                    //helpText("Press Enter.");
+                    for (int i = 0; i<3; i++) {
+                        if (i != commandNumFight-4) {
+                            gp.player.spellCooldownOn[i] = Math.max(0,gp.player.spellCooldownOn[i]-1);
+                        }
+                    }  
                 }
                       
                 break;
@@ -504,13 +647,18 @@ public class UI {
                     gp.player.playerSpellAttack(npcNo, commandNumFight-4);
                     playerTurn = false;
                     gp.keyH.enterPressed = false;
-                    //helpText("Press enter.");
+                    //helpText("Press Enter.");
+                    for (int i = 0; i<3; i++) {
+                        if (i != commandNumFight-4) {
+                            gp.player.spellCooldownOn[i] = Math.max(0,gp.player.spellCooldownOn[i]-1);
+                        }
+                    }  
                 }
         } 
         
         
         
-        commandNumFight = 999;
+
 
         if (gp.keyH.enterPressed && !playerTurn) {
             gp.player.monsterAttack(npcNo);
@@ -523,8 +671,8 @@ public class UI {
         } else {
             helpText("Monster's turn\nPress Enter.");
         }
-        
-        
+
+        commandNumFight = 999;    
         
 
 
@@ -533,9 +681,9 @@ public class UI {
 
     public void helpText(String text) {
         int helpX = gp.screenWidth/2 + (gp.tileSize*7)/2;
-        int helpY = gp.screenHeight/2 + gp.tileSize*5;
+        int helpY = gp.screenHeight/2 + gp.tileSize*4;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD,20f));
-        g2.setColor(Color.green);
+        g2.setColor(new Color(0,255,0));
 
         if (text != null) {
             for (String line : text.split("\n")) {
@@ -547,7 +695,7 @@ public class UI {
 
     public void drawSubWindow(int x, int y, int width, int height) {
         
-        Color c = new Color(0, 0, 0, 200);
+        Color c = new Color(0, 0, 0, 220);
         g2.setColor(c);
         g2.fillRoundRect(x, y, width, height, 35, 35);
 
@@ -558,6 +706,59 @@ public class UI {
 
     }
 
+    public void drawCharacterState() {
+        //WINDOW
+        int x = gp.tileSize*1;
+        int y = gp.tileSize/2;
+        int width = gp.screenWidth - (gp.tileSize*2);
+        int height = gp.tileSize*11;
+        drawSubWindow(x, y, width, height);
+
+        //collison
+        //npcIndex = gp.cChecker.checkEntity(gp.player, gp.npc);
+
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
+        x += gp.tileSize;
+        y += gp.tileSize*0.75;
+
+        String characterStatsMenu  = 
+        "+-------------------------------------------------------------+\r\n" +
+        "> " + "Character Stats" + "\r\n" +
+        "\r\n" +
+        "Player: " + gp.keyH.characterName + "\r\n" +
+        "--> HP: " + gp.player.life + " / " + gp.player.maxLife + "\r\n" +
+        "--> MP: " + gp.player.mana + " / " + gp.player.maxMana + "\r\n" +
+        "--> Attack: " + gp.player.attack + "\r\n" +
+        "--> Magical Attack: " + gp.player.magicalAttack + "\r\n" +
+        "--> Defense: " + gp.player.defense + "\r\n" +
+        "--> Magical Defense: " + gp.player.magicalDefense + "\r\n\n" +
+        "--> Level: " + gp.player.level + "\r\n" +
+        "--> Exp Earned: " + gp.npc[npcNo].expReward + "\r\n" +
+        "--> Next Level Exp: " + gp.player.nextLevelExp[gp.player.level] + "\r\n" +
+        "+-------------------------------------------------------------+\r\n" +
+        ">> Spells\r\n" +
+        "[1] " + gp.player.spellName[0] + " <" + gp.player.spellUnlocked[0] + " - Level: " + gp.player.spellRequirement[0] + " +>\r\n" +
+        "[2] " + gp.player.spellName[1] + " <" + gp.player.spellUnlocked[1] + " - Level: " + gp.player.spellRequirement[1] + " +>\r\n" +
+        "[3] " + gp.player.spellName[2] + " <" + gp.player.spellUnlocked[2] + "- Level: " + gp.player.spellRequirement[2] + " +>\r\n" +
+        "+-------------------------------------------------------------+\r\n" +
+        "";
+
+
+
+        g2.setColor(Color.green);
+        // x = gp.screenWidth/2 - gp.tileSize*6;
+        // y += gp.tileSize;
+
+        if (characterStatsMenu != null) {
+            for (String line : characterStatsMenu .split("\n")) {
+                g2.drawString(line, x, y);
+                y += g2.getFontMetrics().getHeight();
+            }
+        }
+
+        //helpText("Press Enter.");
+    }
 
     public int getXforCenteredText(String text) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();

@@ -72,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int fightState = 5;
     public final int gameOverState = 6;
 
+
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
