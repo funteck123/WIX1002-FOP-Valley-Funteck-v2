@@ -188,7 +188,7 @@ public class Player extends Entity implements Serializable {
 
                 maxManaFactor = 1;
                 maxLifeFactor = 1;
-                maxAttackFactor = 2;
+                maxAttackFactor = 3;
                 maxMagicalAttackFactor = 1;
                 maxDefenseFactor = 2;
                 maxMagicalDefenseFactor = 1;
@@ -414,6 +414,8 @@ public class Player extends Entity implements Serializable {
             // System.out.println("You are hitting an NPC.");
             if (gp.keyH.enterPressed == true) {
                 gp.gameState = gp.dialogueState;
+                gp.stopMusic();
+                gp.playMusic(5);
             }
 
         }
@@ -445,24 +447,28 @@ public class Player extends Entity implements Serializable {
             
             Random random = new Random();
             // Player's attack logic
-            damageDealt = random.nextInt(gp.player.attack) + 1;
+            damageDealt = Math.max(random.nextInt(gp.player.attack) + 1, gp.player.attack/4);
             //damageDealt = gp.player.attack;
             gp.npc[i].life = Math.max(0, gp.npc[i].life - damageDealt);
 
-            gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + " with " + damageDealt + "!";
+            gp.ui.playerAttackDialogue = "You attacked the " + gp.npc[i].name + " with " + damageDealt + "!\n";
 
             damageDealt = 0;
 
             if (gp.npc[i].life <= 0) {
                 // If not defeated, let the monster attack
-                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " has been slain!";
+                gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " has been slain!\n";
             } 
             
         } else {
             gp.ui.gameOverStateNum = 1;
             gp.gameState = gp.gameOverState;
 
-            //playerWin = false;
+            //playerWin = false;.
+
+            //music
+            gp.stopMusic();
+            gp.playSE(3);    
         
         }
     }
@@ -502,6 +508,10 @@ public class Player extends Entity implements Serializable {
 
             //playerWin = false;
 
+            //music
+            gp.stopMusic();
+            gp.playSE(3);    
+
         }
     }
 
@@ -509,7 +519,7 @@ public class Player extends Entity implements Serializable {
         if (gp.player.life > 0) {
             
             // Player's attack logic
-            gp.ui.playerAttackDialogue = "You put " + gp.player.defense + " defense!";
+            gp.ui.playerAttackDialogue = "You put " + gp.player.defense + " defense! \n";
 
             damageDealt1 = gp.player.defense;
 
@@ -518,6 +528,10 @@ public class Player extends Entity implements Serializable {
             gp.gameState = gp.gameOverState;
 
             //playerWin = false;
+
+            //music
+            gp.stopMusic();
+            gp.playSE(3);     
 
         }
     }
@@ -529,13 +543,17 @@ public class Player extends Entity implements Serializable {
             gp.player.life += gp.player.heal;
             gp.player.life = Math.min(gp.player.maxLife, gp.player.life);
 
-            gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "! Refreshing, right?";
+            gp.ui.playerAttackDialogue = "You healed with " + gp.player.heal + "! Refreshing, right? \n";
 
         }   else {
             gp.ui.gameOverStateNum = 1;
             gp.gameState = gp.gameOverState;
 
             //playerWin = false;
+
+            //music
+            gp.stopMusic();
+            gp.playSE(3);     
 
         }
     }
@@ -546,6 +564,12 @@ public class Player extends Entity implements Serializable {
         gp.gameState = gp.gameOverState;
 
         //playerWin = true;
+
+        //music
+        gp.stopMusic();
+        gp.playMusic(2);        
+
+        
         
     }
 
@@ -556,7 +580,7 @@ public class Player extends Entity implements Serializable {
             damageDealt = gp.npc[i].npcAttack(i);
             gp.player.life -= Math.max(0,damageDealt - damageDealt1);
             gp.player.life = Math.max(0,gp.player.life);
-            gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "!";
+            gp.ui.monsterAttackDialogue = "The " + gp.npc[i].name + " attacked you with " + damageDealt + "! \n";
             damageDealt = 0;
             damageDealt1 = 0;
 
@@ -570,7 +594,11 @@ public class Player extends Entity implements Serializable {
 
             //remove monster
             gp.npc[i].worldX = -10;
-            gp.npc[i].worldX = -10;           
+            gp.npc[i].worldX = -10;    
+            
+            //music
+            gp.stopMusic();
+            gp.playMusic(4);
 
         }
     }

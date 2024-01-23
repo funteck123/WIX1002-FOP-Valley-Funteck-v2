@@ -223,7 +223,7 @@ public class KeyHandler implements KeyListener{
 
         // SAVE STATE
         if (gp.gameState == gp.saveState) {
-            if (code == KeyEvent.VK_L && System.currentTimeMillis() - lastSaveToggleTime > saveToggleCooldown) {
+            if (code == KeyEvent.VK_ENTER && System.currentTimeMillis() - lastSaveToggleTime > saveToggleCooldown) {
                 gp.gameState = gp.playState;
                 saved = false;
                 lastPauseToggleTime = System.currentTimeMillis();
@@ -293,6 +293,10 @@ public class KeyHandler implements KeyListener{
                 } else if (gp.ui.gameOverStateNum == 2) {
                     gp.gameState = gp.playState;
                 }
+
+                // change music
+                gp.stopMusic();
+                gp.playMusic(0);
             }
         } 
 

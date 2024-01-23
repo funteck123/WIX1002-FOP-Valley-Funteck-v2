@@ -331,7 +331,7 @@ public class UI {
         int y=gp.screenHeight/2;
         g2.drawString(text, x, y);
         
-        //helpText("Press Enter.");
+        helpText("Press Enter.");
     }
 
     public void drawPauseScreen() {
@@ -412,12 +412,12 @@ public class UI {
                 int newLevel = gp.player.level;
                 int levelDifference = newLevel - oldLevel;
 
-                gp.player.maxLife += gp.player.maxLife * levelDifference * (gp.player.maxLifeFactor)/20;
-                gp.player.maxMana += gp.player.maxMana * levelDifference * (gp.player.maxManaFactor)/20;
-                gp.player.maxDefense += gp.player.maxDefense * levelDifference * (gp.player.maxDefenseFactor)/20;
-                gp.player.maxMagicalDefense += gp.player.maxMagicalDefense * levelDifference * (gp.player.maxMagicalDefenseFactor)/20;
-                gp.player.maxAttack += gp.player.maxAttack * levelDifference * (gp.player.maxAttackFactor)/20; 
-                gp.player.maxMagicalAttack +=  gp.player.maxMagicalAttack * levelDifference * (gp.player.maxMagicalAttackFactor)/20;
+                gp.player.maxLife += gp.player.maxLife * levelDifference * (gp.player.maxLifeFactor)/30;
+                gp.player.maxMana += gp.player.maxMana * levelDifference * (gp.player.maxManaFactor)/30;
+                gp.player.maxDefense += gp.player.maxDefense * levelDifference * (gp.player.maxDefenseFactor)/30;
+                gp.player.maxMagicalDefense += gp.player.maxMagicalDefense * levelDifference * (gp.player.maxMagicalDefenseFactor)/30;
+                gp.player.maxAttack += gp.player.maxAttack * levelDifference * (gp.player.maxAttackFactor)/30; 
+                gp.player.maxMagicalAttack +=  gp.player.maxMagicalAttack * levelDifference * (gp.player.maxMagicalAttackFactor)/30;
                 gp.player.heal += gp.player.heal/20;
 
                 gp.player.life = gp.player.maxLife;
@@ -427,13 +427,14 @@ public class UI {
                 gp.player.defense = gp.player.maxDefense;
                 gp.player.magicalDefense = gp.player.maxMagicalDefense;
 
+
             }
 
             rewarded = true;
 
             String characterStatsMenu  = 
             "+-------------------------------------------------------------+\r\n" +
-            "> " + "Character Stats" + "\r\n" +
+            "> " + "You won! Check your updated character stats below. \nPress C in-game to check again." + "\r\n" +
             "\r\n" +
             "Player: " + gp.keyH.characterName + "\r\n" +
             "--> HP: " + gp.player.life + " / " + gp.player.maxLife + "\r\n" +
@@ -441,8 +442,12 @@ public class UI {
             "--> Attack: " + gp.player.attack + "\r\n" +
             "--> Magical Attack: " + gp.player.magicalAttack + "\r\n" +
             "--> Defense: " + gp.player.defense + "\r\n" +
-            "--> Magical Defense: " + gp.player.magicalDefense + "\r\n\n" +
+            "--> Magical Defense: " + gp.player.magicalDefense + "\r\n" +
+            "--> Heal: " + gp.player.heal + "\r\n\n" +
             "--> Level: " + gp.player.level + "\r\n" +
+            "--> Exp: " + gp.player.exp + "\r\n" +
+            "--> Exp Rewarded: " + gp.npc[npcNo].expReward + "\r\n" +
+            "--> Exp needed for next level: " + (gp.player.level*(25+1) - gp.player.exp) + "\r\n" +
             "+-------------------------------------------------------------+\r\n\n" +
             ">> Spells\r\n" +
             "[1] " + gp.player.spellName[0] + " <" + gp.player.spellUnlocked[0] + " - Level: " + gp.player.spellRequirement[0] + " +>\r\n" +
@@ -469,7 +474,9 @@ public class UI {
         } else if (gameOverStateNum == 1) {
             gp.player.exp = 1;
             String text = "You died. Game over! \n\n\nReturn to the title screen to \nrestart or load a save game.";
+
             g2.setColor(Color.red);
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30));
             x = gp.screenWidth/2 - gp.tileSize*6;
             y += gp.tileSize;
 
@@ -503,7 +510,6 @@ public class UI {
         initFight = true;
         gp.ui.monsterAttackDialogue = "";
         gp.ui.playerAttackDialogue = "";
-        
     }
 
     public void drawFightScreen() {
@@ -525,13 +531,13 @@ public class UI {
 
         if (initFight) {
             monsterAttackDialogue = gp.npc[npcNo].description;
-            playerAttackDialogue = "You have encountered a/an " + gp.npc[npcNo].name + ". What do you do?";
+            playerAttackDialogue = "You have encountered a/an " + gp.npc[npcNo].name + ". What do you do?\n";
             initFight = false;
         }
 
         fightDialogue = "> " + monsterAttackDialogue + "\r\n" + //
                 "\r\n" + //
-                "Monster:"+ gp.npc[npcNo].name +"\r\n" + //
+                "Monster: "+ gp.npc[npcNo].name +"\r\n" + //
                 "--> HP: " + gp.npc[npcNo].life + " / " + gp.npc[npcNo].maxLife + "\r\n" + //
                 "--> MP: " + gp.npc[npcNo].mana + " / " + gp.npc[npcNo].maxMana + "\r\n" +  //
                 "\r\n" + //
@@ -558,8 +564,10 @@ public class UI {
         int j = 0;
         if (fightDialogue != null) {
             for (String line : fightDialogue.split("\n")) {
-                if (j<=5) {
+                if (j>=3 && j<=5) {
                     g2.setColor(Color.red);
+                } else if ((j >= 10 && j <= 12) || (j >= 15 && j <= 18) || ( j >= 20 && j <=22)) {
+                    g2.setColor(Color.green);
                 } else {
                     g2.setColor(Color.white);
                 }
@@ -573,10 +581,10 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 17));
         x = gp.tileSize*1 + gp.tileSize*10;
         y = gp.tileSize/2 + gp.tileSize;
-        if (gp.npc[npcNo].name == "Skeleton") {
-            x = gp.tileSize*1 + gp.tileSize*5;
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
-        }
+        // if (gp.npc[npcNo].name == "Skeleton") {
+        //     x = gp.tileSize*1 + gp.tileSize*5;
+        //     g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20));
+        // }
 
         npcAscii = "\\****__              ____                                              \r\n" + //
                 "|    *****\\_      --/ *\\-__                                          \r\n" + //
